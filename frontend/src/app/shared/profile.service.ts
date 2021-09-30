@@ -24,7 +24,7 @@ export class ProfileService {
     return this.http.get(environment.apiBaseUrl+'/get');
   }
 
-  putCustomer(pro: Profile) {
+  putProfile(pro: Profile) {
     return this.http.put(environment.apiBaseUrl+'/update'+ `/${pro.user_id}`, pro);
   }
 

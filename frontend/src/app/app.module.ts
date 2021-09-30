@@ -24,6 +24,8 @@ import { NewComponent } from './orders/new/new.component';
 import { PendingComponent } from './orders/pending/pending.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { CustomerComponent } from './customer/customer.component';
+import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
+import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
 
 
 
@@ -42,7 +44,9 @@ import { CustomerComponent } from './customer/customer.component';
     NewComponent,
     PendingComponent,
     UserDashboardComponent,
-    CustomerComponent
+    CustomerComponent,
+    CustomerProfileComponent,
+    DriverProfileComponent
    
     
     

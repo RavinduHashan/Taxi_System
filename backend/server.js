@@ -10,7 +10,8 @@ app.use(express.json());
 //app.use(cors({ origin: 'http://localhost:4200' }));
 
 app.use("/users", require('./routes/usersRoute'))
-//app.use("/drivers", require('./routes/driversRoute'))
+app.use("/customers", require('./routes/customersRoute'))
+app.use("/drivers", require('./routes/driversRoute'))
 app.use("/orders", require('./routes/ordersRoute'))
 
 

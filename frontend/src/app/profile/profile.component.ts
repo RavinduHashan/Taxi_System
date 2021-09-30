@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
       });
     }
     else {
-      this.profileService.putCustomer(form.value).subscribe((res:any) => {
+      this.profileService.putProfile(form.value).subscribe((res:any) => {
         this.resetForm(form);
         this.refreshProfileList();
         M.toast({ html: 'Updated successfully', classes: 'rounded' });

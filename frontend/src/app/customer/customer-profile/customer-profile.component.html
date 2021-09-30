@@ -1,0 +1,82 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content white-text">
+          <div class="row">
+            <div class="col s5">
+              <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)">
+                <input type="hidden" name="customer_id" #customer_id="ngModel" [(ngModel)]="customerService.selectedCustomer.customer_id">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="full_name" #name="ngModel" [(ngModel)]="customerService.selectedCustomer.full_name" placeholder="" required>
+                    <label>Full Name :
+                      <label class="red-text">*</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="email" #name="ngModel" [(ngModel)]="customerService.selectedCustomer.email" placeholder="">
+                    <label>email :</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="phone_number" #name="ngModel" [(ngModel)]="customerService.selectedCustomer.phone_number" placeholder="">
+                    <label>Phone Number :</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="city" #name="ngModel" [(ngModel)]="customerService.selectedCustomer.city" placeholder="">
+                    <label>City :</label>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                      <input type="text" name="password" #name="ngModel" [(ngModel)]="customerService.selectedCustomer.password" placeholder="">
+                      <label>Password :</label>
+                    </div>
+                  </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button class="btn btn-custom right" type="button" (click)="resetForm(customerForm)">Reset</button>
+                    <button class="btn btn-custom right" type="submit" [disabled]="!customerForm.valid">Submit</button>  
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col s7">
+                <table class="responsive-table highlight">
+                    <thead>
+                      <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>City</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let cus of customerService.customers">
+                      <td>{{cus.full_name}}</td>
+                      <td>{{cus.email}}</td>
+                      <td>{{cus.phone_number}}</td>
+                      <td>{{cus.city}}</td>
+                      <td>
+                          <a class="action-btn" (click)="onEdit(cus)">
+                            <i class="material-icons">edit</i>
+                          </a>
+                          <a class="action-btn" (click)="onDelete(cus.customer_id,customerForm)">
+                            <i class="material-icons">delete</i>
+                          </a>
+                      </td>
+                    </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:5000/users'
+  apiBaseUrl: 'http://localhost:5000/users',
+  apiBaseUrlDriver:'http://localhost:5000/drivers',
+  apiBaseUrlCustomer:'http://localhost:5000/customers',
+  apiBaseUrlOrder:'http://localhost:5000/orders'
 };
 
 /*
