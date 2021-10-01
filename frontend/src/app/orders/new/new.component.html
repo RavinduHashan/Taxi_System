@@ -6,7 +6,16 @@
         <div class="card-content white-text">
           <div class="row">
             <div class="col s5">
-              <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
+              <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)" class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button style = "color: rgb(46, 139, 46);" class="btn btn-custom left" type="button" (click)="refreshOrderList()">+ New</button>
+                    <button class="btn btn-custom left" type="button" (click)="Pending(orderForm)">Pending</button>
+                    <button class="btn btn-custom left" type="button" (click)="Confirm(orderForm)">Confirm</button>
+                    <button class="btn btn-custom left" type="button" (click)="Complete(orderForm)">Complete</button> 
+                    <button class="btn btn-custom left" type="button" (click)="Reject(orderForm)">Reject</button>
+                  </div>
+                </div>
                 <input type="hidden" name="order_id" #order_id="ngModel" [(ngModel)]="orderService.selectedOrder.order_id">
                 <div class="row">
                   <div class="input-field col s12">
@@ -52,15 +61,11 @@
                     <label>Driver ID :</label>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <button class="btn btn-custom right" type="button" (click)="resetForm(orderForm)">Reset</button>
-                    <button class="btn btn-custom right" type="submit" [disabled]="!orderForm.valid">Submit</button>  
-                  </div>
-                </div>
+                <button class="btn btn-custom right" type="button" (click)="resetForm(orderForm)">Reset</button>
+                <button class="btn btn-custom right" type="submit" [disabled]="!orderForm.valid">Submit</button>
               </form>
             </div>
-            <div class="col s7">
+            <div class="col s10">
                 <table class="responsive-table highlight">
                     <thead>
                       <tr>
@@ -82,7 +87,7 @@
                       <td>{{ord.response}}</td>
                       <td>{{ord.u_id}}</td>
                       <td>{{ord.d_id}}</td>
-                      <td>
+                      <td >
                           <a class="action-btn" (click)="onEdit(ord)">
                             <i class="material-icons">edit</i>
                           </a>

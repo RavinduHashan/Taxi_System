@@ -23,6 +23,23 @@ export class OrderService {
     return this.http.get(environment.apiBaseUrlOrder+'/getOrders');
   }
 
+  //******************************* 
+  getPendingOrderList() {
+    return this.http.get(environment.apiBaseUrlOrder+'/viewPendingOrders');
+  }
+
+  getConfirmOrderList() {
+    return this.http.get(environment.apiBaseUrlOrder+'/viewConfirmOrders');
+  }
+
+  getCompleteOrderList() {
+    return this.http.get(environment.apiBaseUrlOrder+'/viewCompleteOrders');
+  }
+
+  getRejectOrderList() {
+    return this.http.get(environment.apiBaseUrlOrder+'/viewRejectOrders');
+  }
+
   putOrder(ord: Order) {
     return this.http.put(environment.apiBaseUrlOrder+'/updateOrders'+ `/${ord.order_id}`, ord);
   }

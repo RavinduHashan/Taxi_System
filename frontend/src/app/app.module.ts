@@ -21,7 +21,6 @@ import { OrdersComponent } from './orders/orders.component';
 import { DriverComponent } from './driver/driver.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewComponent } from './orders/new/new.component';
-import { PendingComponent } from './orders/pending/pending.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
@@ -42,7 +41,6 @@ import { DriverProfileComponent } from './driver/driver-profile/driver-profile.c
     DriverComponent,
     ProfileComponent,
     NewComponent,
-    PendingComponent,
     UserDashboardComponent,
     CustomerComponent,
     CustomerProfileComponent,

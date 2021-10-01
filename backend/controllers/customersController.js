@@ -130,7 +130,7 @@ const updateCustomers = async (req, res) => {
 
 const deleteCustomers = async (req, res) => {
     try{
-        const result = await pool.query("delete from users where customer_id = $1 returning *", [req.params.customer_id])
+        const result = await pool.query("delete from customers where customer_id = $1 returning *", [req.params.customer_id])
         console.log(result)
         res.json(result)
     }

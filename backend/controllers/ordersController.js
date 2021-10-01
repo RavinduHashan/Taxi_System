@@ -63,6 +63,48 @@ const deleteOrders = async (req, res) => {
 
 //**************************************************************************
 
+const viewPendingOrders = async (req, res) => {
+    try{
+        const result = await pool.query("select * from orders where response LIKE '' ")
+        res.json(result)
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+
+const viewConfirmOrders = async (req, res) => {
+    try{
+        const result = await pool.query("select * from orders where response LIKE 'Confirm' ")
+        res.json(result)
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+
+const viewCompleteOrders = async (req, res) => {
+    try{
+        const result = await pool.query("select * from orders where response LIKE 'Complete' ")
+        res.json(result)
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+const viewRejectOrders = async (req, res) => {
+    try{
+        const result = await pool.query("select * from orders where response LIKE 'Reject' ")
+        res.json(result)
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
 const createOnlineState = async (req, res) => {
     try{
         const {driver_id} = req.body
@@ -141,4 +183,6 @@ const userSeeOrders =  async (req, res) => {
 //     }
 // }
 
-module.exports = {createOrders, getOrders, getOneOrder, updateOrders, deleteOrders, createOnlineState,removeOnlineState, seeOnlineDrivers,driverSeeOrders, userSeeOrders}
+module.exports = {createOrders, getOrders, getOneOrder, updateOrders, deleteOrders,
+                  viewPendingOrders, viewConfirmOrders, viewCompleteOrders, viewRejectOrders, 
+                  createOnlineState,removeOnlineState, seeOnlineDrivers,driverSeeOrders, userSeeOrders}

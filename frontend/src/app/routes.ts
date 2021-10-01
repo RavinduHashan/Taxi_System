@@ -10,7 +10,6 @@ import { DriverComponent } from './driver/driver.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewComponent } from './orders/new/new.component';
-import { PendingComponent } from './orders/pending/pending.component';
 import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
 import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
 
@@ -55,10 +54,6 @@ export const appRoutes: Routes = [
     {
         path: 'new', component: OrdersComponent,
         children: [{ path: '', component: NewComponent }],canActivate:[AuthGuard]
-    },
-    {
-        path: 'pending', component: OrdersComponent,
-        children: [{ path: '', component: PendingComponent }],canActivate:[AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

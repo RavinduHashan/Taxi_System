@@ -49,14 +49,6 @@ create table orders(
     d_id int references drivers(driver_id) not null
 );
 
-create table test_orders(
-    test_order_id serial primary key,
-    pick_location varchar(255) not null,
-    drop_location varchar(255) not null,
-    pick_time varchar(255) not null,
-    drop_time varchar(255) not null,
-    response varchar(255)
-);
 
 create table online_drivers(
     online_driver_id serial primary key,
@@ -64,3 +56,8 @@ create table online_drivers(
 );
 
 DROP TABLE users;
+
+SELECT * FROM mytable
+WHERE column1 LIKE '%word1%'
+  AND column1 LIKE '%word2%'
+  AND column1 LIKE '%word3%'

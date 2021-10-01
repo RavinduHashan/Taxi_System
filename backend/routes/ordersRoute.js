@@ -7,6 +7,12 @@ router.get('/getOneOrder/:order_id', Orders.getOneOrder)
 router.put('/updateOrders/:order_id', Orders.updateOrders)
 router.delete('/deleteOrders/:order_id', Orders.deleteOrders)
 
+router.get('/viewPendingOrders', Orders.viewPendingOrders)
+router.get('/viewConfirmOrders', Orders.viewConfirmOrders)
+router.get('/viewCompleteOrders', Orders.viewCompleteOrders)
+router.get('/viewRejectOrders', Orders.viewRejectOrders)
+
+
 router.post('/createOnlineState', Orders.createOnlineState)
 router.post('/removeOnlineState', Orders.removeOnlineState)
 router.get('/seeOnlineDrivers', Orders.seeOnlineDrivers)
