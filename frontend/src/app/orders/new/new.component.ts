@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
       pick_time: "",
       drop_time: "",
       response: "",
-      u_id: "",
+      c_id: "",
       d_id:""
     }
   }

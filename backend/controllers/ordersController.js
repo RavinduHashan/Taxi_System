@@ -3,9 +3,9 @@ const pool = require("../db")
 
 const createOrders =  async (req, res) => {
     try{
-        const {pick_location, drop_location, pick_time, drop_time, response, u_id, d_id} = req.body
-        const result = await pool.query("insert into orders(pick_location, drop_location, pick_time, drop_time, response, u_id, d_id) values ($1,$2,$3,$4,$5,$6,$7) RETURNING *" ,
-        [pick_location, drop_location, pick_time, drop_time, response, u_id, d_id])
+        const {pick_location, drop_location, pick_time, drop_time, response, c_id, d_id} = req.body
+        const result = await pool.query("insert into orders(pick_location, drop_location, pick_time, drop_time, response, c_id, d_id) values ($1,$2,$3,$4,$5,$6,$7) RETURNING *" ,
+        [pick_location, drop_location, pick_time, drop_time, response, c_id, d_id])
         res.json(result)   
     }
     catch(err){
@@ -39,8 +39,8 @@ const getOneOrder =  async (req, res) => {
 const updateOrders = async (req, res) => {
     
     try{
-        const result = await pool.query("update orders set pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, u_id = $6, d_id = $7 where order_id = $8 returning *" ,
-        [req.body.pick_location, req.body.drop_location, req.body.pick_time, req.body.drop_time, req.body.response, req.body.u_id, req.body.d_id, req.params.order_id])
+        const result = await pool.query("update orders set pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, c_id = $6, d_id = $7 where order_id = $8 returning *" ,
+        [req.body.pick_location, req.body.drop_location, req.body.pick_time, req.body.drop_time, req.body.response, req.body.c_id, req.body.d_id, req.params.order_id])
         console.log(result)
         res.json(result)
     }
@@ -60,6 +60,40 @@ const deleteOrders = async (req, res) => {
     }
 }
 
+
+const createOnlineState = async (req, res) => {
+    try{
+        const {o_d_id} = req.body
+        const result = await pool.query("insert into online_drivers(o_d_id) values ($1) RETURNING *", [o_d_id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+const removeOnlineState = async (req, res) => {
+    try{
+        const result = await pool.query("delete from online_drivers where o_d_id = $1 returning *", [req.params.o_d_id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+
+const seeOnlineDrivers =  async (req, res) => {
+    try{
+        const result = await pool.query("select * from online_drivers")
+        res.json(result)
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 
 //**************************************************************************
 
@@ -105,39 +139,8 @@ const viewRejectOrders = async (req, res) => {
     }
 }
 
-const createOnlineState = async (req, res) => {
-    try{
-        const {driver_id} = req.body
-        const result = await pool.query("insert into online_drivers(o_d_id) values ($1) RETURNING *", [driver_id])
-        res.json(result)  
-    }
-    catch(err){
-        console.log(err);
 
-    }
-}
 
-const removeOnlineState = async (req, res) => {
-    try{
-        const {driver_id} = req.body
-        const result = await pool.query("delete from users where o_d_id = $1 returning *", [driver_id])
-        res.json(result)  
-    }
-    catch(err){
-        console.log(err);
-
-    }
-}
-
-const seeOnlineDrivers =  async (req, res) => {
-    try{
-        const result = await pool.query("select * from online_drivers")
-        res.json(result)
-    }
-    catch(err){
-        console.log(err);
-    }
-}
 
 const driverSeeOrders =  async (req, res) => {
     try{

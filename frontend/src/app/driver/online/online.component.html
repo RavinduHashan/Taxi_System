@@ -1,0 +1,54 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content white-text">
+          <div class="row">
+            <div class="col s5">
+              <form #onlinedriverForm="ngForm" (ngSubmit)="onSubmit(onlinedriverForm)">
+                <input type="hidden" name="online_driver_id" #online_driver_id="ngModel" [(ngModel)]="onlinedriverService.selectedOnlinedriver.online_driver_id">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" name="o_d_id" #name="ngModel" [(ngModel)]="onlinedriverService.selectedOnlinedriver.o_d_id" placeholder="" required>
+                    <label>Online Driver ID :
+                      <label class="red-text">*</label>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button class="btn btn-custom right" type="button" (click)="resetForm(onlinedriverForm)">Reset</button>
+                    <button class="btn btn-custom right" type="submit" [disabled]="!onlinedriverForm.valid">Submit</button>  
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col s7">
+                <table class="responsive-table highlight">
+                    <thead>
+                      <tr>
+                        <th>Online Drivers</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let ond of onlinedriverService.onlinedrivers">
+                      <td>{{ond.o_d_id}}</td>
+                      <td>
+                          <a class="action-btn" (click)="onEdit(ond)">
+                            <i class="material-icons">edit</i>
+                          </a>
+                          <a class="action-btn" (click)="onDelete(ond.online_driver_id,onlinedriverForm)">
+                            <i class="material-icons">delete</i>
+                          </a>
+                      </td>
+                    </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

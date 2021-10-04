@@ -2,8 +2,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 // components
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -25,6 +25,10 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
 import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
+import { OnlineDriverComponent } from './customer/online-driver/online-driver.component';
+import { OnlineComponent } from './driver/online/online.component';
+
+
 
 
 
@@ -44,7 +48,11 @@ import { DriverProfileComponent } from './driver/driver-profile/driver-profile.c
     UserDashboardComponent,
     CustomerComponent,
     CustomerProfileComponent,
-    DriverProfileComponent
+    DriverProfileComponent,
+    OnlineDriverComponent,
+    OnlineComponent,
+   
+ 
    
     
     
@@ -56,6 +64,7 @@ import { DriverProfileComponent } from './driver/driver-profile/driver-profile.c
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     NgbModule,
+    
   
     
   ],

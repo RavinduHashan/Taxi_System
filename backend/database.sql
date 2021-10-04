@@ -49,6 +49,16 @@ create table orders(
     d_id int references drivers(driver_id) not null
 );
 
+create table orders(
+    order_id serial primary key,
+    pick_location varchar(255) not null,
+    drop_location varchar(255) not null,
+    pick_time varchar(255) not null,
+    drop_time varchar(255) not null,
+    response varchar(255),
+    c_id int references customers(customer_id) not null,
+    d_id int references drivers(driver_id) not null
+);
 
 create table online_drivers(
     online_driver_id serial primary key,

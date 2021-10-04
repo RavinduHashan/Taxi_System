@@ -12,7 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { NewComponent } from './orders/new/new.component';
 import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
 import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
-
+import { OnlineComponent } from './driver/online/online.component';
 
 export const appRoutes: Routes = [
     {
@@ -41,13 +41,16 @@ export const appRoutes: Routes = [
         children: [{ path: '', component: DriverProfileComponent }],canActivate:[AuthGuard]
     },
     {
+        path: 'online', component: DriverComponent,
+        children: [{ path: '', component: OnlineComponent }],canActivate:[AuthGuard]
+    },
+    {
         path: 'customer', component: CustomerComponent,canActivate:[AuthGuard]
     },
     {
         path: 'customer-profile', component: CustomerComponent,
         children: [{ path: '', component: CustomerProfileComponent }],canActivate:[AuthGuard]
     },
-
     {
         path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]
     },

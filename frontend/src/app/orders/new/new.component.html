@@ -51,7 +51,7 @@
                   </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input type="text" name="u_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.u_id" placeholder="">
+                    <input type="text" name="c_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.c_id" placeholder="">
                     <label>Customer ID :</label>
                   </div>
                 </div>
@@ -85,7 +85,7 @@
                       <td>{{ord.pick_time}}</td>
                       <td>{{ord.drop_time}}</td>
                       <td>{{ord.response}}</td>
-                      <td>{{ord.u_id}}</td>
+                      <td>{{ord.c_id}}</td>
                       <td>{{ord.d_id}}</td>
                       <td >
                           <a class="action-btn" (click)="onEdit(ord)">

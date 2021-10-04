@@ -5,7 +5,7 @@ export class Order {
     pick_time: string;
     drop_time: string;
     response: string;
-    u_id: string;
+    c_id: string;
     d_id: string;
 
 }

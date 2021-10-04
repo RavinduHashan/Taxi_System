@@ -14,8 +14,10 @@ router.get('/viewRejectOrders', Orders.viewRejectOrders)
 
 
 router.post('/createOnlineState', Orders.createOnlineState)
-router.post('/removeOnlineState', Orders.removeOnlineState)
 router.get('/seeOnlineDrivers', Orders.seeOnlineDrivers)
+router.delete('/removeOnlineState/:o_d_id', Orders.removeOnlineState)
+
+
 router.get('/driverSeeOrders', Orders.driverSeeOrders)
 //router.put('/driverResponseOrder', Orders.driverResponseOrder)
 router.get('/userSeeOrders', Orders.userSeeOrders)
