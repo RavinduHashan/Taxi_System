@@ -12,15 +12,11 @@ router.get('/viewConfirmOrders', Orders.viewConfirmOrders)
 router.get('/viewCompleteOrders', Orders.viewCompleteOrders)
 router.get('/viewRejectOrders', Orders.viewRejectOrders)
 
-
 router.post('/createOnlineState', Orders.createOnlineState)
 router.get('/seeOnlineDrivers', Orders.seeOnlineDrivers)
-router.delete('/removeOnlineState/:o_d_id', Orders.removeOnlineState)
+router.delete('/removeOnlineState/:online_driver_id', Orders.removeOnlineState)
+router.put('/updateOnlineState/:online_driver_id', Orders.updateOnlineState)
 
 
-router.get('/driverSeeOrders', Orders.driverSeeOrders)
-//router.put('/driverResponseOrder', Orders.driverResponseOrder)
-router.get('/userSeeOrders', Orders.userSeeOrders)
-//router.get('/deleteOrders', Orders.deleteOrders)
 
 module.exports = router

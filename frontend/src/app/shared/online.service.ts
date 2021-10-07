@@ -4,30 +4,30 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { Onlinedriver } from './onlinedriver.model';
+import { Online } from './online.model';
 import { environment }  from '../../environments/environment';
 
 @Injectable()
-export class OnlinedirverService {
-  selectedOnlinedriver: Onlinedriver;
-  onlinedrivers: Onlinedriver[] = [];
+export class onlineService {
+  selectedOnlineDriver: Online;
+  onlines: Online[] = [];
   
   constructor(private http: HttpClient) { }
 
 
-  postOnlinedriver(ond: Onlinedriver) {
+  postOnlineDriver(ond: Online) {
     return this.http.post(environment.apiBaseUrlOrder+'/createOnlineState', ond);
   }
 
-  getOnlinedriverList() {
+  getOnlineDriverList() {
     return this.http.get(environment.apiBaseUrlOrder+'/seeOnlineDrivers');
   }
 
-  putOnlinedriver(ond: Onlinedriver) {
+  putOnlineDriver(ond: Online) {
     return this.http.put(environment.apiBaseUrlOrder+'/updateOnlineState'+ `/${ond.online_driver_id}`, ond);
   }
 
-  deleteOnlinedriver(online_driver_id: string) {
+  deleteOnlineDriver(online_driver_id: string) {
     return this.http.delete(environment.apiBaseUrlOrder+'/removeOnlineState'+ `/${online_driver_id}`);
   }
 }

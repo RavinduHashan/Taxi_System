@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const jwtGenerator = require("../jwtGenerator/customersJwtGenerator")
 
 
-
+//Customer registration
 const registerCustomers =  async (req, res) => {
     const { full_name, email, phone_number, city, password } = req.body;
     try {
@@ -25,6 +25,7 @@ const registerCustomers =  async (req, res) => {
     }
   };
  
+//Customer login  
 const loginCustomers = async (req, res) => {
   
   try {
@@ -52,6 +53,7 @@ const loginCustomers = async (req, res) => {
   }
 };
 
+//Verify customer login or not
 const verify =  (req, res) => {
   try {
     res.json(true);
@@ -61,10 +63,9 @@ const verify =  (req, res) => {
   }
 };
 
-
+//Dashbord accessibility
 const dashboard = async (req, res) =>{
   try{
-      //res.json(req.user)
       const customer = await pool.query("SELECT * FROM customers WHERE customer_id = $1", [req.customer])
       res.json(customer.rows[0])
   }
@@ -74,8 +75,9 @@ const dashboard = async (req, res) =>{
   }
 }
 
-/**
-const createUsers =  async (req, res) => {
+
+//Create Customer without athetication and hash password
+const createCustomers =  async (req, res) => {
     try{
         const result = await pool.query("insert into users(fullName, email, phoneNumber, city, usersPassword) values ($1,$2,$3,$4,$5)" ,
         [req.body.fullName, req.body.email, req.body.phoneNumber, req.body.city, req.body.usersPassword,])
@@ -89,10 +91,11 @@ const createUsers =  async (req, res) => {
         console.log(err);
     }
 }
-**/
+
+//Read customers
 const getCustomers =  async (req, res) => {
     try{
-        const result = await pool.query("select * from customers")
+        const result = await pool.query("select * from customers order by customer_id desc")
         console.log(result)
         res.json(result)
     }
@@ -101,6 +104,7 @@ const getCustomers =  async (req, res) => {
     }
 }
 
+//Read one customer
 const getOneCustomer =  async (req, res) => {
     try{
         const {customer_id} = req.params;
@@ -113,6 +117,7 @@ const getOneCustomer =  async (req, res) => {
     }
 }
 
+//Update customers
 const updateCustomers = async (req, res) => {
     const { password } = req.body;
     try{
@@ -128,6 +133,7 @@ const updateCustomers = async (req, res) => {
     }
 }
 
+//Delete customers
 const deleteCustomers = async (req, res) => {
     try{
         const result = await pool.query("delete from customers where customer_id = $1 returning *", [req.params.customer_id])
@@ -139,4 +145,4 @@ const deleteCustomers = async (req, res) => {
     }
 }
 
-module.exports = {registerCustomers,loginCustomers, verify, dashboard, getCustomers, getOneCustomer, updateCustomers, deleteCustomers}
+module.exports = {registerCustomers,loginCustomers, verify, dashboard,createCustomers, getCustomers, getOneCustomer, updateCustomers, deleteCustomers}

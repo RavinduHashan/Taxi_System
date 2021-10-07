@@ -1,4 +1,4 @@
-You can add global styles to this file, and also import other style files
+/* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
 form div.input-field input{
     padding-left: 15px !important;
@@ -24,7 +24,7 @@ form div.input-field input{
   }
   
   div.card{
-    background-color : #ffffff;
+    background-color : #083045;
     border-radius: 10px;
   }
   
@@ -74,9 +74,8 @@ input.ng-invalid.ng-dirty{
 }
 
 div.card{
-  background-color : #e3e8eb;
+  background-color : #083045;
   border-radius: 10px;
-  
 }
 
 .vl {
@@ -124,7 +123,7 @@ form div.input-field input{
   }
   
   div.card{
-    background-color : #ffffff;
+    background-color : #083045;
     border-radius: 10px;
   }
   
@@ -147,13 +146,4 @@ form div.input-field input{
     right: auto !important;
     bottom: 10%;
     left:7%;
-  }
-
-
-
-  td {
-      color: black;
-  }
-  th{
-      color: black;
   }

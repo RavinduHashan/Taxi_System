@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const jwtGenerator = require("../jwtGenerator/driversJwtGenerator")
 
 
-
+//Driver registration
 const registerDrivers =  async (req, res) => {
     const { full_name, email, phone_number, vehicle_type, vehicle_number, city, password } = req.body;
     try {
@@ -24,7 +24,8 @@ const registerDrivers =  async (req, res) => {
       res.status(500).send("Server error");
     }
   };
- 
+
+  //Driver login
 const loginDrivers = async (req, res) => {
   
   try {
@@ -36,7 +37,6 @@ const loginDrivers = async (req, res) => {
     }
 
     const validPassword = await bcrypt.compare(password, driver.rows[0].driver_password);
-    //console.log(validPassword)
     
     if (!validPassword) {
       return res.status(401).json("Password or Email is incorrect");
@@ -52,6 +52,7 @@ const loginDrivers = async (req, res) => {
   }
 };
 
+//Vefify drivers login or not
 const verify =  (req, res) => {
   try {
     res.json(true);
@@ -61,10 +62,9 @@ const verify =  (req, res) => {
   }
 };
 
-
+//Dashboard accessability
 const dashboard = async (req, res) =>{
   try{
-      //res.json(req.user)
       const driver = await pool.query("SELECT * FROM drivers WHERE driver_id = $1", [req.driver])
       res.json(driver.rows[0])
   }
@@ -74,7 +74,7 @@ const dashboard = async (req, res) =>{
   }
 }
 
-/**
+//Create drivers without authentication and hash password
 const createDrivers =  async (req, res) => {
     try{
         const result = await pool.query("insert into drivers(fullName, email, phoneNumber,vehicle_type, vehicle_number, city, driver_Password) values ($1,$2,$3,$4,$5,$6,$7)" ,
@@ -89,10 +89,11 @@ const createDrivers =  async (req, res) => {
         console.log(err);
     }
 }
-**/
+
+//Read drivers
 const getDrivers =  async (req, res) => {
     try{
-        const result = await pool.query("select * from drivers")
+        const result = await pool.query("select * from drivers order by driver_id desc")
         console.log(result)
         res.json(result)
     }
@@ -101,6 +102,7 @@ const getDrivers =  async (req, res) => {
     }
 }
 
+//Read one driver
 const getOneDriver =  async (req, res) => {
     try{
         const {driver_id} = req.params;
@@ -113,6 +115,7 @@ const getOneDriver =  async (req, res) => {
     }
 }
 
+//Update drivers
 const updateDrivers = async (req, res) => {
     try{
         const result = await pool.query("update drivers set full_name = $1, email = $2, phone_number = $3, vehicle_type = $4, vehicle_number = $5, city = $6, driver_password = $7 where driver_id = $8 returning *" ,
@@ -125,6 +128,8 @@ const updateDrivers = async (req, res) => {
     }
 }
 
+
+//Delete drivers
 const deleteDrivers = async (req, res) => {
     try{
         const result = await pool.query("delete from drivers where driver_id = $1 returning *", [req.params.driver_id])
@@ -138,4 +143,4 @@ const deleteDrivers = async (req, res) => {
 
 
 
-module.exports = {registerDrivers,loginDrivers, verify, dashboard, getDrivers, getOneDriver, updateDrivers, deleteDrivers}
+module.exports = {registerDrivers,loginDrivers, verify, dashboard, createDrivers, getDrivers, getOneDriver, updateDrivers, deleteDrivers}

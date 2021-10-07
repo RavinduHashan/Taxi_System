@@ -2,8 +2,7 @@ const pool = require("../db")
 const bcrypt = require("bcrypt")
 const jwtGenerator = require("../jwtGenerator/usersJwtGenerator")
 
-
-
+//Admin registration
 const registerUsers =  async (req, res) => {
     const { full_name, email, phone_number, city, password } = req.body;
     try {
@@ -24,7 +23,8 @@ const registerUsers =  async (req, res) => {
       res.status(500).send("Server error");
     }
   };
- 
+
+//Admin login
 const loginUsers = async (req, res) => {
   
   try {
@@ -36,7 +36,6 @@ const loginUsers = async (req, res) => {
     }
 
     const validPassword = await bcrypt.compare(password, user.rows[0].user_password);
-    //console.log(validPassword)
     
     if (!validPassword) {
       return res.status(401).json("Password or Email is incorrect");
@@ -52,6 +51,7 @@ const loginUsers = async (req, res) => {
   }
 };
 
+//Verify admin login or not
 const verify =  (req, res) => {
   try {
     res.json(true);
@@ -61,10 +61,9 @@ const verify =  (req, res) => {
   }
 };
 
-
+//Dashbord accessibility
 const dashboard = async (req, res) =>{
   try{
-      //res.json(req.user)
       const user = await pool.query("SELECT * FROM users WHERE user_id = $1", [req.user])
       res.json(user.rows[0])
   }
@@ -74,7 +73,7 @@ const dashboard = async (req, res) =>{
   }
 }
 
-/**
+//Create admin without athetication and hash password
 const createUsers =  async (req, res) => {
     try{
         const result = await pool.query("insert into users(fullName, email, phoneNumber, city, usersPassword) values ($1,$2,$3,$4,$5)" ,
@@ -89,10 +88,11 @@ const createUsers =  async (req, res) => {
         console.log(err);
     }
 }
-**/
+
+//Read admins
 const getUsers =  async (req, res) => {
     try{
-        const result = await pool.query("select * from users")
+        const result = await pool.query("select * from users order by user_id desc")
         console.log(result)
         res.json(result)
     }
@@ -101,6 +101,7 @@ const getUsers =  async (req, res) => {
     }
 }
 
+//Read one admin
 const getOneUser =  async (req, res) => {
     try{
         const {user_id} = req.params;
@@ -113,6 +114,7 @@ const getOneUser =  async (req, res) => {
     }
 }
 
+//Update admin
 const updateUsers = async (req, res) => {
     const { password } = req.body;
     try{
@@ -128,6 +130,7 @@ const updateUsers = async (req, res) => {
     }
 }
 
+//Delete admin
 const deleteUsers = async (req, res) => {
     try{
         const result = await pool.query("delete from users where user_id = $1 returning *", [req.params.user_id])
@@ -139,4 +142,4 @@ const deleteUsers = async (req, res) => {
     }
 }
 
-module.exports = {registerUsers,loginUsers, verify, dashboard, getUsers, getOneUser, updateUsers, deleteUsers}
+module.exports = {registerUsers, loginUsers, verify, dashboard, createUsers, getUsers, getOneUser, updateUsers, deleteUsers}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Onlinedriver } from '../../shared/onlinedriver.model';
-import { OnlinedirverService } from '../../shared/onlinedirver.service';
+import { Online } from '../../shared/online.model';
+import { onlineService } from '../../shared/online.service';
 
 declare var M: any;
 
@@ -10,21 +10,21 @@ declare var M: any;
   selector: 'app-online',
   templateUrl: './online.component.html',
   styleUrls: ['./online.component.css'],
-  providers: [OnlinedirverService]
+  providers: [onlineService]
 })
 export class OnlineComponent implements OnInit {
 
-  constructor(public onlinedriverService: OnlinedirverService) { }
+  constructor(public OnlineService: onlineService) { }
 
   ngOnInit(): void {
     this.resetForm();
-    this.refreshOnlinedriverList();
+    this.refreshOnlineList();
   }
 
   resetForm(form?: NgForm) {
     if (form)
       form.reset();
-    this.onlinedriverService.selectedOnlinedriver = {
+    this.OnlineService.selectedOnlineDriver = {
       online_driver_id: "",
       o_d_id: ""
     }
@@ -32,37 +32,37 @@ export class OnlineComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (form.value.online_driver_id == "") {
-      this.onlinedriverService.postOnlinedriver(form.value).subscribe((res:any) => {
+      this.OnlineService.postOnlineDriver(form.value).subscribe((res:any) => {
         this.resetForm(form);
-        this.refreshOnlinedriverList();
+        this.refreshOnlineList();
         M.toast({ html: 'Saved successfully', classes: 'rounded' });
       });
     }
     else {
-      this.onlinedriverService.putOnlinedriver(form.value).subscribe((res:any) => {
+      this.OnlineService.putOnlineDriver(form.value).subscribe((res:any) => {
         this.resetForm(form);
-        this.refreshOnlinedriverList();
+        this.refreshOnlineList();
         M.toast({ html: 'Updated successfully', classes: 'rounded' });
       });
     }
   }
 
-  refreshOnlinedriverList() {
-    this.onlinedriverService.getOnlinedriverList().subscribe((res:any) => {
+  refreshOnlineList() {
+    this.OnlineService.getOnlineDriverList().subscribe((res:any) => {
       console.log(res)
-      this.onlinedriverService.onlinedrivers = res.rows as Onlinedriver[];
+      this.OnlineService.onlines = res.rows as Online[];
       
     });
   }
 
-  onEdit(ond: Onlinedriver) {
-    this.onlinedriverService.selectedOnlinedriver = ond;
+  onEdit(ond: Online) {
+    this.OnlineService.selectedOnlineDriver = ond;
   }
 
   onDelete(online_driver_id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.onlinedriverService.deleteOnlinedriver(online_driver_id).subscribe((res:any) => {
-        this.refreshOnlinedriverList();
+      this.OnlineService.deleteOnlineDriver(online_driver_id).subscribe((res:any) => {
+        this.refreshOnlineList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });

@@ -10,6 +10,8 @@ import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 //routes
 import { appRoutes } from './routes';
+import { driverRoutes } from './driver/driverRoutes';
+import { customerRoutes } from './customer/customerRoutes';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { UserService } from './shared/user.service';
 //other
@@ -27,11 +29,10 @@ import { CustomerProfileComponent } from './customer/customer-profile/customer-p
 import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
 import { OnlineDriverComponent } from './customer/online-driver/online-driver.component';
 import { OnlineComponent } from './driver/online/online.component';
-
-
-
-
-
+import { TripComponent } from './customer/trip/trip.component';
+import { ResponseComponent } from './customer/response/response.component';
+import { TripOrderComponent } from './driver/trip-order/trip-order.component';
+import { HistoryComponent } from './driver/history/history.component';
 
 
 @NgModule({
@@ -51,22 +52,21 @@ import { OnlineComponent } from './driver/online/online.component';
     DriverProfileComponent,
     OnlineDriverComponent,
     OnlineComponent,
-   
- 
-   
-    
-    
-   
+    TripComponent,
+    ResponseComponent,
+    TripOrderComponent,
+    HistoryComponent, 
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(driverRoutes),
+    RouterModule.forRoot(customerRoutes),
     HttpClientModule,
     NgbModule,
-    
-  
-    
+      
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
