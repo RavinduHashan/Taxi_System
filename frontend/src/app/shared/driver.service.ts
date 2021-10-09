@@ -24,10 +24,19 @@ export class DriverService {
   }
 
   putDriver(dri: Driver) {
-    return this.http.put(environment.apiBaseUrlDriver+'/update'+ `/${dri.driver_id}`, dri);
+    return this.http.put(environment.apiBaseUrlDriver+'/update'+ `/${dri.id}`, dri);
   }
 
-  deleteDriver(driver_id: string) {
-    return this.http.delete(environment.apiBaseUrlDriver+'/delete'+ `/${driver_id}`);
+  deleteDriver(id: string) {
+    return this.http.delete(environment.apiBaseUrlDriver+'/delete'+ `/${id}`);
   }
+
+  seeAvailableDriverList() {
+    return this.http.get(environment.apiBaseUrlOrder+'/seeAvailableDrivers');
+  }
+  
+  updateAvailableStateList(dri: Driver) {
+    return this.http.put(environment.apiBaseUrlOrder+'/updateAvailableState' + `/${dri.id}`, dri);
+  }
+
 }

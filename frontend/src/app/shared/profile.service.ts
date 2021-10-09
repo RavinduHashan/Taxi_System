@@ -11,24 +11,24 @@ import { environment }  from '../../environments/environment';
 export class ProfileService {
   selectedProfile: Profile;
   profiles: Profile[] = [];
-  readonly baseURL = 'http://localhost:5000/users';
+  readonly baseURL = 'http://localhost:5000/admins';
 
   constructor(private http: HttpClient) { }
 
 
   postProfile(pro: Profile) {
-    return this.http.post(environment.apiBaseUrl+'/register', pro);
+    return this.http.post(environment.apiBaseUrlAdmin+'/register', pro);
   }
 
   getProfileList() {
-    return this.http.get(environment.apiBaseUrl+'/get');
+    return this.http.get(environment.apiBaseUrlAdmin+'/get');
   }
 
   putProfile(pro: Profile) {
-    return this.http.put(environment.apiBaseUrl+'/update'+ `/${pro.user_id}`, pro);
+    return this.http.put(environment.apiBaseUrlAdmin+'/update'+ `/${pro.id}`, pro);
   }
 
-  deleteProfile(user_id: string) {
-    return this.http.delete(environment.apiBaseUrl+'/delete'+ `/${user_id}`);
+  deleteProfile(id: string) {
+    return this.http.delete(environment.apiBaseUrlAdmin+'/delete'+ `/${id}`);
   }
 }

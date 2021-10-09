@@ -1,37 +1,28 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 
-import { UserComponent } from './user/user.component';
-import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { SignInComponent } from './user/sign-in/sign-in.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AdminComponent } from './admin/admin.component';
+import { SignUpComponent } from './admin/sign-up/sign-up.component';
+import { SignInComponent } from './admin/sign-in/sign-in.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './orders/orders.component';
 import { DriverComponent } from './driver/driver.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewComponent } from './orders/new/new.component';
-import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
-import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
-import { OnlineComponent } from './driver/online/online.component';
-import { TripComponent } from './customer/trip/trip.component';
-import { OnlineDriverComponent } from './customer/online-driver/online-driver.component';
-import { ResponseComponent } from './customer/response/response.component';
-import { TripOrderComponent } from './driver/trip-order/trip-order.component';
-import { HistoryComponent } from './driver/history/history.component';
-
 
 export const appRoutes: Routes = [
     {
-        path: 'signup', component: UserComponent,
+        path: 'signup', component: AdminComponent,
         children: [{ path: '', component: SignUpComponent }]
     },
     {
-        path: 'login', component: UserComponent,
+        path: 'login', component: AdminComponent,
         children: [{ path: '', component: SignInComponent }]
     },
     {
-        path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuard]
+        path: 'dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]
     },
     {
         path: 'home', component: HomeComponent, canActivate: [AuthGuard]

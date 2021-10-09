@@ -8,8 +8,8 @@ router.post('/login', validInfo, Drivers.loginDrivers)
 router.get('/is-verify',authorization, Drivers.verify)
 router.get('/dashboard',authorization, Drivers.dashboard)
 router.get('/get', Drivers.getDrivers)
-router.put('/update/:driver_id', Drivers.updateDrivers)
-router.delete('/delete/:driver_id', Drivers.deleteDrivers)
-router.get('/getOneDrvier/:driver_id', Drivers.getOneDriver)
+router.put('/update/:id', Drivers.updateDrivers)
+router.delete('/delete/:id', Drivers.deleteDrivers)
+router.get('/getOneDriver/:id', Drivers.getOneDriver)
 
 module.exports = router

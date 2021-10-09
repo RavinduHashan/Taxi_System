@@ -26,19 +26,19 @@ export class TripOrderComponent implements OnInit {
     if (form)
       form.reset();
     this.orderService.selectedOrder = {
-      order_id: "",
+      id: "",
       pick_location: "",
       drop_location: "",
       pick_time: "",
       drop_time: "",
       response: "",
-      c_id: "",
-      d_id:""
+      customer_id: "",
+      driver_id:""
     }
   }
 
   onSubmit(form: NgForm) {
-    if (form.value.order_id == "") {
+    if (form.value.id == "") {
       this.orderService.postOrder(form.value).subscribe((res:any) => {
         this.resetForm(form);
         this.refreshOrderList();
@@ -67,9 +67,9 @@ export class TripOrderComponent implements OnInit {
     this.orderService.selectedOrder = ord;
   }
 
-  onDelete(order_id: string, form: NgForm) {
+  onDelete(id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.orderService.deleteOrder(order_id).subscribe((res:any) => {
+      this.orderService.deleteOrder(id).subscribe((res:any) => {
         this.refreshOrderList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });

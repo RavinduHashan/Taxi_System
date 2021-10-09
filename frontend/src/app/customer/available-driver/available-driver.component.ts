@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Driver } from '../../shared/driver.model';
+import { Driver} from '../../shared/driver.model';
 import { DriverService } from '../../shared/driver.service';
 
 declare var M: any;
 
 @Component({
-  selector: 'app-driver-profile',
-  templateUrl: './driver-profile.component.html',
-  styleUrls: ['./driver-profile.component.css'],
+  selector: 'app-available-driver',
+  templateUrl: './available-driver.component.html',
+  styleUrls: ['./available-driver.component.css'],
   providers: [DriverService]
 })
-export class DriverProfileComponent implements OnInit {
-
+export class AvailableDriverComponent implements OnInit {
   constructor(public driverService: DriverService) { }
 
   ngOnInit(): void {
     this.resetForm();
-    this.refreshDriverList();
+    this.refreshAvailableDriverList();
   }
 
   resetForm(form?: NgForm) {
@@ -31,46 +30,44 @@ export class DriverProfileComponent implements OnInit {
       phone_number: "",
       city: "",
       vehicle_type: "",
-      vehicle_number:"",
+      vehicle_number: "",
       password: "",
-      available:false
-
+      available: true
     }
   }
-
   onSubmit(form: NgForm) {
-    if (form.value.driver_id == "") {
+    if (form.value.id == "") {
       this.driverService.postDriver(form.value).subscribe((res:any) => {
         this.resetForm(form);
-        this.refreshDriverList();
+        this.refreshAvailableDriverList();
         M.toast({ html: 'Saved successfully', classes: 'rounded' });
       });
     }
     else {
       this.driverService.putDriver(form.value).subscribe((res:any) => {
         this.resetForm(form);
-        this.refreshDriverList();
+        this.refreshAvailableDriverList();
         M.toast({ html: 'Updated successfully', classes: 'rounded' });
       });
     }
   }
 
-  refreshDriverList() {
-    this.driverService.getDriverList().subscribe((res:any) => {
+  refreshAvailableDriverList() {
+    this.driverService.seeAvailableDriverList().subscribe((res:any) => {
       console.log(res)
       this.driverService.drivers = res.rows as Driver[];
       
     });
   }
 
-  onEdit(dri: Driver) {
-    this.driverService.selectedDriver = dri;
+  onEdit(dir: Driver) {
+    this.driverService.selectedDriver = dir;
   }
 
-  onDelete(driver_id: string, form: NgForm) {
+  onDelete(id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.driverService.deleteDriver(driver_id).subscribe((res:any) => {
-        this.refreshDriverList();
+      this.driverService.deleteDriver(id).subscribe((res:any) => {
+        this.refreshAvailableDriverList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });
@@ -78,3 +75,4 @@ export class DriverProfileComponent implements OnInit {
   }
 
 }
+

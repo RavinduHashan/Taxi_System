@@ -3,7 +3,7 @@ import { AuthGuard } from '../auth/auth.guard';
 
 import { DriverComponent } from './driver.component';
 import { DriverProfileComponent } from './driver-profile/driver-profile.component';
-import { OnlineComponent } from './online/online.component';
+import { AvailableComponent } from './available/available.component';
 import { TripOrderComponent } from './trip-order/trip-order.component';
 import { HistoryComponent } from './history/history.component';
 
@@ -14,8 +14,8 @@ export const driverRoutes: Routes = [
         children: [{ path: '', component: DriverProfileComponent }], canActivate: [AuthGuard]
     },
     {
-        path: 'online', component: DriverComponent,
-        children: [{ path: '', component: OnlineComponent }], canActivate: [AuthGuard]
+        path: 'available', component: DriverComponent,
+        children: [{ path: '', component: AvailableComponent }], canActivate: [AuthGuard]
     },
     {
         path: 'trip-order', component: DriverComponent,

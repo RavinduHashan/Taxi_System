@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { User } from './user.model';
+import { Admin } from './admin.model';
 import { environment }  from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  selectedUser: User = {
+export class AdminService {
+  selectedAdmin: Admin = {
     full_name: '',
     email:'', 
     phone_number: '',
@@ -21,16 +21,16 @@ export class UserService {
 
    //HttpMethods
 
-   postUser(user: User){
-    return this.http.post(environment.apiBaseUrl+'/register',user,this.noAuthHeader);
+  postAdmin(admin: Admin){
+    return this.http.post(environment.apiBaseUrlAdmin+'/register',admin,this.noAuthHeader);
   }
 
   login(authCredentials: any) {
-    return this.http.post(environment.apiBaseUrl + '/login', authCredentials,this.noAuthHeader);
+    return this.http.post(environment.apiBaseUrlAdmin + '/login', authCredentials,this.noAuthHeader);
   }
 
-  getUserProfile() {
-    return this.http.get(environment.apiBaseUrl + '/dashboard');
+  getAdminProfile() {
+    return this.http.get(environment.apiBaseUrlAdmin + '/dashboard');
   }
 
 
@@ -48,20 +48,20 @@ export class UserService {
     localStorage.removeItem('token');
   }
 
-  getUserPayload() {
+  getAdminPayload() {
     var token = this.getToken();
     if (token) {
-      var userPayload = atob(token.split('.')[1]);
-      return JSON.parse(userPayload);
+      var adminPayload = atob(token.split('.')[1]);
+      return JSON.parse(adminPayload);
     }
     else
       return null;
   }
 
   isLoggedIn() {
-    var userPayload = this.getUserPayload();
-    if (userPayload)
-      return userPayload.exp > Date.now() / 1000;
+    var adminPayload = this.getAdminPayload();
+    if (adminPayload)
+      return adminPayload.exp > Date.now() / 1000;
     else
       return false;
   }

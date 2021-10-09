@@ -7,16 +7,18 @@ const jwtGenerator = require("../jwtGenerator/customersJwtGenerator")
 const registerCustomers =  async (req, res) => {
     const { full_name, email, phone_number, city, password } = req.body;
     try {
-      const customer = await pool.query("SELECT * FROM customers WHERE email = $1", [email]);
+      const query1 = `SELECT * FROM customers WHERE email = $1`
+      const customer = await pool.query(query1, [email]);
       if (customer.rows.length > 0) {
         return res.status(401).json("Customer already exist!");
       }
       const salt = await bcrypt.genSalt(10);
       const bcryptPassword = await bcrypt.hash(password, salt);
-      const newCustomer = await pool.query("INSERT INTO customers (full_name, email, phone_number, city, customer_password) VALUES ($1, $2, $3, $4, $5) RETURNING *",[full_name, email, phone_number, city, bcryptPassword]);
+      const query2 = `INSERT INTO customers (full_name, email, phone_number, city, customer_password) VALUES ($1, $2, $3, $4, $5) RETURNING *`
+      const newCustomer = await pool.query(query2, [full_name, email, phone_number, city, bcryptPassword]);
       //res.json(newUser.rows[0])
 
-      const token = jwtGenerator(newCustomer.rows[0].customer_id);
+      const token = jwtGenerator(newCustomer.rows[0].id);
       res.json({ token });  
     } 
     catch (err) {
@@ -30,7 +32,8 @@ const loginCustomers = async (req, res) => {
   
   try {
     const { email, password } = req.body;
-    const customer = await pool.query("SELECT * FROM customers WHERE email = $1", [email]);
+    const query = `SELECT * FROM customers WHERE email = $1`
+    const customer = await pool.query(query, [email]);
 
     if (customer.rows.length === 0) {
       return res.status(401).json("Password or Email is incorrect");
@@ -43,7 +46,7 @@ const loginCustomers = async (req, res) => {
       return res.status(401).json("Password or Email is incorrect");
     }
     
-    const token = jwtGenerator(customer.rows[0].customer_id);
+    const token = jwtGenerator(customer.rows[0].id);
     res.json({ token });
 
     
@@ -66,7 +69,8 @@ const verify =  (req, res) => {
 //Dashbord accessibility
 const dashboard = async (req, res) =>{
   try{
-      const customer = await pool.query("SELECT * FROM customers WHERE customer_id = $1", [req.customer])
+      const query = `SELECT * FROM customers WHERE id = $1`
+      const customer = await pool.query(query, [req.customer])
       res.json(customer.rows[0])
   }
   catch(err){
@@ -79,8 +83,8 @@ const dashboard = async (req, res) =>{
 //Create Customer without athetication and hash password
 const createCustomers =  async (req, res) => {
     try{
-        const result = await pool.query("insert into users(fullName, email, phoneNumber, city, usersPassword) values ($1,$2,$3,$4,$5)" ,
-        [req.body.fullName, req.body.email, req.body.phoneNumber, req.body.city, req.body.usersPassword,])
+        const query = `insert into users(fullName, email, phoneNumber, city, usersPassword) values ($1,$2,$3,$4,$5)`
+        const result = await pool.query(query, [req.body.fullName, req.body.email, req.body.phoneNumber, req.body.city, req.body.usersPassword,])
         console.log(result)
         res.status(201).json({
             status: "Success",
@@ -95,7 +99,8 @@ const createCustomers =  async (req, res) => {
 //Read customers
 const getCustomers =  async (req, res) => {
     try{
-        const result = await pool.query("select * from customers order by customer_id desc")
+        const query = "select * from customers order by id desc"
+        const result = await pool.query(query)
         console.log(result)
         res.json(result)
     }
@@ -107,8 +112,9 @@ const getCustomers =  async (req, res) => {
 //Read one customer
 const getOneCustomer =  async (req, res) => {
     try{
-        const {customer_id} = req.params;
-        const result = await pool.query("select * from customers where customer_id = $1", [customer_id])
+        const {id} = req.params;
+        const query = `select * from customers where id = $1`
+        const result = await pool.query(query, [id])
         console.log(result)
         res.json(result)
     }
@@ -122,9 +128,9 @@ const updateCustomers = async (req, res) => {
     const { password } = req.body;
     try{
         const salt = await bcrypt.genSalt(10);
-        const Bpassword = await bcrypt.hash(password, salt);
-        const result = await pool.query("update customers set full_name = $1, email = $2, phone_number = $3, city = $4, customer_password = $5 where customer_id = $6 returning *" ,
-        [req.body.full_name, req.body.email, req.body.phone_number, req.body.city, Bpassword, req.params.customer_id])
+        const bcryptPassword = await bcrypt.hash(password, salt);
+        const query = `update customers set full_name = $1, email = $2, phone_number = $3, city = $4, customer_password = $5 where id = $6 returning *`
+        const result = await pool.query(query, [req.body.full_name, req.body.email, req.body.phone_number, req.body.city, bcryptPassword, req.params.id])
         console.log(result)
         res.json(result)
     }
@@ -136,7 +142,8 @@ const updateCustomers = async (req, res) => {
 //Delete customers
 const deleteCustomers = async (req, res) => {
     try{
-        const result = await pool.query("delete from customers where customer_id = $1 returning *", [req.params.customer_id])
+        const query = `delete from customers where id = $1 returning *`
+        const result = await pool.query(query, [req.params.id])
         console.log(result)
         res.json(result)
     }

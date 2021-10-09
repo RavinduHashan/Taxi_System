@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { UserService } from '../../shared/user.service'
+import { AdminService } from '../../shared/admin.service'
 
 @Component({
   selector: 'app-sign-up',
@@ -13,13 +13,13 @@ export class SignUpComponent implements OnInit {
   showSucessMessage: boolean;
   serverErrorMessages: string;
 
-  constructor(public userService: UserService) { }
+  constructor(public adminService: AdminService) { }
 
   ngOnInit() {
   }
 
   onSubmit(form: NgForm) {
-    this.userService.postUser(form.value).subscribe(
+    this.adminService.postAdmin(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
         setTimeout(() => this.showSucessMessage = false, 4000);
@@ -36,7 +36,7 @@ export class SignUpComponent implements OnInit {
   }
 
   resetForm(form: NgForm) {
-    this.userService.selectedUser = {
+    this.adminService.selectedAdmin = {
       full_name: '',
       email: '',
       phone_number: '',

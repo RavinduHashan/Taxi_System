@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col s5">
               <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
-                <input type="hidden" name="user_id" #user_id="ngModel" [(ngModel)]="profileService.selectedProfile.user_id">
+                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="profileService.selectedProfile.id">
                 <div class="row">
                   <div class="input-field col s12">
                     <input type="text" name="full_name" #name="ngModel" [(ngModel)]="profileService.selectedProfile.full_name" placeholder="" required>
@@ -68,7 +68,7 @@
                           <a class="action-btn" (click)="onEdit(pro)">
                             <i class="material-icons">edit</i>
                           </a>
-                          <a class="action-btn" (click)="onDelete(pro.user_id,profileForm)">
+                          <a class="action-btn" (click)="onDelete(pro.id,profileForm)">
                             <i class="material-icons">delete</i>
                           </a>
                       </td>

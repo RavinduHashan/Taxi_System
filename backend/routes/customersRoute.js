@@ -9,8 +9,8 @@ router.post('/login', validInfo, Customers.loginCustomers)
 router.get('/is-verify',authorization, Customers.verify)
 router.get('/dashboard',authorization, Customers.dashboard)
 router.get('/get', Customers.getCustomers)
-router.put('/update/:customer_id', Customers.updateCustomers)
-router.delete('/delete/:customer_id', Customers.deleteCustomers)
-router.get('/getOneCustomer/:customer_id', Customers.getOneCustomer)
+router.put('/update/:id', Customers.updateCustomers)
+router.delete('/delete/:id', Customers.deleteCustomers)
+router.get('/getOneCustomer/:id', Customers.getOneCustomer)
 
 module.exports = router

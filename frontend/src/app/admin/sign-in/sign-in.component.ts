@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 
 
-import { UserService} from '../../shared/user.service';
+import { AdminService} from '../../shared/admin.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +12,7 @@ import { UserService} from '../../shared/user.service';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(private userService: UserService,private router : Router) { }
+  constructor(private adminService: AdminService,private router : Router) { }
 
   model ={
     email :'',
@@ -21,14 +21,14 @@ export class SignInComponent implements OnInit {
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   serverErrorMessages: string;
   ngOnInit() {
-    if(this.userService.isLoggedIn())
+    if(this.adminService.isLoggedIn())
     this.router.navigateByUrl('/home');
   }
 
   onSubmit(form : NgForm){
-    this.userService.login(form.value).subscribe(
+    this.adminService.login(form.value).subscribe(
       (res:any) => {
-        this.userService.setToken(res['token']);
+        this.adminService.setToken(res['token']);
         this.router.navigateByUrl('/home');
       },
       err => {

@@ -1,5 +1,5 @@
 export class Driver {
-    driver_id: any;
+    id: any;
     full_name: string;
     email: string;
     phone_number: string;
@@ -7,4 +7,5 @@ export class Driver {
     vehicle_type: string;
     vehicle_number: string;
     password: string;
+    available: any;
 }

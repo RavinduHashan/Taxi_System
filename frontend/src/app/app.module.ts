@@ -6,14 +6,14 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 // components
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
-import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { AdminComponent } from './admin/admin.component';
+import { SignUpComponent } from './admin/sign-up/sign-up.component';
 //routes
 import { appRoutes } from './routes';
 import { driverRoutes } from './driver/driverRoutes';
 import { customerRoutes } from './customer/customerRoutes';
-import { SignInComponent } from './user/sign-in/sign-in.component';
-import { UserService } from './shared/user.service';
+import { SignInComponent } from './admin/sign-in/sign-in.component';
+import { AdminService } from './shared/admin.service';
 //other
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -23,13 +23,12 @@ import { OrdersComponent } from './orders/orders.component';
 import { DriverComponent } from './driver/driver.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewComponent } from './orders/new/new.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
 import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
-import { OnlineDriverComponent } from './customer/online-driver/online-driver.component';
-import { OnlineComponent } from './driver/online/online.component';
-import { TripComponent } from './customer/trip/trip.component';
+import { AvailableDriverComponent } from './customer/available-driver/available-driver.component';
+import { AvailableComponent } from './driver/available/available.component';
 import { ResponseComponent } from './customer/response/response.component';
 import { TripOrderComponent } from './driver/trip-order/trip-order.component';
 import { HistoryComponent } from './driver/history/history.component';
@@ -38,7 +37,7 @@ import { HistoryComponent } from './driver/history/history.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
+    AdminComponent,
     SignUpComponent,
     SignInComponent,
     HomeComponent,
@@ -46,13 +45,12 @@ import { HistoryComponent } from './driver/history/history.component';
     DriverComponent,
     ProfileComponent,
     NewComponent,
-    UserDashboardComponent,
+    AdminDashboardComponent,
     CustomerComponent,
     CustomerProfileComponent,
     DriverProfileComponent,
-    OnlineDriverComponent,
-    OnlineComponent,
-    TripComponent,
+    AvailableDriverComponent,
+    AvailableComponent,
     ResponseComponent,
     TripOrderComponent,
     HistoryComponent, 
@@ -72,7 +70,7 @@ import { HistoryComponent } from './driver/history/history.component';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  },AuthGuard,UserService],
+  },AuthGuard,AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -25,14 +25,14 @@ export class NewComponent implements OnInit {
     if (form)
       form.reset();
     this.orderService.selectedOrder = {
-      order_id: "",
+      id: "",
       pick_location: "",
       drop_location: "",
       pick_time: "",
       drop_time: "",
       response: "",
-      c_id: "",
-      d_id:""
+      customer_id: "",
+      driver_id:""
     }
   }
 

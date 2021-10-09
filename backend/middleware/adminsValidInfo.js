@@ -1,8 +1,8 @@
 module.exports = function(req, res, next) {
     const { full_name, email, phone_number, city, password } = req.body;
   
-    function validEmail(userEmail) {
-      return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail);
+    function validEmail(adminEmail) {
+      return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(adminEmail);
     }
   
     if (req.path === "/register") {

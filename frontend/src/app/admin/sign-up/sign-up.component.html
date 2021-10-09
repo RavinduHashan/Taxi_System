@@ -4,28 +4,28 @@
 </div>
 <h2 style="color:rgb(110, 110, 223);" >Taxi</h2>
 <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
-  <input type="text" #full_name="ngModel" [(ngModel)]="userService.selectedUser.full_name" name="full_name" placeholder="Full Name"
+  <input type="text" #full_name="ngModel" [(ngModel)]="adminService.selectedAdmin.full_name" name="full_name" placeholder="Full Name"
   required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !full_name.valid }">
   <div *ngIf="signUpForm.submitted && !full_name.valid">
     <label class="validation-message">This field is required.</label>
   </div>
-  <input type="text" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="Email"
+  <input type="text" #email="ngModel" [(ngModel)]="adminService.selectedAdmin.email" name="email" placeholder="Email"
   required [pattern]="emailRegex"  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }">
   <div *ngIf="signUpForm.submitted && email.errors">
     <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
     <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
   </div>
-  <input type="text" #phone_number="ngModel" [(ngModel)]="userService.selectedUser.phone_number" name="phone_number" placeholder="Phone Number"
+  <input type="text" #phone_number="ngModel" [(ngModel)]="adminService.selectedAdmin.phone_number" name="phone_number" placeholder="Phone Number"
   required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !phone_number.valid }">
   <div *ngIf="signUpForm.submitted && !phone_number.valid">
     <label class="validation-message">This field is required.</label>
   </div>
-  <input type="text" #city="ngModel" [(ngModel)]="userService.selectedUser.city" name="city" placeholder="City"
+  <input type="text" #city="ngModel" [(ngModel)]="adminService.selectedAdmin.city" name="city" placeholder="City"
   required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !city.valid }">
   <div *ngIf="signUpForm.submitted && !city.valid">
     <label class="validation-message">This field is required.</label>
   </div>
-  <input type="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" name="password" placeholder="Password"
+  <input type="password" #password="ngModel" [(ngModel)]="adminService.selectedAdmin.password" name="password" placeholder="Password"
   minlength="4" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password.valid }">
   <div *ngIf="signUpForm.submitted && password.errors">
     <label *ngIf="password.errors.required" class="validation-message">This field is required.</label>

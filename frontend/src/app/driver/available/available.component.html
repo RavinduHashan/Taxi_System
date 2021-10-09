@@ -10,48 +10,10 @@
                 <input type="hidden" name="id" #id="ngModel" [(ngModel)]="driverService.selectedDriver.id">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input type="text" name="full_name" #name="ngModel" [(ngModel)]="driverService.selectedDriver.full_name" placeholder="" required>
-                    <label>Full Name :
-                      <label class="red-text">*</label>
-                    </label>
+                    <input type="text" name="available" #name="ngModel" [(ngModel)]="driverService.selectedDriver.available" placeholder="">
+                    <label>Available :</label>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="email" #name="ngModel" [(ngModel)]="driverService.selectedDriver.email" placeholder="">
-                    <label>email :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="phone_number" #name="ngModel" [(ngModel)]="driverService.selectedDriver.phone_number" placeholder="">
-                    <label>Phone Number :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="city" #name="ngModel" [(ngModel)]="driverService.selectedDriver.city" placeholder="">
-                    <label>City :</label>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input type="text" name="vehicle_type" #name="ngModel" [(ngModel)]="driverService.selectedDriver.vehicle_type" placeholder="">
-                      <label>vehicle Number :</label>
-                    </div>
-                  </div>
-                <div class="row">
-                <div class="input-field col s12">
-                    <input type="text" name="vehicle_number" #name="ngModel" [(ngModel)]="driverService.selectedDriver.vehicle_number" placeholder="">
-                    <label>Vehicle Number :</label>
-                </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input type="text" name="password" #name="ngModel" [(ngModel)]="driverService.selectedDriver.password" placeholder="">
-                      <label>Password :</label>
-                    </div>
-                  </div>
                 <div class="row">
                   <div class="input-field col s12">
                     <button class="btn btn-custom right" type="button" (click)="resetForm(driverForm)">Reset</button>
@@ -70,6 +32,7 @@
                         <th>City</th>
                         <th>Vehicle Type</th>
                         <th>Vehicle Number</th>
+                        <th>Available</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -80,6 +43,7 @@
                       <td>{{dri.city}}</td>
                       <td>{{dri.vehicle_type}}</td>
                       <td>{{dri.vehicle_number}}</td>
+                      <td>{{dri.available}}</td>
                       <td>
                           <a class="action-btn" (click)="onEdit(dri)">
                             <i class="material-icons">edit</i>

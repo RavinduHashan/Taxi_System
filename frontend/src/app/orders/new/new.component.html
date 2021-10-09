@@ -16,7 +16,7 @@
                     <button class="btn btn-custom left" type="button" (click)="Reject(orderForm)">Reject</button>
                   </div>
                 </div>
-                <input type="hidden" name="order_id" #order_id="ngModel" [(ngModel)]="orderService.selectedOrder.order_id">
+                <input type="hidden" name="id" #order_id="ngModel" [(ngModel)]="orderService.selectedOrder.id">
                 <div class="row">
                   <div class="input-field col s12">
                     <input type="text" name="pick_location" #name="ngModel" [(ngModel)]="orderService.selectedOrder.pick_location" placeholder="" required>
@@ -51,13 +51,13 @@
                   </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input type="text" name="c_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.c_id" placeholder="">
+                    <input type="text" name="c_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.customer_id" placeholder="">
                     <label>Customer ID :</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input type="text" name="d_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.d_id" placeholder="">
+                    <input type="text" name="d_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.driver_id" placeholder="">
                     <label>Driver ID :</label>
                   </div>
                 </div>
@@ -85,13 +85,13 @@
                       <td>{{ord.pick_time}}</td>
                       <td>{{ord.drop_time}}</td>
                       <td>{{ord.response}}</td>
-                      <td>{{ord.c_id}}</td>
-                      <td>{{ord.d_id}}</td>
+                      <td>{{ord.customer_id}}</td>
+                      <td>{{ord.driver_id}}</td>
                       <td >
                           <a class="action-btn" (click)="onEdit(ord)">
                             <i class="material-icons">edit</i>
                           </a>
-                          <a class="action-btn" (click)="onDelete(ord.order_id,orderForm)">
+                          <a class="action-btn" (click)="onDelete(ord.id,orderForm)">
                             <i class="material-icons">delete</i>
                           </a>
                       </td>

@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     if (form)
       form.reset();
     this.profileService.selectedProfile = {
-      user_id: "",
+      id: "",
       full_name: "",
       email:"",
       phone_number: "",
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.value.user_id == "") {
+    if (form.value.id == "") {
       this.profileService.postProfile(form.value).subscribe((res:any) => {
         this.resetForm(form);
         this.refreshProfileList();
@@ -63,9 +63,9 @@ export class ProfileComponent implements OnInit {
     this.profileService.selectedProfile = pro;
   }
 
-  onDelete(user_id: string, form: NgForm) {
+  onDelete(id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.profileService.deleteProfile(user_id).subscribe((res:any) => {
+      this.profileService.deleteProfile(id).subscribe((res:any) => {
         this.refreshProfileList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });

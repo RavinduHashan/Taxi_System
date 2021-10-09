@@ -41,10 +41,10 @@ export class OrderService {
   }
 
   putOrder(ord: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/updateOrders'+ `/${ord.order_id}`, ord);
+    return this.http.put(environment.apiBaseUrlOrder+'/updateOrders'+ `/${ord.id}`, ord);
   }
 
-  deleteOrder(order_id: string) {
-    return this.http.delete(environment.apiBaseUrlOrder+'/deleteOrders'+ `/${order_id}`);
+  deleteOrder(id: string) {
+    return this.http.delete(environment.apiBaseUrlOrder+'/deleteOrders'+ `/${id}`);
   }
 }
