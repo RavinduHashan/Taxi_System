@@ -39,4 +39,6 @@ export class DriverService {
     return this.http.put(environment.apiBaseUrlOrder+'/updateAvailableState' + `/${dri.id}`, dri);
   }
 
+  
+
 }

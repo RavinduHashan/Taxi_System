@@ -32,6 +32,7 @@ import { AvailableComponent } from './driver/available/available.component';
 import { ResponseComponent } from './customer/response/response.component';
 import { TripOrderComponent } from './driver/trip-order/trip-order.component';
 import { HistoryComponent } from './driver/history/history.component';
+import { CreateOrderComponent } from './customer/create-order/create-order.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { HistoryComponent } from './driver/history/history.component';
     AvailableComponent,
     ResponseComponent,
     TripOrderComponent,
-    HistoryComponent, 
+    HistoryComponent,
+    CreateOrderComponent, 
   ],
 
   imports: [

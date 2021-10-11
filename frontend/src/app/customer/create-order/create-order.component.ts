@@ -7,12 +7,12 @@ import { OrderService } from '../../shared/order.service';
 declare var M: any;
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.css'],
+  selector: 'app-create-order',
+  templateUrl: './create-order.component.html',
+  styleUrls: ['./create-order.component.css'],
   providers: [OrderService]
 })
-export class NewComponent implements OnInit {
+export class CreateOrderComponent implements OnInit {
 
   constructor(public orderService: OrderService) { }
 
@@ -131,7 +131,7 @@ export class NewComponent implements OnInit {
       
     });
   }
-
+  
 }
 
 

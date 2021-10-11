@@ -29,9 +29,9 @@ const getOrders =  async (req, res) => {
 //Read one order(Admin)
 const getOneOrder =  async (req, res) => {
     try{
-        const {order_id} = req.params;
-        const query = `select * from orders where order_id = $1`
-        const result = await pool.query(query, [order_id])
+        const {id} = req.params;
+        const query = `select * from orders where id = $1`
+        const result = await pool.query(query, [id])
         console.log(result)
         res.json(result)
     }
@@ -43,8 +43,8 @@ const getOneOrder =  async (req, res) => {
 //Update orders(Admin)
 const updateOrders = async (req, res) => {
     try{
-        const query = `update orders set pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, c_id = $6, d_id = $7 where order_id = $8 returning *`
-        const result = await pool.query(query, [req.body.pick_location, req.body.drop_location, req.body.pick_time, req.body.drop_time, req.body.response, req.body.customer_id, req.body.driver_id, req.params.order_id])
+        const query = `update orders set pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, customer_id = $6, driver_id = $7 where id = $8 returning *`
+        const result = await pool.query(query, [req.body.pick_location, req.body.drop_location, req.body.pick_time, req.body.drop_time, req.body.response, req.body.customer_id, req.body.driver_id, req.params.id])
         console.log(result)
         res.json(result)
     }
@@ -56,8 +56,8 @@ const updateOrders = async (req, res) => {
 //Delete orders(Admin)
 const deleteOrders = async (req, res) => {
     try{
-        const query = `delete from orders where order_id = $1 returning *`
-        const result = await pool.query(query, [req.params.order_id])
+        const query = `delete from orders where id = $1 returning *`
+        const result = await pool.query(query, [req.params.id])
         console.log(result)
         res.json(result)
     }
@@ -141,9 +141,20 @@ const viewRejectOrders = async (req, res) => {
     }
 }
 
+//Driver response the order
+const updateDriverResponse = async (req, res) => {
+    try{
+        const query = `update orders set response = $1 where id = $2 returning *`
+        const result = await pool.query(query, [req.body.response, req.params.id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
 
+    }
+}
 //****************************************************************************************************
-//Customer
+// //Customer
 
 //Create trips(Customer)
 const customerCreateOrders = async (req, res) =>{
@@ -245,5 +256,5 @@ const customerDeleteOrders = async (req, res) => {
 // }
 
 module.exports = {createOrders, getOrders, getOneOrder, updateOrders, deleteOrders, updateAvailableState, seeAvailableDrivers,
-                  viewPendingOrders, viewConfirmOrders, viewCompleteOrders, viewRejectOrders, customerCreateOrders, customerGetOrders,
+                  viewPendingOrders, viewConfirmOrders, viewCompleteOrders, viewRejectOrders,updateDriverResponse, customerCreateOrders, customerGetOrders,
                   customerUpdateOrders, customerDeleteOrders}

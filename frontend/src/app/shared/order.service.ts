@@ -47,4 +47,8 @@ export class OrderService {
   deleteOrder(id: string) {
     return this.http.delete(environment.apiBaseUrlOrder+'/deleteOrders'+ `/${id}`);
   }
+
+  updateResponseList(ord: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/updateDriverResponse'+ `/${ord.id}`, ord);
+  }
 }
