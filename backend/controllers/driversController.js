@@ -6,7 +6,7 @@ const { query } = require("express");
 
 //Driver registration
 const registerDrivers =  async (req, res) => {
-    const { full_name, email, phone_number, vehicle_type, vehicle_number, city, password, available } = req.body;
+    const { full_name, email, phone_number, vehicle_type, vehicle_number, city, password} = req.body;
     try {
       const query1 = `SELECT * FROM drivers WHERE email = $1`
       const driver = await pool.query(query1, [email]);
@@ -15,8 +15,8 @@ const registerDrivers =  async (req, res) => {
       }
       const salt = await bcrypt.genSalt(10);
       const bcryptPassword = await bcrypt.hash(password, salt);
-      const query2 = `INSERT INTO drivers (full_name, email, phone_number,vehicle_type,vehicle_number, city, driver_password, availab) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`
-      const newDriver = await pool.query(query2, [full_name, email, phone_number, vehicle_type, vehicle_number, city, bcryptPassword, available]);
+      const query2 = `INSERT INTO drivers (full_name, email, phone_number,vehicle_type,vehicle_number, city, driver_password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`
+      const newDriver = await pool.query(query2, [full_name, email, phone_number, vehicle_type, vehicle_number, city, bcryptPassword]);
       //res.json(newUser.rows[0])
 
       const token = jwtGenerator(newDriver.rows[0].id);

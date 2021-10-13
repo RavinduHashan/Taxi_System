@@ -63,7 +63,7 @@ const verify =  (req, res) => {
   }
 };
 
-//Dashbord accessibility
+//Dashboard accessibility
 const dashboard = async (req, res) =>{
   try{
       const query = `SELECT * FROM admins WHERE id = $1`
@@ -76,16 +76,15 @@ const dashboard = async (req, res) =>{
   }
 }
 
-//Create admin without athetication and hash password
+//Create admin without authentication and hash password
 const createAdmins =  async (req, res) => {
     try{
+        const {fullName, email, phoneNumber, city , admin_password} = req.body
+        const array = [fullName, email, phoneNumber, city, admin_password]
         const query = `insert into admins(fullName, email, phoneNumber, city, admin_password) values ($1,$2,$3,$4,$5)`
-        const result = await pool.query( query, [req.body.fullName, req.body.email, req.body.phoneNumber, req.body.city, req.body.admin_password])
+        const result = await pool.query( query, array)
         console.log(result)
-        res.status(201).json({
-            status: "Success",
-            date: {users: "Ravindu"}
-        })
+        res.json(result)
     }
     catch(err){
         console.log(err);

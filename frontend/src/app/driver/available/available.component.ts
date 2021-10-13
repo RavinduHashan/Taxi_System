@@ -55,6 +55,7 @@ export class AvailableComponent implements OnInit {
     }
   }
 
+  
   refreshDriverList() {
     this.driverService.getDriverList().subscribe((res:any) => {
       console.log(res)
@@ -76,5 +77,4 @@ export class AvailableComponent implements OnInit {
       });
     }
   }
-
 }

@@ -211,16 +211,16 @@ const customerDeleteOrders = async (req, res) => {
 
 
 
-// const driverSeeOrders =  async (req, res) => {
-//     try{
-//         const {driver_id} = req.body
-//         const result = await pool.query("select * from orders where d_id = 1$",[driver_id])
-//         res.json(result)
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
+const driverSeeOrders =  async (req, res) => {
+    try{
+        const {id} = req.params
+        const result = await pool.query("select * from orders where id = 1$",[id])
+        res.json(result)
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 
 // const driverResponseOrder = async (req, res) => {
 //     try{

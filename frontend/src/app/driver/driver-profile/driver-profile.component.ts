@@ -33,13 +33,13 @@ export class DriverProfileComponent implements OnInit {
       vehicle_type: "",
       vehicle_number:"",
       password: "",
-      available:false
+      available: true
 
     }
   }
 
   onSubmit(form: NgForm) {
-    if (form.value.driver_id == "") {
+    if (form.value.id == "") {
       this.driverService.postDriver(form.value).subscribe((res:any) => {
         this.resetForm(form);
         this.refreshDriverList();
@@ -67,9 +67,9 @@ export class DriverProfileComponent implements OnInit {
     this.driverService.selectedDriver = dri;
   }
 
-  onDelete(driver_id: string, form: NgForm) {
+  onDelete(id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.driverService.deleteDriver(driver_id).subscribe((res:any) => {
+      this.driverService.deleteDriver(id).subscribe((res:any) => {
         this.refreshDriverList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });

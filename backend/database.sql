@@ -55,7 +55,7 @@ create table drivers(
     vehicle_number varchar(255) not null,
     city varchar(255) not null,
     driver_password varchar(255) not null,
-    available boolean
+    available boolean DEFAULT false
 );
 
 -- create table orders(
