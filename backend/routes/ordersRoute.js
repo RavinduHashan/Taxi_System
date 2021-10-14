@@ -16,6 +16,9 @@ router.get('/viewRejectOrders', Orders.viewRejectOrders)
 router.get('/seeAvailableDrivers', Orders.seeAvailableDrivers)
 router.put('/updateAvailableState/:id', Orders.updateAvailableState)
 
+router.put('/insertTrue/:id', Orders.insertTrue)
+router.put('/insertFalse/:id', Orders.insertFalse)
+
 router.put('/updateDriverResponse/:id', Orders.updateDriverResponse)
 
 //Customer

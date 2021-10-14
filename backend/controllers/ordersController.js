@@ -153,6 +153,30 @@ const updateDriverResponse = async (req, res) => {
 
     }
 }
+
+const insertTrue = async (req, res) => {
+    try{
+        const query = `update drivers set available = true where id = $1 returning *`
+        const result = await pool.query(query, [req.params.id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+const insertFalse = async (req, res) => {
+    try{
+        const query = `update drivers set available = false where id = $1 returning *`
+        const result = await pool.query(query, [req.params.id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
 //****************************************************************************************************
 // //Customer
 
@@ -211,16 +235,16 @@ const customerDeleteOrders = async (req, res) => {
 
 
 
-const driverSeeOrders =  async (req, res) => {
-    try{
-        const {id} = req.params
-        const result = await pool.query("select * from orders where id = 1$",[id])
-        res.json(result)
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+// const driverSeeOrders =  async (req, res) => {
+//     try{
+//         const {id} = req.params
+//         const result = await pool.query("select * from orders where id = 1$",[id])
+//         res.json(result)
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
 
 // const driverResponseOrder = async (req, res) => {
 //     try{
@@ -256,5 +280,5 @@ const driverSeeOrders =  async (req, res) => {
 // }
 
 module.exports = {createOrders, getOrders, getOneOrder, updateOrders, deleteOrders, updateAvailableState, seeAvailableDrivers,
-                  viewPendingOrders, viewConfirmOrders, viewCompleteOrders, viewRejectOrders,updateDriverResponse, customerCreateOrders, customerGetOrders,
+                  viewPendingOrders, viewConfirmOrders, viewCompleteOrders, viewRejectOrders,updateDriverResponse,insertTrue,insertFalse, customerCreateOrders, customerGetOrders,
                   customerUpdateOrders, customerDeleteOrders}

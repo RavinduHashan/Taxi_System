@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+
 import { Driver } from '../../shared/driver.model';
 import { DriverService } from '../../shared/driver.service';
 
@@ -33,7 +34,7 @@ export class AvailableComponent implements OnInit {
       vehicle_type: "",
       vehicle_number: "",
       password: "",
-      available: ""
+      available:""
         
     }
   }
@@ -64,9 +65,24 @@ export class AvailableComponent implements OnInit {
     });
   }
 
-  onEdit(dir: Driver) {
-    this.driverService.selectedDriver = dir;
+  onEdit(dri: Driver) {
+    this.driverService.selectedDriver = dri;
   }
+
+  available(dri: Driver) {
+    if(dri.available)
+        this.driverService.insertFalse(dri).subscribe((res:any) => {
+        this.refreshDriverList();
+        M.toast({ html: 'Saved successfully', classes: 'rounded' });
+      });
+    else{
+        this.driverService.insertTrue(dri).subscribe((res:any) => {
+        this.refreshDriverList();
+        M.toast({ html: 'Saved successfully', classes: 'rounded' });
+      })
+    }
+
+    }
 
   onDelete(id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {

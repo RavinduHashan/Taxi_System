@@ -39,8 +39,12 @@ export class DriverService {
     return this.http.put(environment.apiBaseUrlOrder+'/updateAvailableState' + `/${dri.id}`, dri);
   }
 
-  update(dri: Driver) {
-    return this.http.put(environment.apiBaseUrlOrder+'/updateAvailableState' + `/${dri.id}`, dri);
+  insertTrue(dri: Driver) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertTrue' + `/${dri.id}`, dri);
+  }
+
+  insertFalse(dri: Driver) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertFalse' + `/${dri.id}`, dri);
   }
 
 }
