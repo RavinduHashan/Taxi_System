@@ -73,11 +73,13 @@ export class AvailableComponent implements OnInit {
     if(dri.available)
         this.driverService.insertFalse(dri).subscribe((res:any) => {
         this.refreshDriverList();
+        this.resetForm();
         M.toast({ html: 'Saved successfully', classes: 'rounded' });
       });
     else{
         this.driverService.insertTrue(dri).subscribe((res:any) => {
         this.refreshDriverList();
+        this.resetForm();
         M.toast({ html: 'Saved successfully', classes: 'rounded' });
       })
     }

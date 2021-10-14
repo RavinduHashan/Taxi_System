@@ -1,28 +1,11 @@
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <div class="row">
     <div class="col s12">
       <div class="card">
         <div class="card-content white-text">
           <div class="row">
-            <div class="col s5">
-              <form #driverForm="ngForm" (ngSubmit)="onSubmit(driverForm)">
-                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="driverService.selectedDriver.id">
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="available" #name="ngModel" [(ngModel)]="driverService.selectedDriver.available" placeholder="">
-                    <label>Available :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <button class="btn btn-custom right" type="button" (click)="resetForm(driverForm)">Reset</button>
-                    <button class="btn btn-custom right" type="submit" [disabled]="!driverForm.valid">Submit</button>  
-                  </div>
-                </div>
-              </form>
-            </div>
             <div class="col s7">
-                <table class="responsive-table highlight">
+                <table class="table table-striped">
                     <thead>
                       <tr>
                         <th>Full Name</th>
@@ -31,10 +14,8 @@
                         <th>City</th>
                         <th>Vehicle Type</th>
                         <th>Vehicle Number</th>
-                        <th>Available</th>
-                        <th>Online</th>
-                        <th>Edit</th>
-                        <th></th>
+                        <th>Available</th> 
+                        <th>True/False</th> 
                       </tr>
                     </thead>
                     <tr *ngFor="let dri of driverService.drivers">
@@ -44,21 +25,17 @@
                       <td>{{dri.city}}</td>
                       <td>{{dri.vehicle_type}}</td>
                       <td>{{dri.vehicle_number}}</td>
-                      <td>{{dri.available}}</td>
-                      <td>
-                        <div (click)="available(dri)" class="form-check">
-                          <input  class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate" >
+                      <td> 
+                        <div (click)="available(dri)" class="switch">
+                          <label>
+                            Off
+                            <input [checked]="dri.available" disabled type="checkbox">
+                            <span class="lever"></span>
+                            On
+                          </label>
                         </div>
-                
                       </td>
-                      <td>
-                          <a class="action-btn" (click)="onEdit(dri)">
-                            <i class="material-icons">edit</i>
-                          </a>
-                          <a class="action-btn" (click)="onDelete(dri.id,driverForm)">
-                            <i class="material-icons">delete</i>
-                          </a>
-                      </td>
+                      <td>{{dri.available}}</td> 
                     </tr>
                 </table>
             </div>
