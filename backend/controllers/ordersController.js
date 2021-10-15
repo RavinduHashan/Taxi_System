@@ -154,6 +154,7 @@ const updateDriverResponse = async (req, res) => {
     }
 }
 
+//Driver make available
 const insertTrue = async (req, res) => {
     try{
         const query = `update drivers set available = true where id = $1 returning *`
@@ -166,9 +167,46 @@ const insertTrue = async (req, res) => {
     }
 }
 
+//Driver make unavailable
 const insertFalse = async (req, res) => {
     try{
         const query = `update drivers set available = false where id = $1 returning *`
+        const result = await pool.query(query, [req.params.id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+const insertConfirm = async (req, res) => {
+    try{
+        const query = `update orders set response = 'Confirm' where id = $1 returning *`
+        const result = await pool.query(query, [req.params.id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+const insertReject = async (req, res) => {
+    try{
+        const query = `update orders set response = 'Reject' where id = $1 returning *`
+        const result = await pool.query(query, [req.params.id])
+        res.json(result)  
+    }
+    catch(err){
+        console.log(err);
+
+    }
+}
+
+const insertComplete = async (req, res) => {
+    try{
+        const query = `update orders set response = 'Complete' where id = $1 returning *`
         const result = await pool.query(query, [req.params.id])
         res.json(result)  
     }
@@ -280,5 +318,6 @@ const customerDeleteOrders = async (req, res) => {
 // }
 
 module.exports = {createOrders, getOrders, getOneOrder, updateOrders, deleteOrders, updateAvailableState, seeAvailableDrivers,
-                  viewPendingOrders, viewConfirmOrders, viewCompleteOrders, viewRejectOrders,updateDriverResponse,insertTrue,insertFalse, customerCreateOrders, customerGetOrders,
+                  viewPendingOrders, viewConfirmOrders, viewCompleteOrders, viewRejectOrders,updateDriverResponse,insertTrue,insertFalse,
+                  insertConfirm, insertReject, insertComplete, customerCreateOrders, customerGetOrders,
                   customerUpdateOrders, customerDeleteOrders}

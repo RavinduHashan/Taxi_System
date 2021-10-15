@@ -51,4 +51,16 @@ export class OrderService {
   updateResponseList(ord: Order) {
     return this.http.put(environment.apiBaseUrlOrder+'/updateDriverResponse'+ `/${ord.id}`, ord);
   }
+
+  insertConfirm(ord: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertConfirm'+ `/${ord.id}`, ord);
+  }
+
+  insertReject(ord: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertReject'+ `/${ord.id}`, ord);
+  }
+
+  insertComplete(ord: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertComplete'+ `/${ord.id}`, ord);
+  }
 }

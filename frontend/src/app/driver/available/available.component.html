@@ -15,7 +15,6 @@
                         <th>Vehicle Type</th>
                         <th>Vehicle Number</th>
                         <th>Available</th> 
-                        <th>True/False</th> 
                       </tr>
                     </thead>
                     <tr *ngFor="let dri of driverService.drivers">
@@ -29,13 +28,12 @@
                         <div (click)="available(dri)" class="switch">
                           <label>
                             Off
-                            <input [checked]="dri.available" disabled type="checkbox">
+                            <input [checked]="dri.available" type="checkbox">
                             <span class="lever"></span>
                             On
                           </label>
                         </div>
                       </td>
-                      <td>{{dri.available}}</td> 
                     </tr>
                 </table>
             </div>

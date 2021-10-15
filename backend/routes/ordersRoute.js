@@ -19,6 +19,10 @@ router.put('/updateAvailableState/:id', Orders.updateAvailableState)
 router.put('/insertTrue/:id', Orders.insertTrue)
 router.put('/insertFalse/:id', Orders.insertFalse)
 
+router.put('/insertConfirm/:id', Orders.insertConfirm)
+router.put('/insertReject/:id', Orders.insertReject)
+router.put('/insertComplete/:id', Orders.insertComplete)
+
 router.put('/updateDriverResponse/:id', Orders.updateDriverResponse)
 
 //Customer

@@ -131,19 +131,30 @@ export class TripOrderComponent implements OnInit {
       this.orderService.orders = res.rows as Order[];
       
     });
-}
+  }
 
-
-
-
-
-
-
-
-
- 
-
-  
+  confirm(ord: Order) {
+      this.orderService.insertConfirm(ord).subscribe((res:any) => {
+        this.resetForm();
+        this.refreshOrderList();
+        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
+      });
+  }
+  reject(ord: Order) {
+    this.orderService.insertReject(ord).subscribe((res:any) => {
+      this.resetForm();
+      this.refreshOrderList();
+      M.toast({ html: 'Deleted successfully', classes: 'rounded' });
+    });
+  }
+  complete(ord: Order) {
+    this.orderService.insertComplete(ord).subscribe((res:any) => {
+      this.resetForm();
+      this.refreshOrderList();
+      M.toast({ html: 'Deleted successfully', classes: 'rounded' });
+    });
+  }
+    
 }
 
 
