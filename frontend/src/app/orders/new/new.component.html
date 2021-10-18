@@ -11,7 +11,7 @@
                     <button style = "color: rgb(46, 139, 46);" class="btn btn-custom left" type="button" (click)="refreshOrderList()">+ New</button>
                     <button class="btn btn-custom left" type="button" (click)="Pending(orderForm)">Pending</button>
                     <button class="btn btn-custom left" type="button" (click)="Confirm(orderForm)">Confirm</button>
-                    <button class="btn btn-custom left" type="button" (click)="Complete(orderForm)">Complete</button> 
+                    <button class="btn btn-custom left" type="button" (click)="Complete(orderForm)">Complete</button>
                     <button class="btn btn-custom left" type="button" (click)="Reject(orderForm)">Reject</button>
                   </div>
                 </div>
@@ -73,8 +73,8 @@
                         <th>Pick Time</th>
                         <th>Drop Time</th>
                         <th>Response</th>
-                        <th>Customer ID</th>
-                        <th>Driver ID</th>
+                        <th>Customer Name</th>
+                        <th>Driver Name</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -84,8 +84,8 @@
                       <td>{{ord.pick_time}}</td>
                       <td>{{ord.drop_time}}</td>
                       <td>{{ord.response}}</td>
-                      <td>{{ord.customer_id}}</td>
-                      <td>{{ord.driver_id}}</td>
+                      <td>{{ord.customer_name}}</td>
+                      <td>{{ord.driver_name}}</td>
                       <td >
                           <a class="action-btn" (click)="onEdit(ord)">
                             <i class="material-icons">edit</i>

@@ -32,7 +32,9 @@ export class NewComponent implements OnInit {
       drop_time: "",
       response: "",
       customer_id: "",
-      driver_id:""
+      driver_id:"",
+      customer_name:"",
+      driver_name: ""
     }
   }
 
@@ -52,16 +54,16 @@ export class NewComponent implements OnInit {
       });
     }
   }
-  
+
   refreshOrderList() {
     this.orderService.getOrderList().subscribe((res:any) => {
       console.log(res)
       this.orderService.orders = res.rows as Order[];
-      
+
     });
   }
 
-  
+
   onEdit(ord: Order) {
     this.orderService.selectedOrder = ord;
   }
@@ -76,7 +78,7 @@ export class NewComponent implements OnInit {
     }
   }
 
- //****************************************** 
+ //******************************************
 
   Pending(form: NgForm){
     this.resetForm(form);
@@ -87,7 +89,7 @@ export class NewComponent implements OnInit {
     this.orderService.getPendingOrderList().subscribe((res:any) => {
       console.log(res)
       this.orderService.orders = res.rows as Order[];
-      
+
     });
   }
 
@@ -101,7 +103,7 @@ export class NewComponent implements OnInit {
     this.orderService.getConfirmOrderList().subscribe((res:any) => {
       console.log(res)
       this.orderService.orders = res.rows as Order[];
-      
+
     });
   }
 
@@ -114,7 +116,7 @@ export class NewComponent implements OnInit {
     this.orderService.getCompleteOrderList().subscribe((res:any) => {
       console.log(res)
       this.orderService.orders = res.rows as Order[];
-      
+
     });
   }
 
@@ -128,7 +130,7 @@ export class NewComponent implements OnInit {
     this.orderService.getRejectOrderList().subscribe((res:any) => {
       console.log(res)
       this.orderService.orders = res.rows as Order[];
-      
+
     });
   }
 

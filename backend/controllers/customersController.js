@@ -83,7 +83,7 @@ const dashboard = async (req, res) =>{
 //Create Customer without athetication and hash password
 const createCustomers =  async (req, res) => {
     try{
-        const query = `insert into users(fullName, email, phoneNumber, city, usersPassword) values ($1,$2,$3,$4,$5)`
+        const query = `INSERT INTO users(fullName, email, phoneNumber, city, usersPassword) values ($1,$2,$3,$4,$5)`
         const result = await pool.query(query, [req.body.fullName, req.body.email, req.body.phoneNumber, req.body.city, req.body.usersPassword,])
         console.log(result)
         res.status(201).json({
@@ -99,7 +99,7 @@ const createCustomers =  async (req, res) => {
 //Read customers
 const getCustomers =  async (req, res) => {
     try{
-        const query = "select * from customers order by id desc"
+        const query = "SELECT * FROM customers"
         const result = await pool.query(query)
         console.log(result)
         res.json(result)
@@ -113,7 +113,7 @@ const getCustomers =  async (req, res) => {
 const getOneCustomer =  async (req, res) => {
     try{
         const {id} = req.params;
-        const query = `select * from customers where id = $1`
+        const query = `SELECT * FROM customers WHERE id = $1`
         const result = await pool.query(query, [id])
         console.log(result)
         res.json(result)
@@ -129,7 +129,7 @@ const updateCustomers = async (req, res) => {
     try{
         const salt = await bcrypt.genSalt(10);
         const bcryptPassword = await bcrypt.hash(password, salt);
-        const query = `update customers set full_name = $1, email = $2, phone_number = $3, city = $4, customer_password = $5 where id = $6 returning *`
+        const query = `UPDATE customers SET full_name = $1, email = $2, phone_number = $3, city = $4, customer_password = $5 WHERE id = $6 RETURNING *`
         const result = await pool.query(query, [req.body.full_name, req.body.email, req.body.phone_number, req.body.city, bcryptPassword, req.params.id])
         console.log(result)
         res.json(result)
@@ -142,7 +142,7 @@ const updateCustomers = async (req, res) => {
 //Delete customers
 const deleteCustomers = async (req, res) => {
     try{
-        const query = `delete from customers where id = $1 returning *`
+        const query = `DELETE FROM customers WHERE id = $1 RETURNING *`
         const result = await pool.query(query, [req.params.id])
         console.log(result)
         res.json(result)

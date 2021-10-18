@@ -7,4 +7,6 @@ export class Order {
     response: string;
     customer_id: string;
     driver_id: string;
+    customer_name: string;
+    driver_name: string;
 }

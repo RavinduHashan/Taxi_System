@@ -81,7 +81,7 @@ const createAdmins =  async (req, res) => {
     try{
         const {fullName, email, phoneNumber, city , admin_password} = req.body
         const array = [fullName, email, phoneNumber, city, admin_password]
-        const query = `insert into admins(fullName, email, phoneNumber, city, admin_password) values ($1,$2,$3,$4,$5)`
+        const query = `INSERT INTO admins(fullName, email, phoneNumber, city, admin_password) VALUES ($1,$2,$3,$4,$5)`
         const result = await pool.query( query, array)
         console.log(result)
         res.json(result)
@@ -94,7 +94,7 @@ const createAdmins =  async (req, res) => {
 //Read admins
 const getAdmins =  async (req, res) => {
     try{
-        const query = `select * from admins order by id desc`
+        const query = `SELECT * FROM admins`
         const result = await pool.query(query)
         console.log(result)
         res.json(result)
@@ -108,7 +108,7 @@ const getAdmins =  async (req, res) => {
 const getOneAdmin =  async (req, res) => {
     try{
         const {id} = req.params;
-        const query = `select * from admins where id = $1`
+        const query = `SELECT * FROM admins WHERE id = $1`
         const result = await pool.query(query, [id])
         console.log(result)
         res.json(result)
@@ -124,7 +124,7 @@ const updateAdmins = async (req, res) => {
     try{
         const salt = await bcrypt.genSalt(10);
         const bcryptPassword = await bcrypt.hash(password, salt);
-        const query = `update admins set full_name = $1, email = $2, phone_number = $3, city = $4, admin_password = $5 where id = $6 returning *`
+        const query = `UPDATE admins SET full_name = $1, email = $2, phone_number = $3, city = $4, admin_password = $5 WHERE id = $6 RETURNING *`
         const result = await pool.query(query, [req.body.full_name, req.body.email, req.body.phone_number, req.body.city, bcryptPassword, req.params.id])
         console.log(result)
         res.json(result)
@@ -137,7 +137,7 @@ const updateAdmins = async (req, res) => {
 //Delete admin
 const deleteAdmins = async (req, res) => {
     try{
-        const query = `delete from admins where id = $1 returning *`
+        const query = `DELETE FROM admins WHERE id = $1 RETURNING *`
         const result = await pool.query(query, [req.params.id])
         console.log(result)
         res.json(result)

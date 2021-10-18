@@ -82,7 +82,7 @@ const dashboard = async (req, res) =>{
 //Create drivers without authentication and hash password
 const createDrivers =  async (req, res) => {
     try{
-        const query = `insert into drivers(fullName, email, phoneNumber,vehicle_type, vehicle_number, city, driver_Password) values ($1,$2,$3,$4,$5,$6,$7)`
+        const query = `INSERT INTO drivers(fullName, email, phoneNumber,vehicle_type, vehicle_number, city, driver_Password) VALUES ($1,$2,$3,$4,$5,$6,$7)`
         const result = await pool.query(query, [req.body.fullName, req.body.email, req.body.phoneNumber,req.body.vehicle_type, req.body.vehicle_number, req.body.city, req.body.driver_Password])
         console.log(result)
         res.status(201).json({
@@ -98,7 +98,7 @@ const createDrivers =  async (req, res) => {
 //Read drivers
 const getDrivers =  async (req, res) => {
     try{
-        const query = `select * from drivers order by id desc`
+        const query = `SELECT * FROM drivers`
         const result = await pool.query(query)
         console.log(result)
         res.json(result)
@@ -112,7 +112,7 @@ const getDrivers =  async (req, res) => {
 const getOneDriver =  async (req, res) => {
     try{
         const {id} = req.params;
-        const query = `select * from drivers where id = $1`
+        const query = `SELECT * FROM drivers WHERE id = $1`
         const result = await pool.query(query, [id])
         console.log(result)
         res.json(result)
@@ -128,7 +128,7 @@ const updateDrivers = async (req, res) => {
     try{
         const salt = await bcrypt.genSalt(10);
         const bcryptPassword = await bcrypt.hash(password, salt);
-        const query = `update drivers set full_name = $1, email = $2, phone_number = $3, vehicle_type = $4, vehicle_number = $5, city = $6, driver_password = $7 where id = $8 returning *`
+        const query = `UPDATE drivers SET full_name = $1, email = $2, phone_number = $3, vehicle_type = $4, vehicle_number = $5, city = $6, driver_password = $7 where id = $8 RETURNING *`
         const result = await pool.query(query, [req.body.full_name, req.body.email, req.body.phone_number, req.body.vehicle_type, req.body.vehicle_number, req.body.city, bcryptPassword, req.params.id])
         console.log(result)
         res.json(result)
@@ -142,7 +142,7 @@ const updateDrivers = async (req, res) => {
 //Delete drivers
 const deleteDrivers = async (req, res) => {
     try{
-        const query = `delete from drivers where id = $1 returning *`
+        const query = `DELETE FROM drivers WHERE id = $1 RETURNING *`
         const result = await pool.query(query, [req.params.id])
         console.log(result)
         res.json(result)

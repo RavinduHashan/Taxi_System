@@ -3,7 +3,7 @@ const pool = require("../db")
 //Create orders(Admin)
 const createOrders =  async (req, res) => {
     try{
-        const query = `insert into orders(pick_location, drop_location, pick_time, drop_time, response, customer_id, driver_id) values ($1,$2,$3,$4,$5,$6,$7) RETURNING *`
+        const query = `INSERT INTO orders(pick_location, drop_location, pick_time, drop_time, response, customer_id, driver_id) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`
         const {pick_location, drop_location, pick_time, drop_time, response, customer_id, driver_id} = req.body
         const result = await pool.query( query, [pick_location, drop_location, pick_time, drop_time, response, customer_id, driver_id])
         res.json(result)   
@@ -16,7 +16,9 @@ const createOrders =  async (req, res) => {
 //Read orders(Admin)
 const getOrders =  async (req, res) => {
     try{
-        const query = `select * from orders order by id desc`
+        const query = `select *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                                 from orders ORDER BY created DESC;`
         const result = await pool.query(query)
         console.log(result)
         res.json(result)
@@ -30,7 +32,7 @@ const getOrders =  async (req, res) => {
 const getOneOrder =  async (req, res) => {
     try{
         const {id} = req.params;
-        const query = `select * from orders where id = $1`
+        const query = `SELECT * FROM orders WHERE id = $1`
         const result = await pool.query(query, [id])
         console.log(result)
         res.json(result)
@@ -43,7 +45,7 @@ const getOneOrder =  async (req, res) => {
 //Update orders(Admin)
 const updateOrders = async (req, res) => {
     try{
-        const query = `update orders set pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, customer_id = $6, driver_id = $7 where id = $8 returning *`
+        const query = `UPDATE orders SET pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, customer_id = $6, driver_id = $7 WHERE id = $8 RETURNING *`
         const result = await pool.query(query, [req.body.pick_location, req.body.drop_location, req.body.pick_time, req.body.drop_time, req.body.response, req.body.customer_id, req.body.driver_id, req.params.id])
         console.log(result)
         res.json(result)
@@ -56,7 +58,7 @@ const updateOrders = async (req, res) => {
 //Delete orders(Admin)
 const deleteOrders = async (req, res) => {
     try{
-        const query = `delete from orders where id = $1 returning *`
+        const query = `DELETE FROM orders WHERE id = $1 RETURNING *`
         const result = await pool.query(query, [req.params.id])
         console.log(result)
         res.json(result)
@@ -70,7 +72,7 @@ const deleteOrders = async (req, res) => {
 //Update availability of a driver(Admin)
 const updateAvailableState = async (req, res) => {
     try{
-        const query = `update drivers set available = $1 where id = $2 returning *`
+        const query = `UPDATE drivers SET available = $1 WHERE id = $2 RETURNING *`
         const result = await pool.query(query, [req.body.available, req.params.id])
         res.json(result)  
     }
@@ -83,7 +85,7 @@ const updateAvailableState = async (req, res) => {
 //Read available drivers(Admin)
 const seeAvailableDrivers =  async (req, res) => {
     try{
-        const query = `SELECT * FROM drivers where available = true`
+        const query = `SELECT * FROM drivers WHERE available = true`
         const result = await pool.query(query)
         res.json(result)
     }
@@ -96,7 +98,7 @@ const seeAvailableDrivers =  async (req, res) => {
 //Read pending orders(Admin)
 const viewPendingOrders = async (req, res) => {
     try{
-        const query = `select * from orders where response LIKE '' order by id desc`
+        const query = `SELECT * FROM orders where response LIKE ''`
         const result = await pool.query(query)
         res.json(result)
     }
@@ -108,7 +110,7 @@ const viewPendingOrders = async (req, res) => {
 //Read confirm orders(Admin)
 const viewConfirmOrders = async (req, res) => {
     try{
-        const query = `select * from orders where response LIKE 'Confirm' order by id desc`
+        const query = `SELECT * FROM orders where response LIKE 'Confirm' `
         const result = await pool.query(query)
         res.json(result)
     }
@@ -120,7 +122,7 @@ const viewConfirmOrders = async (req, res) => {
 //Read complete orders(Admin)
 const viewCompleteOrders = async (req, res) => {
     try{
-        const query = `select * from orders where response LIKE 'Complete' order by id desc`
+        const query = `SELECT * FROM orders WHERE response LIKE 'Complete'`
         const result = await pool.query(query)
         res.json(result)
     }
@@ -132,7 +134,7 @@ const viewCompleteOrders = async (req, res) => {
 //Read reject orders(Admin)
 const viewRejectOrders = async (req, res) => {
     try{
-        const query = `select * from orders where response LIKE 'Reject' order by id desc`
+        const query = `select * from orders where response LIKE 'Reject' `
         const result = await pool.query(query)
         res.json(result)
     }
@@ -218,58 +220,58 @@ const insertComplete = async (req, res) => {
 //****************************************************************************************************
 // //Customer
 
-//Create trips(Customer)
-const customerCreateOrders = async (req, res) =>{
-    try{
-        const {pick_location, drop_location, pick_time, drop_time, response, driver_id} = req.body
-        const {id} = req.params
-        const query = `insert into orders(pick_location, drop_location, pick_time, drop_time, response, id, driver_id) values ($1,$2,$3,$4,$5,$6,$7) RETURNING *`
-        const result = await pool.query(query, [pick_location, drop_location, pick_time, drop_time, response, id, driver_id])
-        res.json(result)   
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+// //Create trips(Customer)
+// const customerCreateOrders = async (req, res) =>{
+//     try{
+//         const {pick_location, drop_location, pick_time, drop_time, response, driver_id} = req.body
+//         const {id} = req.params
+//         const query = `insert into orders(pick_location, drop_location, pick_time, drop_time, response, id, driver_id) values ($1,$2,$3,$4,$5,$6,$7) RETURNING *`
+//         const result = await pool.query(query, [pick_location, drop_location, pick_time, drop_time, response, id, driver_id])
+//         res.json(result)   
+//     }
+//     catch(err){
+//         console.log(err)
+//     }
+// }
 
-//Get trips(Customer)
-const customerGetOrders = async (req, res) =>{
-    try{
-        const {id} = req.params
-        const query = `select * from orders where id = $1`
-        const result = await pool.query(query, [id])
-        res.json(result)   
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+// //Get trips(Customer)
+// const customerGetOrders = async (req, res) =>{
+//     try{
+//         const {id} = req.params
+//         const query = `select * from orders where id = $1`
+//         const result = await pool.query(query, [id])
+//         res.json(result)   
+//     }
+//     catch(err){
+//         console.log(err)
+//     }
+// }
 
-//Update trips(Customer)
-const customerUpdateOrders = async (req, res) => {
-    try{
-        const query = `update orders set pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, customer_id = $6, driver_id = $7 where id = $8 returning *`
-        const result = await pool.query(query, [req.body.pick_location, req.body.drop_location, req.body.pick_time, req.body.drop_time, req.body.response, req.body.c_id, req.body.d_id, req.params.id])
-        console.log(result)
-        res.json(result)
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+// //Update trips(Customer)
+// const customerUpdateOrders = async (req, res) => {
+//     try{
+//         const query = `update orders set pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, customer_id = $6, driver_id = $7 where id = $8 returning *`
+//         const result = await pool.query(query, [req.body.pick_location, req.body.drop_location, req.body.pick_time, req.body.drop_time, req.body.response, req.body.c_id, req.body.d_id, req.params.id])
+//         console.log(result)
+//         res.json(result)
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
 
-//Delete trips(Customer)
-const customerDeleteOrders = async (req, res) => {
-    try{
-        const query = `delete from orders where id = $1 returning *`
-        const result = await pool.query(query, [req.params.id])
-        console.log(result)
-        res.json(result)
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+// //Delete trips(Customer)
+// const customerDeleteOrders = async (req, res) => {
+//     try{
+//         const query = `delete from orders where id = $1 returning *`
+//         const result = await pool.query(query, [req.params.id])
+//         console.log(result)
+//         res.json(result)
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
 
 
 
