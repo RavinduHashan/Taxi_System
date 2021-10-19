@@ -12,6 +12,7 @@ import { SignUpComponent } from './admin/sign-up/sign-up.component';
 import { appRoutes } from './routes';
 import { driverRoutes } from './driver/driverRoutes';
 import { customerRoutes } from './customer/customerRoutes';
+import { orderRoutes } from './orders/orderRoutes';
 import { SignInComponent } from './admin/sign-in/sign-in.component';
 import { AdminService } from './shared/admin.service';
 //other
@@ -33,6 +34,7 @@ import { ResponseComponent } from './customer/response/response.component';
 import { TripOrderComponent } from './driver/trip-order/trip-order.component';
 import { HistoryComponent } from './driver/history/history.component';
 import { CreateOrderComponent } from './customer/create-order/create-order.component';
+import { EditComponent } from './orders/edit/edit.component';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { CreateOrderComponent } from './customer/create-order/create-order.compo
     ResponseComponent,
     TripOrderComponent,
     HistoryComponent,
-    CreateOrderComponent, 
+    CreateOrderComponent,
+    EditComponent,
   ],
 
   imports: [
@@ -64,9 +67,10 @@ import { CreateOrderComponent } from './customer/create-order/create-order.compo
     RouterModule.forRoot(appRoutes),
     RouterModule.forRoot(driverRoutes),
     RouterModule.forRoot(customerRoutes),
+    RouterModule.forRoot(orderRoutes),
     HttpClientModule,
     NgbModule,
-      
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

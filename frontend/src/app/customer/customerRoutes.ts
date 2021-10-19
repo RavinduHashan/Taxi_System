@@ -6,9 +6,10 @@ import { CustomerProfileComponent } from './customer-profile/customer-profile.co
 import { AvailableDriverComponent } from './available-driver/available-driver.component';
 import { ResponseComponent } from './response/response.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
+import { EditComponent } from './edit/edit.component';
 
 export const customerRoutes: Routes = [
-    
+
     {
         path: 'create-order', component: CustomerComponent,
         children: [{ path: '', component: CreateOrderComponent }], canActivate: [AuthGuard]
@@ -25,4 +26,8 @@ export const customerRoutes: Routes = [
         path: 'response', component: CustomerComponent,
         children: [{ path: '', component: ResponseComponent }], canActivate: [AuthGuard]
     },
+    {
+      path: 'edit', component: CustomerComponent,
+      children: [{ path: '', component: EditComponent }], canActivate: [AuthGuard]
+  },
 ]

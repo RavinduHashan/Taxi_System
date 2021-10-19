@@ -10,7 +10,6 @@ import { OrdersComponent } from './orders/orders.component';
 import { DriverComponent } from './driver/driver.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NewComponent } from './orders/new/new.component';
 
 export const appRoutes: Routes = [
     {
@@ -34,16 +33,12 @@ export const appRoutes: Routes = [
     {
         path: 'driver', component: DriverComponent, canActivate: [AuthGuard]
     },
-    
+
     {
         path: 'customer', component: CustomerComponent, canActivate: [AuthGuard]
     },
     {
         path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
-    },
-    {
-        path: 'new', component: OrdersComponent,
-        children: [{ path: '', component: NewComponent }], canActivate: [AuthGuard]
     },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

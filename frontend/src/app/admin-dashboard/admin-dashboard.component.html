@@ -1,18 +1,12 @@
-<header class="p-3 bg-dark text-white">
-    <div  class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 text-secondary"  routerLink="/home">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white"  routerLink="/new">Orders</a></li>
-            <li><a href="#" class="nav-link px-2 text-white" routerLink="/create-order">Customer</a></li>
-            <li><a href="#" class="nav-link px-2 text-white"  routerLink="/trip-order">Driver</a></li>
-            <li><a href="#" class="nav-link px-2 text-white"  routerLink="/profile">Profile</a></li>
-        </ul>
-        <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2" (click)="onLogout()" value="Logout">Logout</button>
-            <button type="button" class="btn btn-warning" routerLink="/signup">Register</button>
-        </div>
-        </div>
-    </div>
-</header>
+<nav class="navbar navbar-light bg-light">
+  <form   class="container-fluid justify-content-start">
+    <button class="btn btn-outline-success ml-2" routerLink="/home" type="button">Home</button>
+    <button class="btn btn-outline-success ml-2" routerLink="/new" type="button">Order</button>
+    <button class="btn btn-outline-success ml-2" routerLink="/create-order" type="button">Customer</button>
+    <button class="btn btn-outline-success ml-2" routerLink="/trip-order"type="button">Driver</button>
+    <button class="btn btn-outline-success ml-2" routerLink="/profile" type="button">Profile</button>
+    <button class="btn btn-outline-success ml-2" (click)="onLogout()" value="Logout" type="button">Logout</button>
+  </form>
+</nav>
+<hr>
 

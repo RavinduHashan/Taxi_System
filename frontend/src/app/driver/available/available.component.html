@@ -1,45 +1,29 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<div class="row">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content white-text">
-          <div class="row">
-            <div class="col s7">
-                <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>City</th>
-                        <th>Vehicle Type</th>
-                        <th>Vehicle Number</th>
-                        <th>Available</th> 
-                      </tr>
-                    </thead>
-                    <tr *ngFor="let dri of driverService.drivers">
-                      <td>{{dri.full_name}}</td>
-                      <td>{{dri.email}}</td>
-                      <td>{{dri.phone_number}}</td>
-                      <td>{{dri.city}}</td>
-                      <td>{{dri.vehicle_type}}</td>
-                      <td>{{dri.vehicle_number}}</td>
-                      <td> 
-                        <div (click)="available(dri)" class="switch">
-                          <label>
-                            Off
-                            <input [checked]="dri.available" type="checkbox">
-                            <span class="lever"></span>
-                            On
-                          </label>
-                        </div>
-                      </td>
-                    </tr>
-                </table>
-            </div>
-          </div>
+<div class="container">
+<table  class="table table-striped">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>City</th>
+        <th>Vehicle Type</th>
+        <th>Vehicle Number</th>
+        <th>Available</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let dri of driverService.drivers">
+      <td>{{dri.full_name}}</td>
+      <td>{{dri.email}}</td>
+      <td>{{dri.phone_number}}</td>
+      <td>{{dri.city}}</td>
+      <td>{{dri.vehicle_type}}</td>
+      <td>{{dri.vehicle_number}}</td>
+      <td>
+        <div (click)="available(dri)" class="form-check form-switch">
+          <input [checked]="dri.available" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
         </div>
-      </div>
-    </div>
-  </div>
+      </td>
+    </tr>
+</table>
+</div>
 

@@ -1,104 +1,45 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<div class="row">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content white-text">
-          <div class="row">
-            <div class="col s5">
-              <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)" class="col s12">
-                <div class="row">
-                  <div class="input-field col s12">
-                    <button style = "color: rgb(46, 139, 46);" class="btn btn-custom left" type="button" (click)="refreshOrderList()">+ New</button>
-                    <button class="btn btn-custom left" type="button" (click)="Pending(orderForm)">Pending</button>
-                    <button class="btn btn-custom left" type="button" (click)="Confirm(orderForm)">Confirm</button>
-                    <button class="btn btn-custom left" type="button" (click)="Complete(orderForm)">Complete</button>
-                    <button class="btn btn-custom left" type="button" (click)="Reject(orderForm)">Reject</button>
-                  </div>
-                </div>
-                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="orderService.selectedOrder.id">
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="pick_location" #name="ngModel" [(ngModel)]="orderService.selectedOrder.pick_location" placeholder="" required>
-                    <label>Pick Location :
-                      <label class="red-text">*</label>
-                    </label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="drop_location" #name="ngModel" [(ngModel)]="orderService.selectedOrder.drop_location" placeholder="">
-                    <label>Drop Location :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="pick_time" #name="ngModel" [(ngModel)]="orderService.selectedOrder.pick_time" placeholder="">
-                    <label>Pick Time :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="drop_time" #name="ngModel" [(ngModel)]="orderService.selectedOrder.drop_time" placeholder="">
-                    <label>Drop Time :</label>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input type="text" name="response" #name="ngModel" [(ngModel)]="orderService.selectedOrder.response" placeholder="">
-                      <label>Response :</label>
-                    </div>
-                  </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="customer_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.customer_id" placeholder="">
-                    <label>Customer ID :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="driver_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.driver_id" placeholder="">
-                    <label>Driver ID :</label>
-                  </div>
-                </div>
-                <button class="btn btn-custom right" type="button" (click)="resetForm(orderForm)">Reset</button>
-                <button class="btn btn-custom right" type="submit" [disabled]="!orderForm.valid">Submit</button>
-              </form>
-            </div>
-            <div class="col s10">
-                <table class="responsive-table highlight">
-                    <thead>
-                      <tr>
-                        <th>Pick Location</th>
-                        <th>Drop Location</th>
-                        <th>Pick Time</th>
-                        <th>Drop Time</th>
-                        <th>Response</th>
-                        <th>Customer Name</th>
-                        <th>Driver Name</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tr *ngFor="let ord of orderService.orders">
-                      <td>{{ord.pick_location}}</td>
-                      <td>{{ord.drop_location}}</td>
-                      <td>{{ord.pick_time}}</td>
-                      <td>{{ord.drop_time}}</td>
-                      <td>{{ord.response}}</td>
-                      <td>{{ord.customer_name}}</td>
-                      <td>{{ord.driver_name}}</td>
-                      <td >
-                          <a class="action-btn" (click)="onEdit(ord)">
-                            <i class="material-icons">edit</i>
-                          </a>
-                          <a class="action-btn" (click)="onDelete(ord.id,orderForm)">
-                            <i class="material-icons">delete</i>
-                          </a>
-                      </td>
-                    </tr>
-                </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<nav  class="navbar navbar-light bg-light">
+  <form class="container-fluid justify-content-start" #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)" >
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()" >New</button>
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Pending(orderForm)" >Pending</button>
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Confirm(orderForm)" >Confirm</button>
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Complete(orderForm)">Complete</button>
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Reject(orderForm)">Reject</button>
+  </form>
+</nav>
+</div>
+<div class="container">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Pick Location</th>
+        <th>Drop Location</th>
+        <th>Pick Time</th>
+        <th>Drop Time</th>
+        <th>Response</th>
+        <th>Customer Name</th>
+        <th>Driver Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr *ngFor="let ord of orderService.orders">
+      <td>{{ord.pick_location}}</td>
+      <td>{{ord.drop_location}}</td>
+      <td>{{ord.pick_time}}</td>
+      <td>{{ord.drop_time}}</td>
+      <td>{{ord.response}}</td>
+      <td>{{ord.customer_name}}</td>
+      <td>{{ord.driver_name}}</td>
+      <td >
+          <a class="action-btn" routerLink="/edit-order" (click)="onEdit(ord)">
+            <i class="material-icons">View</i>
+          </a>
+          <!-- <a class="action-btn" (click)="onDelete(ord.id,orderForm)">
+            <i class="material-icons">delete</i>
+          </a> -->
+      </td>
+    </tr>
+</table>
+</div>
+
