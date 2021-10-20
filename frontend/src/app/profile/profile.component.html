@@ -1,81 +1,27 @@
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
-<div class="row">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content white-text">
-          <div class="row">
-            <div class="col s5">
-              <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
-                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="profileService.selectedProfile.id">
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="full_name" #name="ngModel" [(ngModel)]="profileService.selectedProfile.full_name" placeholder="" required>
-                    <label>Full Name :
-                      <label class="red-text">*</label>
-                    </label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="email" #name="ngModel" [(ngModel)]="profileService.selectedProfile.email" placeholder="">
-                    <label>email :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="phone_number" #name="ngModel" [(ngModel)]="profileService.selectedProfile.phone_number" placeholder="">
-                    <label>Phone Number :</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" name="city" #name="ngModel" [(ngModel)]="profileService.selectedProfile.city" placeholder="">
-                    <label>City :</label>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                      <input type="text" name="password" #name="ngModel" [(ngModel)]="profileService.selectedProfile.password" placeholder="">
-                      <label>Password :</label>
-                    </div>
-                  </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <button class="btn btn-custom right" type="button" (click)="resetForm(profileForm)">Reset</button>
-                    <button class="btn btn-custom right" type="submit" [disabled]="!profileForm.valid">Submit</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="col s7">
-                <table class="responsive-table highlight">
-                    <thead>
-                      <tr>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>City</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tr *ngFor="let pro of profileService.profiles">
-                      <td>{{pro.full_name}}</td>
-                      <td>{{pro.email}}</td>
-                      <td>{{pro.phone_number}}</td>
-                      <td>{{pro.city}}</td>
-                      <td>
-                          <a class="action-btn" (click)="onEdit(pro)">
-                            <i class="material-icons">edit</i>
-                          </a>
-                          <a class="action-btn" (click)="onDelete(pro.id,profileForm)">
-                            <i class="material-icons">delete</i>
-                          </a>
-                      </td>
-                    </tr>
-                </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>City</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr *ngFor="let pro of profileService.profiles">
+        <td>{{pro.full_name}}</td>
+        <td>{{pro.email}}</td>
+        <td>{{pro.phone_number}}</td>
+        <td>{{pro.city}}</td>
+        <td>
+            <a class="action-btn" routerLink="/edit-admin-profile" (click)="onEdit(pro)">
+              <i class="material-icons">view</i>
+            </a>
+            <!-- <a class="action-btn" (click)="onDelete(pro.id,profileForm)">
+              <i class="material-icons">delete</i>
+            </a> -->
+        </td>
+      </tr>
+  </table>
+</div>

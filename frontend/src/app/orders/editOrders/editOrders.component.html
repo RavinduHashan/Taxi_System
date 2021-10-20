@@ -1,12 +1,36 @@
 <div class="container">
   <div >
-    <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)" >
+    <form #orderForm="ngForm" [formGroup]="editOrderForm" (ngSubmit)="onSubmit()" >
       <input type="hidden" name="id" #id="ngModel" [(ngModel)]="orderService.selectedOrder.id">
       <div class="form-group">
         <label>Pick Location :</label>
-        <input class="form-control" type="text" name="pick_location" #name="ngModel" [(ngModel)]="orderService.selectedOrder.pick_location" placeholder="" required>
+        <input class="form-control" type="text" name="pick_location" formControlName="pickLocation" [(ngModel)]="formData.pick_location" >
       </div>
       <div class="form-group">
+        <label>Drop Location :</label>
+        <input class="form-control" type="text" name="drop_location" formControlName="dropLocation" [(ngModel)]="formData.drop_location" >
+      </div>
+      <div class="form-group">
+        <label>Pick Time :</label>
+        <input class="form-control" type="text" name="pick_time" formControlName="pickTime" [(ngModel)]="formData.pick_time" >
+      </div>
+      <div class="form-group">
+        <label>Drop Time :</label>
+        <input class="form-control" type="text" name="drop_time" formControlName="dropTime" [(ngModel)]="formData.drop_time" >
+      </div>
+      <div class="form-group">
+        <label>Response :</label>
+        <input class="form-control" type="text" name="response" formControlName="response" [(ngModel)]="formData.response" >
+      </div>
+      <div class="form-group">
+        <label>Customer_Id :</label>
+        <input class="form-control" type="text" name="customer_id" formControlName="customer_id" [(ngModel)]="formData.customer_id" >
+      </div>
+      <div class="form-group">
+        <label>Driver_id :</label>
+        <input class="form-control" type="text" name="driver_id" formControlName="driver_id" [(ngModel)]="formData.driver_id" >
+      </div>
+      <!-- <div class="form-group">
         <label>Drop Location :</label>
         <input class="form-control" type="text" name="drop_location" #name="ngModel" [(ngModel)]="orderService.selectedOrder.drop_location" placeholder="">
       </div>
@@ -29,8 +53,8 @@
       <div class="form-group">
         <label>Driver ID :</label>
         <input class="form-control" type="text" name="driver_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.driver_id" placeholder="">
-      </div>
-      <button class="btn btn-custom right" type="button" (click)="resetForm(orderForm)">Reset</button>
+      </div> -->
+      <button class="btn btn-custom right" type="button" (click)="resetForm()">Reset</button>
       <button class="btn btn-custom right" type="submit" [disabled]="!orderForm.valid">Submit</button>
     </form>
   </div>

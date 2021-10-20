@@ -11,7 +11,7 @@ import { environment }  from '../../environments/environment';
 export class OrderService {
   selectedOrder: Order;
   orders: Order[] = [];
-  
+
   constructor(private http: HttpClient) { }
 
 
@@ -23,7 +23,12 @@ export class OrderService {
     return this.http.get(environment.apiBaseUrlOrder+'/getOrders');
   }
 
-  //******************************* 
+  getOneOrder(id: any) {
+    return this.http.get(environment.apiBaseUrlOrder+`/getOneOrder/${id}`);
+  }
+
+
+  //*******************************
   getPendingOrderList() {
     return this.http.get(environment.apiBaseUrlOrder+'/viewPendingOrders');
   }

@@ -1,7 +1,7 @@
 // built-in
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 // components
@@ -12,7 +12,7 @@ import { SignUpComponent } from './admin/sign-up/sign-up.component';
 import { appRoutes } from './routes';
 import { driverRoutes } from './driver/driverRoutes';
 import { customerRoutes } from './customer/customerRoutes';
-import { orderRoutes } from './orders/orderRoutes';
+import { ordersRoutes } from './orders/ordersRoutes';
 import { SignInComponent } from './admin/sign-in/sign-in.component';
 import { AdminService } from './shared/admin.service';
 //other
@@ -34,7 +34,11 @@ import { ResponseComponent } from './customer/response/response.component';
 import { TripOrderComponent } from './driver/trip-order/trip-order.component';
 import { HistoryComponent } from './driver/history/history.component';
 import { CreateOrderComponent } from './customer/create-order/create-order.component';
-import { EditComponent } from './orders/edit/edit.component';
+import { EditOrdersComponent } from './orders/editOrders/editOrders.component';
+import { EditCustomerProfileComponent } from './customer/edit-customer-profile/edit-customer-profile.component';
+import { EditDriverProfileComponent } from './driver/edit-driver-profile/edit-driver-profile.component';
+import { EditAdminProfileComponent } from './edit-admin-profile/edit-admin-profile.component';
+
 
 
 @NgModule({
@@ -58,16 +62,21 @@ import { EditComponent } from './orders/edit/edit.component';
     TripOrderComponent,
     HistoryComponent,
     CreateOrderComponent,
-    EditComponent,
+    EditOrdersComponent,
+    EditCustomerProfileComponent,
+    EditDriverProfileComponent,
+    EditAdminProfileComponent
+
   ],
 
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     RouterModule.forRoot(driverRoutes),
     RouterModule.forRoot(customerRoutes),
-    RouterModule.forRoot(orderRoutes),
+    RouterModule.forRoot(ordersRoutes),
     HttpClientModule,
     NgbModule,
 

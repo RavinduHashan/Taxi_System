@@ -10,6 +10,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { DriverComponent } from './driver/driver.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditAdminProfileComponent } from './edit-admin-profile/edit-admin-profile.component';
 
 export const appRoutes: Routes = [
     {
@@ -40,6 +41,9 @@ export const appRoutes: Routes = [
     {
         path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
     },
+    {
+      path: 'edit-admin-profile', component: EditAdminProfileComponent, canActivate: [AuthGuard]
+  },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'
     }

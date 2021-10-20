@@ -98,7 +98,9 @@ const seeAvailableDrivers =  async (req, res) => {
 //Read pending orders(Admin)
 const viewPendingOrders = async (req, res) => {
     try{
-        const query = `SELECT * FROM orders where response LIKE ''`
+        const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                                 FROM orders where response LIKE ''`
         const result = await pool.query(query)
         res.json(result)
     }
@@ -110,7 +112,9 @@ const viewPendingOrders = async (req, res) => {
 //Read confirm orders(Admin)
 const viewConfirmOrders = async (req, res) => {
     try{
-        const query = `SELECT * FROM orders WHERE response LIKE 'Confirm' `
+        const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                                 FROM orders WHERE response LIKE 'Confirm' `
         const result = await pool.query(query)
         res.json(result)
     }
@@ -122,7 +126,9 @@ const viewConfirmOrders = async (req, res) => {
 //Read complete orders(Admin)
 const viewCompleteOrders = async (req, res) => {
     try{
-        const query = `SELECT * FROM orders WHERE response LIKE 'Complete'`
+        const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                                 FROM orders WHERE response LIKE 'Complete'`
         const result = await pool.query(query)
         res.json(result)
     }
@@ -134,7 +140,9 @@ const viewCompleteOrders = async (req, res) => {
 //Read reject orders(Admin)
 const viewRejectOrders = async (req, res) => {
     try{
-        const query = `SELECT * FROM orders WHERE response LIKE 'Reject' `
+        const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                                 FROM orders WHERE response LIKE 'Reject' `
         const result = await pool.query(query)
         res.json(result)
     }
