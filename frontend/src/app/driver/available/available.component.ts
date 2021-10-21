@@ -35,40 +35,17 @@ export class AvailableComponent implements OnInit {
       vehicle_number: "",
       password: "",
       available:""
-        
+
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.value.id == "") {
-      this.driverService.updateAvailableStateList(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshDriverList();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
-      });
-    }
-    else {
-      this.driverService.updateAvailableStateList(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshDriverList();
-        M.toast({ html: 'Updated successfully', classes: 'rounded' });
-      });
-    }
-  }
-
-  
   refreshDriverList() {
     this.driverService.getDriverList().subscribe((res:any) => {
       console.log(res)
       this.driverService.drivers = res.rows as Driver[];
-      
+
     });
   }
-
-  onEdit(dri: Driver) {
-    this.driverService.selectedDriver = dri;
-  }
-
   available(dri: Driver) {
     if(dri.available)
         this.driverService.insertFalse(dri).subscribe((res:any) => {
@@ -84,15 +61,6 @@ export class AvailableComponent implements OnInit {
       })
     }
 
-    }
-
-  onDelete(id: string, form: NgForm) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-      this.driverService.deleteDriver(id).subscribe((res:any) => {
-        this.refreshDriverList();
-        this.resetForm(form);
-        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-      });
-    }
   }
+
 }

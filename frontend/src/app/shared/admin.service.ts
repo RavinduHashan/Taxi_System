@@ -10,7 +10,7 @@ import { environment }  from '../../environments/environment';
 export class AdminService {
   selectedAdmin: Admin = {
     full_name: '',
-    email:'', 
+    email:'',
     phone_number: '',
     city: '',
     password: ''

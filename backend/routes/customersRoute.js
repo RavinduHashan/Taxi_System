@@ -11,6 +11,6 @@ router.get('/dashboard',authorization, Customers.dashboard)
 router.get('/get', Customers.getCustomers)
 router.put('/update/:id', Customers.updateCustomers)
 router.delete('/delete/:id', Customers.deleteCustomers)
-router.get('/getOneCustomer/:id', Customers.getOneCustomer)
+router.get('/:id', Customers.getOneCustomer)
 
 module.exports = router

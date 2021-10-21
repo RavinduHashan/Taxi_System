@@ -10,6 +10,6 @@ router.get('/dashboard',authorization, Drivers.dashboard)
 router.get('/get', Drivers.getDrivers)
 router.put('/update/:id', Drivers.updateDrivers)
 router.delete('/delete/:id', Drivers.deleteDrivers)
-router.get('/getOneDriver/:id', Drivers.getOneDriver)
+router.get('/:id', Drivers.getOneDriver)
 
 module.exports = router

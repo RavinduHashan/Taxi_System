@@ -25,7 +25,7 @@ export class CustomerProfileComponent implements OnInit {
     if (form)
       form.reset();
     this.customerService.selectedCustomer = {
-      customer_id: "",
+      id: "",
       full_name: "",
       email:"",
       phone_number: "",
@@ -34,28 +34,11 @@ export class CustomerProfileComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.value.customer_id == "") {
-      this.customerService.postCustomer(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshCustomerList();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
-      });
-    }
-    else {
-      this.customerService.putCustomer(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshCustomerList();
-        M.toast({ html: 'Updated successfully', classes: 'rounded' });
-      });
-    }
-  }
-
   refreshCustomerList() {
     this.customerService.getCustomerList().subscribe((res:any) => {
       console.log(res)
       this.customerService.customers = res.rows as Customer[];
-      
+
     });
   }
 
@@ -63,14 +46,13 @@ export class CustomerProfileComponent implements OnInit {
     this.customerService.selectedCustomer = cus;
   }
 
-  onDelete(customer_id: string, form: NgForm) {
+  onDelete(id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.customerService.deleteCustomer(customer_id).subscribe((res:any) => {
+      this.customerService.deleteCustomer(id).subscribe((res:any) => {
         this.refreshCustomerList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });
     }
   }
-
 }

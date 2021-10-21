@@ -4,7 +4,7 @@ const Orders = require('../controllers/ordersController')
 //Admin
 router.post('/createOrders', Orders.createOrders)
 router.get('/getOrders', Orders.getOrders)
-router.get('/getOneOrder/:id', Orders.getOneOrder)
+router.get('/:id', Orders.getOneOrder)
 router.put('/updateOrders/:id', Orders.updateOrders)
 router.delete('/deleteOrders/:id', Orders.deleteOrders)
 

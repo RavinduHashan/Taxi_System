@@ -11,7 +11,7 @@ import { environment }  from '../../environments/environment';
 export class CustomerService {
   selectedCustomer: Customer;
   customers: Customer[] = [];
-  
+
   constructor(private http: HttpClient) { }
 
 
@@ -23,11 +23,15 @@ export class CustomerService {
     return this.http.get(environment.apiBaseUrlCustomer+'/get');
   }
 
-  putCustomer(cus: Customer) {
-    return this.http.put(environment.apiBaseUrlCustomer+'/update'+ `/${cus.customer_id}`, cus);
+  getCustomerById(id: string) {
+    return this.http.get(`${environment.apiBaseUrlCustomer}/${id}`);
   }
 
-  deleteCustomer(customer_id: string) {
-    return this.http.delete(environment.apiBaseUrlCustomer+'/delete'+ `/${customer_id}`);
+  putCustomer(cus: Customer) {
+    return this.http.put(environment.apiBaseUrlCustomer+'/update'+ `/${cus.id}`, cus);
+  }
+
+  deleteCustomer(id: string) {
+    return this.http.delete(environment.apiBaseUrlCustomer+'/delete'+ `/${id}`);
   }
 }

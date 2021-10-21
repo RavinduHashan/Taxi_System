@@ -28,7 +28,7 @@ export const driverRoutes: Routes = [
         children: [{ path: '', component: HistoryComponent }], canActivate: [AuthGuard]
     },
     {
-      path: 'edit-driver-profile', component: DriverComponent,
+      path: 'edit-driver-profile/:id', component: DriverComponent,
       children: [{ path: '', component: EditDriverProfileComponent }], canActivate: [AuthGuard]
     },
 

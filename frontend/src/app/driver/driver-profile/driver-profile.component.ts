@@ -59,7 +59,7 @@ export class DriverProfileComponent implements OnInit {
     this.driverService.getDriverList().subscribe((res:any) => {
       console.log(res)
       this.driverService.drivers = res.rows as Driver[];
-      
+
     });
   }
 

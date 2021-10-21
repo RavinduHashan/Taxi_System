@@ -1,37 +1,37 @@
 <div class="container">
   <form #driverForm="ngForm" (ngSubmit)="onSubmit(driverForm)">
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="driverService.selectedDriver.id">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="selectedDriver.id">
       <div class="form-group">
         <label>Full Name :</label>
-        <input class="form-control" type="text" name="full_name" #name="ngModel" [(ngModel)]="driverService.selectedDriver.full_name" placeholder="" required>
+        <input class="form-control" type="text" name="full_name" #name="ngModel" [(ngModel)]="selectedDriver.full_name" placeholder="" required>
       </div>
       <div class="form-group">
         <label>email :</label>
-        <input class="form-control" type="text" name="email" #name="ngModel" [(ngModel)]="driverService.selectedDriver.email" placeholder="">
+        <input class="form-control" type="text" name="email" #name="ngModel" [(ngModel)]="selectedDriver.email" placeholder="">
       </div>
       <div class="form-group">
         <label>Phone Number :</label>
-        <input class="form-control" type="text" name="phone_number" #name="ngModel" [(ngModel)]="driverService.selectedDriver.phone_number" placeholder="">
+        <input class="form-control" type="text" name="phone_number" #name="ngModel" [(ngModel)]="selectedDriver.phone_number" placeholder="">
       </div>
       <div class="form-group">
         <label>City :</label>
-        <input class="form-control" type="text" name="city" #name="ngModel" [(ngModel)]="driverService.selectedDriver.city" placeholder="">
+        <input class="form-control" type="text" name="city" #name="ngModel" [(ngModel)]="selectedDriver.city" placeholder="">
       </div>
         <div class="form-group">
           <label>vehicle Number :</label>
-          <input class="form-control" type="text" name="vehicle_type" #name="ngModel" [(ngModel)]="driverService.selectedDriver.vehicle_type" placeholder="">
+          <input class="form-control" type="text" name="vehicle_type" #name="ngModel" [(ngModel)]="selectedDriver.vehicle_type" placeholder="">
         </div>
       <div class="form-group">
         <label>Vehicle Number :</label>
-          <input class="form-control" type="text" name="vehicle_number" #name="ngModel" [(ngModel)]="driverService.selectedDriver.vehicle_number" placeholder="">
+          <input class="form-control" type="text" name="vehicle_number" #name="ngModel" [(ngModel)]="selectedDriver.vehicle_number" placeholder="">
       </div>
       <div class="form-group">
           <label>Password :</label>
-          <input class="form-control" type="text" name="password" #name="ngModel" [(ngModel)]="driverService.selectedDriver.password" placeholder="">
+          <input class="form-control" type="text" name="password" #name="ngModel" [(ngModel)]="selectedDriver.password" placeholder="">
         </div>
       <div class="form-group">
-        <button class="btn btn-custom right" type="button" (click)="resetForm(driverForm)">Reset</button>
-        <button class="btn btn-custom right" type="submit" [disabled]="!driverForm.valid">Submit</button>
+        <button class="btn btn-success float-right ml-2" type="submit" [disabled]="!driverForm.valid">Submit</button>
+        <button class="btn btn-danger float-right" type="button" (click)="resetForm(driverForm)">Reset</button>
       </div>
   </form>
 </div>

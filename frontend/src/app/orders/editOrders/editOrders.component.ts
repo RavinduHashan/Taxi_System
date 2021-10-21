@@ -1,84 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Order } from '../../shared/order.model';
 import { OrderService } from '../../shared/order.service';
-
+import { NewComponent} from '../new/new.component'
 
 declare var M: any;
 
 @Component({
-  selector: 'app-editOrders',
+  selector: 'app-edit-orders',
   templateUrl: './editOrders.component.html',
   styleUrls: ['./editOrders.component.css'],
-  providers: [OrderService]
+  providers: [OrderService, NewComponent]
 })
 export class EditOrdersComponent implements OnInit {
-  orderId:any
-  orderDetails: any;
-  editOrderForm: FormGroup;
-  formData: any = {
-    id: "",
-    pick_location: "",
-    drop_location: "",
-    pick_time: "",
-    drop_time: "",
-    response: "",
-    customer_id: "",
-    driver_id:"",
-    customer_name:"",
-    driver_name: ""
-  }
+  id:any;
 
-  constructor(public orderService: OrderService, public route:ActivatedRoute) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    public orderService: OrderService,
+    public newComponent: NewComponent) { }
 
   ngOnInit(): void {
-
-    this.editOrderForm = new FormGroup({
-      pickLocation: new FormControl(null, [Validators.required]),
-      dropLocation: new FormControl(null, [Validators.required]),
-      pickTime: new FormControl(null, [Validators.required]),
-      dropTime: new FormControl(null, [Validators.required]),
-      response: new FormControl(null, [Validators.required]),
-      customer_id: new FormControl(null, [Validators.required]),
-      driver_id: new FormControl(null, [Validators.required])
-    })
-
-
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      if (paramMap.has("id")) {
-        this.orderId = paramMap.get("id");
-
-        this.orderService.getOneOrder(this.orderId).subscribe(
-
-          res => {
-            this.orderDetails = res
-            this.assignData(this.orderDetails);
-          }
-
-        );
-      }
-    })
-
+    this.activatedRoute.paramMap.subscribe((params: any) => {
+      this.id = params.get('id')
+    });
+    if (this.id) { this.getOrderData() };
     this.resetForm();
     this.refreshOrderList();
   }
-
-
-  assignData(orderData: any) {
-    console.log(orderData)
-
-    this.formData = {
-      pick_location: orderData.rows[0].pick_location,
-      drop_location: orderData.rows[0].drop_location,
-      pick_time: orderData.rows[0].pick_time,
-      drop_time: orderData.rows[0].drop_time,
-      response: orderData.rows[0].response,
-      customer_id: orderData.rows[0].customer_id,
-      driver_id: orderData.rows[0].driver_id
-    }
-
+  getOrderData() {
+    console.log(this.id);
+    this.orderService.getOrderById(this.id).subscribe((res: any) => {
+      this.orderService.selectedOrder = res.body;
+      console.log(res);
+    })
   }
 
   resetForm(form?: NgForm) {
@@ -98,17 +55,17 @@ export class EditOrdersComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (this.formData.id == "") {
-      this.orderService.postOrder(this.formData).subscribe((res:any) => {
-        this.resetForm(this.formData);
+  onSubmit(form: NgForm) {
+    if (form.value.id == "") {
+      this.orderService.postOrder(form.value).subscribe((res:any) => {
+        this.resetForm(form);
         this.refreshOrderList();
         M.toast({ html: 'Saved successfully', classes: 'rounded' });
       });
     }
     else {
-      this.orderService.putOrder(this.formData).subscribe((res:any) => {
-        this.resetForm(this.formData);
+      this.orderService.putOrder(form.value).subscribe((res:any) => {
+        this.resetForm(form);
         this.refreshOrderList();
         M.toast({ html: 'Updated successfully', classes: 'rounded' });
       });
@@ -117,7 +74,7 @@ export class EditOrdersComponent implements OnInit {
 
   refreshOrderList() {
     this.orderService.getOrderList().subscribe((res:any) => {
-      // console.log(res)
+      console.log(res)
       this.orderService.orders = res.rows as Order[];
 
     });

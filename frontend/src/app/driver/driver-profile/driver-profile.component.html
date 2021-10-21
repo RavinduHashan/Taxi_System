@@ -19,7 +19,7 @@
       <td>{{dri.vehicle_type}}</td>
       <td>{{dri.vehicle_number}}</td>
       <td>
-          <a class="action-btn" routerLink="/edit-driver-profile" (click)="onEdit(dri)">
+          <a class="action-btn" routerLink="/edit-driver-profile/{{dri.id}}" (click)="onEdit(dri)">
             <i class="material-icons">view</i>
           </a>
           <!-- <a class="action-btn" (click)="onDelete(dri.id,driverForm)">

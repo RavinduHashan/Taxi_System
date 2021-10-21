@@ -11,25 +11,25 @@ import { EditCustomerProfileComponent } from './edit-customer-profile/edit-custo
 
 export const customerRoutes: Routes = [
 
-    {
-        path: 'create-order', component: CustomerComponent,
-        children: [{ path: '', component: CreateOrderComponent }], canActivate: [AuthGuard]
-    },
-    {
-        path: 'customer-profile', component: CustomerComponent,
-        children: [{ path: '', component: CustomerProfileComponent }], canActivate: [AuthGuard]
-    },
-    {
-        path: 'available-driver', component: CustomerComponent,
-        children: [{ path: '', component: AvailableDriverComponent }], canActivate: [AuthGuard]
-    },
-    {
-        path: 'response', component: CustomerComponent,
-        children: [{ path: '', component: ResponseComponent }], canActivate: [AuthGuard]
-    },
-    {
-      path: 'edit-customer-profile', component: CustomerComponent,
-      children: [{ path: '', component: EditCustomerProfileComponent  }], canActivate: [AuthGuard]
-    }
+  {
+    path: 'create-order', component: CustomerComponent,
+    children: [{ path: '', component: CreateOrderComponent }], canActivate: [AuthGuard]
+  },
+  {
+    path: 'customer-profile', component: CustomerComponent,
+    children: [{ path: '', component: CustomerProfileComponent }], canActivate: [AuthGuard]
+  },
+  {
+    path: 'available-driver', component: CustomerComponent,
+    children: [{ path: '', component: AvailableDriverComponent }], canActivate: [AuthGuard]
+  },
+  {
+    path: 'response', component: CustomerComponent,
+    children: [{ path: '', component: ResponseComponent }], canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-customer-profile/:id', component: CustomerComponent,
+    children: [{ path: '', component: EditCustomerProfileComponent }], canActivate: [AuthGuard]
+  }
 
 ]

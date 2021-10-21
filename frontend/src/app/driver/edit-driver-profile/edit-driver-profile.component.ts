@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Driver } from '../../shared/driver.model';
 import { DriverService } from '../../shared/driver.service';
+import { DriverProfileComponent} from '../driver-profile/driver-profile.component'
 
 declare var M: any;
 
@@ -10,16 +12,34 @@ declare var M: any;
   selector: 'app-edit-driver-profile',
   templateUrl: './edit-driver-profile.component.html',
   styleUrls: ['./edit-driver-profile.component.css'],
-  providers: [DriverService]
+  providers: [DriverService, DriverProfileComponent]
 })
 export class EditDriverProfileComponent implements OnInit {
+  id: string = '';
+  selectedDriver: Driver;
 
-  constructor(public driverService: DriverService) { }
+  constructor(
+      public driverService: DriverService,
+      private activatedRoute: ActivatedRoute,
+      public driverProfileComponent: DriverProfileComponent) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params: any) => {
+      this.id = params.get('id')
+    });
+    if (this.id) { this.getDriverData() };
     this.resetForm();
     this.refreshDriverList();
   }
+
+  getDriverData() {
+    console.log(this.id);
+    this.driverService.getDriverById(this.id).subscribe((res: any) => {
+      this.driverService.selectedDriver = res.body;
+      console.log(res);
+    })
+  }
+
 
   resetForm(form?: NgForm) {
     if (form)

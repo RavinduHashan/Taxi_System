@@ -110,16 +110,18 @@ const getDrivers =  async (req, res) => {
 
 //Read one driver
 const getOneDriver =  async (req, res) => {
-    try{
-        const {id} = req.params;
-        const query = `SELECT * FROM drivers WHERE id = $1`
-        const result = await pool.query(query, [id])
-        console.log(result)
-        res.json(result)
-    }
-    catch(err){
-        console.log(err);
-    }
+  try{
+      const {id} = req.params;
+      const query = `SELECT * FROM drivers WHERE id = $1`
+      const result = await pool.query(query, [id])
+      const [data] = result.rows;
+      console.log(data)
+      res.status(200).send({done: true, body: data});
+  }
+  catch(err){
+      console.log(err);
+      res.status(500).send({done: false, message: 'Something went wrong!'});
+  }
 }
 
 //Update drivers

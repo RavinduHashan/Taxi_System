@@ -18,7 +18,7 @@ const registerCustomers =  async (req, res) => {
       const newCustomer = await pool.query(query2, [full_name, email, phone_number, city, bcryptPassword]);
       //res.json(newUser.rows[0])
 
-      const token = jwtGenerator(newCustomer.rows[0].id);
+      const token = jwtGenerator(newCustomer.rows.length && newCustomer.rows[0].id);
       res.json({ token });  
     } 
     catch (err) {
@@ -115,11 +115,13 @@ const getOneCustomer =  async (req, res) => {
         const {id} = req.params;
         const query = `SELECT * FROM customers WHERE id = $1`
         const result = await pool.query(query, [id])
-        console.log(result)
-        res.json(result)
+        const [data] = result.rows;
+        console.log(data)
+        res.status(200).send({done: true, body: data});
     }
     catch(err){
         console.log(err);
+        res.status(500).send({done: false, message: 'Something went wrong!'});
     }
 }
 

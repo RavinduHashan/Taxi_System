@@ -11,7 +11,7 @@ import { environment }  from '../../environments/environment';
 export class DriverService {
   selectedDriver: Driver;
   drivers: Driver[] = [];
-  
+
   constructor(private http: HttpClient) { }
 
 
@@ -20,7 +20,11 @@ export class DriverService {
   }
 
   getDriverList() {
-    return this.http.get(environment.apiBaseUrlDriver+'/get');
+    return this.http.get(environment.apiBaseUrlDriver+`/get`);
+  }
+
+  getDriverById(id:string) {
+    return this.http.get(`${environment.apiBaseUrlDriver}/${id}`);
   }
 
   putDriver(dri: Driver) {
@@ -34,7 +38,7 @@ export class DriverService {
   seeAvailableDriverList() {
     return this.http.get(environment.apiBaseUrlOrder+'/seeAvailableDrivers');
   }
-  
+
   updateAvailableStateList(dri: Driver) {
     return this.http.put(environment.apiBaseUrlOrder+'/updateAvailableState' + `/${dri.id}`, dri);
   }

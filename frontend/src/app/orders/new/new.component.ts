@@ -38,22 +38,7 @@ export class NewComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.value.id == "") {
-      this.orderService.postOrder(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshOrderList();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
-      });
-    }
-    else {
-      this.orderService.putOrder(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshOrderList();
-        M.toast({ html: 'Updated successfully', classes: 'rounded' });
-      });
-    }
-  }
+  
 
   refreshOrderList() {
     this.orderService.getOrderList().subscribe((res:any) => {
