@@ -1,11 +1,16 @@
 <div class="container">
 <nav  class="navbar navbar-light bg-light">
-  <form class="container-fluid justify-content-start" #orderForm="ngForm"  >
+  <form class="container-fluid" #orderForm="ngForm">
+      <div>
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+      </div>
+      <div class="justify-content-start">
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()" >New</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Pending(orderForm)" >Pending</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Confirm(orderForm)" >Confirm</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Complete(orderForm)">Complete</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Reject(orderForm)">Reject</button>
+      </div>
   </form>
 </nav>
 </div>
@@ -33,11 +38,11 @@
       <td>{{ord.driver_name}}</td>
       <td >
           <a class="action-btn" routerLink="/edit-order/{{ord.id}}" (click)="onEdit(ord)">
-            <i class="material-icons">View</i>
+            <i class="material-icons">edit</i>
           </a>
-          <!-- <a class="action-btn" (click)="onDelete(ord.id,orderForm)">
+          <a  class="action-btn" (click)="onDelete(ord.id,orderForm)">
             <i class="material-icons">delete</i>
-          </a> -->
+          </a>
       </td>
     </tr>
 </table>

@@ -16,11 +16,11 @@
       <td>{{cus.city}}</td>
       <td>
           <a class="action-btn" routerLink="/edit-customer-profile/{{cus.id}}" (click)="onEdit(cus)">
-            <i class="material-icons">view</i>
+            <i class="material-icons">edit</i>
           </a>
-          <!-- <a class="action-btn" (click)="onDelete(cus.customer_id,customerForm)">
+          <a class="action-btn" (click)="onDelete(cus.id)">
             <i class="material-icons">delete</i>
-          </a> -->
+          </a>
       </td>
     </tr>
 </table>

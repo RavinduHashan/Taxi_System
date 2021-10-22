@@ -38,6 +38,7 @@ import { EditOrdersComponent } from './orders/editOrders/editOrders.component';
 import { EditCustomerProfileComponent } from './customer/edit-customer-profile/edit-customer-profile.component';
 import { EditDriverProfileComponent } from './driver/edit-driver-profile/edit-driver-profile.component';
 import { EditAdminProfileComponent } from './edit-admin-profile/edit-admin-profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -79,6 +80,7 @@ import { EditAdminProfileComponent } from './edit-admin-profile/edit-admin-profi
     RouterModule.forRoot(ordersRoutes),
     HttpClientModule,
     NgbModule,
+    FontAwesomeModule,
 
   ],
   providers: [{

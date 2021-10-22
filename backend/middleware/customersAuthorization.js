@@ -1,20 +1,18 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-
 module.exports = async (req, res, next) => {
-  try{
+  try {
     const jwtToken = req.header("token");
 
     if (!jwtToken) {
-        return res.status(403).json("Not Authorization");
+      return res.status(403).json("Not Authorization");
     }
-    const payload = jwt.verify(jwtToken, process.env.jwtSecret)
+    const payload = jwt.verify(jwtToken, process.env.jwtSecret);
     req.customer = payload.customer;
-  }
-  catch (err) {
-    console.error(err.message)
-    return res.status(403).json("Not Authorize" );
+  } catch (err) {
+    console.error(err.message);
+    return res.status(403).json("Not Authorize");
   }
   next();
 };

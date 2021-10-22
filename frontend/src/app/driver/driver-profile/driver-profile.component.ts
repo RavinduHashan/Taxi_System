@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { Driver } from '../../shared/driver.model';
 import { DriverService } from '../../shared/driver.service';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 declare var M: any;
 
@@ -13,6 +14,7 @@ declare var M: any;
   providers: [DriverService]
 })
 export class DriverProfileComponent implements OnInit {
+  faCoffee = faCoffee;
 
   constructor(public driverService: DriverService) { }
 
@@ -58,7 +60,7 @@ export class DriverProfileComponent implements OnInit {
   refreshDriverList() {
     this.driverService.getDriverList().subscribe((res:any) => {
       console.log(res)
-      this.driverService.drivers = res.rows as Driver[];
+      this.driverService.drivers = res.body as Driver[];
 
     });
   }
@@ -67,11 +69,11 @@ export class DriverProfileComponent implements OnInit {
     this.driverService.selectedDriver = dri;
   }
 
-  onDelete(id: string, form: NgForm) {
+  onDelete(id: any) {
     if (confirm('Are you sure to delete this record ?') == true) {
       this.driverService.deleteDriver(id).subscribe((res:any) => {
         this.refreshDriverList();
-        this.resetForm(form);
+        // this.resetForm();
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });
     }

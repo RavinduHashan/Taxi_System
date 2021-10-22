@@ -37,7 +37,7 @@ export class CustomerProfileComponent implements OnInit {
   refreshCustomerList() {
     this.customerService.getCustomerList().subscribe((res:any) => {
       console.log(res)
-      this.customerService.customers = res.rows as Customer[];
+      this.customerService.customers = res.body as Customer[];
 
     });
   }
@@ -46,11 +46,11 @@ export class CustomerProfileComponent implements OnInit {
     this.customerService.selectedCustomer = cus;
   }
 
-  onDelete(id: string, form: NgForm) {
+  onDelete(id: string) {
     if (confirm('Are you sure to delete this record ?') == true) {
       this.customerService.deleteCustomer(id).subscribe((res:any) => {
         this.refreshCustomerList();
-        this.resetForm(form);
+        this.resetForm();
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });
     }
