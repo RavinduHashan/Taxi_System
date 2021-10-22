@@ -14,6 +14,7 @@ declare var M: any;
 })
 export class NewComponent implements OnInit {
 
+  value = ""
   constructor(public orderService: OrderService) { }
 
   ngOnInit(): void {
@@ -32,8 +33,8 @@ export class NewComponent implements OnInit {
       drop_time: "",
       response: "",
       customer_id: "",
-      driver_id:"",
-      customer_name:"",
+      driver_id: "",
+      customer_name: "",
       driver_name: ""
     }
   }
@@ -41,7 +42,7 @@ export class NewComponent implements OnInit {
 
 
   refreshOrderList() {
-    this.orderService.getOrderList().subscribe((res:any) => {
+    this.orderService.getOrderList().subscribe((res: any) => {
       console.log(res)
       this.orderService.orders = res.rows as Order[];
 
@@ -55,7 +56,7 @@ export class NewComponent implements OnInit {
 
   onDelete(id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.orderService.deleteOrder(id).subscribe((res:any) => {
+      this.orderService.deleteOrder(id).subscribe((res: any) => {
         this.refreshOrderList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
@@ -63,15 +64,15 @@ export class NewComponent implements OnInit {
     }
   }
 
- //******************************************
+  //******************************************
 
-  Pending(form: NgForm){
+  Pending(form: NgForm) {
     this.resetForm(form);
     this.refreshPendingOrderList()
   }
 
   refreshPendingOrderList() {
-    this.orderService.getPendingOrderList().subscribe((res:any) => {
+    this.orderService.getPendingOrderList().subscribe((res: any) => {
       console.log(res)
       this.orderService.orders = res.body as Order[];
 
@@ -79,26 +80,26 @@ export class NewComponent implements OnInit {
   }
 
 
-  Confirm(form: NgForm){
+  Confirm(form: NgForm) {
     this.resetForm(form);
     this.refreshConfirmOrderList()
   }
 
   refreshConfirmOrderList() {
-    this.orderService.getConfirmOrderList().subscribe((res:any) => {
+    this.orderService.getConfirmOrderList().subscribe((res: any) => {
       console.log(res)
       this.orderService.orders = res.body as Order[];
 
     });
   }
 
-  Complete(form: NgForm){
+  Complete(form: NgForm) {
     this.resetForm(form);
     this.refreshCompleteOrderList()
   }
 
   refreshCompleteOrderList() {
-    this.orderService.getCompleteOrderList().subscribe((res:any) => {
+    this.orderService.getCompleteOrderList().subscribe((res: any) => {
       console.log(res)
       this.orderService.orders = res.body as Order[];
 
@@ -106,19 +107,31 @@ export class NewComponent implements OnInit {
   }
 
 
-  Reject(form: NgForm){
+  Reject(form: NgForm) {
     this.resetForm(form);
     this.refreshRejectOrderList()
   }
 
   refreshRejectOrderList() {
-    this.orderService.getRejectOrderList().subscribe((res:any) => {
+    this.orderService.getRejectOrderList().subscribe((res: any) => {
       console.log(res)
       this.orderService.orders = res.body as Order[];
 
     });
   }
 
+  Response1(value: any) {
+    this.orderService.getOrderByResponse(value)
+
+  }
+
+  Response(value: any) {
+    this.orderService.getOrderByResponse(value).subscribe((res: any) => {
+      console.log(res)
+      this.orderService.orders = res.body as Order[];
+    })
+
+  }
 }
 
 

@@ -12,7 +12,7 @@ router.get("/viewPendingOrders", Orders.viewPendingOrders);
 router.get("/viewConfirmOrders", Orders.viewConfirmOrders);
 router.get("/viewCompleteOrders", Orders.viewCompleteOrders);
 router.get("/viewRejectOrders", Orders.viewRejectOrders);
-router.get("/viewOrdersByResponse/:response", Orders.viewOrdersByResponse);
+router.get("/viewOrdersByResponse/:value", Orders.viewOrdersByResponse);
 
 router.get("/seeAvailableDrivers", Orders.seeAvailableDrivers);
 router.put("/updateAvailableState/:id", Orders.updateAvailableState);

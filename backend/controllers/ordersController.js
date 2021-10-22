@@ -118,8 +118,8 @@ const viewPendingOrders = async (req, res) => {
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  FROM orders WHERE response LIKE ''`;
     const result = await pool.query(query);
-    const [data1] = result.rows;
-    res.status(200).send({ done: true, body: data1 });
+    const [data] = result.rows
+    res.status(200).send({ done: true, body: data});
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
@@ -172,9 +172,9 @@ const viewRejectOrders = async (req, res) => {
 const viewOrdersByResponse = async (req, res) => {
   try {
     const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
-                                 FROM orders WHERE response = $1`;
-    const result = await pool.query(query, [req.params.response]);
+                             (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                              FROM orders WHERE response = $1`;
+    const result = await pool.query(query, [req.params.value]);
     res.json(result);
   } catch (err) {
     console.log(err);
