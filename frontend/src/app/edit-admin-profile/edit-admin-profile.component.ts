@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Profile } from '../shared/profile.model';
 import { ProfileService } from '../shared/profile.service';
+import { ProfileComponent } from '../profile/profile.component';
 
 declare var M: any;
 
@@ -10,16 +12,33 @@ declare var M: any;
   selector: 'app-edit-admin-profile',
   templateUrl: './edit-admin-profile.component.html',
   styleUrls: ['./edit-admin-profile.component.css'],
-  providers: [ProfileService]
+  providers: [ProfileService, ProfileComponent]
 })
 export class EditAdminProfileComponent implements OnInit {
+  id: string = '';
+  selectedProfile: Profile;
 
-  constructor(public profileService: ProfileService) { }
+  constructor(
+    public profileService: ProfileService,
+    private activatedRoute: ActivatedRoute,
+    public profileComponent: ProfileComponent) { }
 
-  ngOnInit(): void {
-    this.resetForm();
-    this.refreshProfileList();
-  }
+    ngOnInit(): void {
+      this.activatedRoute.paramMap.subscribe((params: any) => {
+        this.id = params.get('id')
+      });
+      if (this.id) { this.getProfileData() };
+      this.resetForm();
+      this.refreshProfileList();
+    }
+
+    getProfileData() {
+      console.log(this.id);
+      this.profileService.getProfileById(this.id).subscribe((res: any) => {
+        this.selectedProfile = res.body;
+        console.log(res);
+      })
+    }
 
   resetForm(form?: NgForm) {
     if (form)
@@ -54,7 +73,7 @@ export class EditAdminProfileComponent implements OnInit {
   refreshProfileList() {
     this.profileService.getProfileList().subscribe((res:any) => {
       console.log(res)
-      this.profileService.profiles = res.rows as Profile[];
+      this.profileService.profiles = res.body as Profile[];
 
     });
   }

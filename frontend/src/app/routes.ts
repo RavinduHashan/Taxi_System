@@ -42,7 +42,7 @@ export const appRoutes: Routes = [
         path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
     },
     {
-      path: 'edit-admin-profile', component: EditAdminProfileComponent, canActivate: [AuthGuard]
+      path: 'edit-admin-profile/:id', component: EditAdminProfileComponent, canActivate: [AuthGuard]
   },
     {
         path: '', redirectTo: '/login', pathMatch: 'full'

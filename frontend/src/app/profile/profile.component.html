@@ -15,7 +15,7 @@
         <td>{{pro.phone_number}}</td>
         <td>{{pro.city}}</td>
         <td>
-            <a class="action-btn" routerLink="/edit-admin-profile" (click)="onEdit(pro)">
+            <a class="action-btn" routerLink="/edit-admin-profile/{{pro.id}}" (click)="onEdit(pro)">
               <i class="material-icons">edit</i>
             </a>
             <a class="action-btn" (click)="onDelete(pro.id)">

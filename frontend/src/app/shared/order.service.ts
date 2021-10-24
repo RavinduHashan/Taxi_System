@@ -45,6 +45,9 @@ export class OrderService {
     return this.http.get(environment.apiBaseUrlOrder+'/viewRejectOrders');
   }
 
+
+
+
   getOrderByResponse(value:any) {
     return this.http.get(environment.apiBaseUrlOrder+'/viewOrdersByResponse'+ `/${value}`);
   }

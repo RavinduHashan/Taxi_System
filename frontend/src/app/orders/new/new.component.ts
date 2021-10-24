@@ -104,7 +104,6 @@ export class NewComponent implements OnInit {
     });
   }
 
-
   Reject(form: NgForm) {
     this.resetForm(form);
     this.refreshRejectOrderList()
@@ -117,6 +116,7 @@ export class NewComponent implements OnInit {
 
     });
   }
+
 
 }
 

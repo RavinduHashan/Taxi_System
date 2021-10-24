@@ -5,11 +5,12 @@
           <input class="form-control" type="text" placeholder="Search" aria-label="Search">
       </div>
       <div class="justify-content-start">
-        <button class="btn btn-sm btn-outline-secondary ml-2"  (click)="refreshOrderList()" >New</button>
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()" >All</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Pending(orderForm)" >Pending</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Confirm(orderForm)" >Confirm</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Complete(orderForm)">Complete</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="Reject(orderForm)">Reject</button>
+
         <!-- <button class="btn btn-sm btn-outline-secondary ml-2"  (click)="refreshOrderList()" >New</button>
         <button class="btn btn-sm btn-outline-secondary ml-2" [value]="Pending" (click)="Response(value)" >Pending</button>
         <button class="btn btn-sm btn-outline-secondary ml-2"  [value]="Confirm" (click)="Response(value)" >Confirm</button>

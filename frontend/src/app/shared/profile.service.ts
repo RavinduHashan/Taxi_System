@@ -31,4 +31,8 @@ export class ProfileService {
   deleteProfile(id: string) {
     return this.http.delete(environment.apiBaseUrlAdmin+'/delete'+ `/${id}`);
   }
+
+  getProfileById(id: string) {
+    return this.http.get(environment.apiBaseUrlAdmin + `/${id}`);
+  }
 }

@@ -35,7 +35,7 @@ export class EditDriverProfileComponent implements OnInit {
   getDriverData() {
     console.log(this.id);
     this.driverService.getDriverById(this.id).subscribe((res: any) => {
-      this.driverService.selectedDriver = res.body;
+      this.selectedDriver = res.body;
       console.log(res);
     })
   }
@@ -78,7 +78,7 @@ export class EditDriverProfileComponent implements OnInit {
   refreshDriverList() {
     this.driverService.getDriverList().subscribe((res:any) => {
       console.log(res)
-      this.driverService.drivers = res.rows as Driver[];
+      this.driverService.drivers = res.body as Driver[];
 
     });
   }

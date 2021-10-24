@@ -73,7 +73,7 @@ export class EditCustomerProfileComponent implements OnInit {
   refreshCustomerList() {
     this.customerService.getCustomerList().subscribe((res: any) => {
       console.log(res)
-      this.customerService.customers = res.rows as Customer[];
+      this.customerService.customers = res.body as Customer[];
 
     });
   }

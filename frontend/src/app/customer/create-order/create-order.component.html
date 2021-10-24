@@ -30,8 +30,10 @@
         <label>Driver ID :</label>
         <input class="form-control" type="text" name="driver_id" #name="ngModel" [(ngModel)]="orderService.selectedOrder.driver_id" placeholder="">
       </div>
-      <button class="btn btn-custom right" type="button" (click)="resetForm(orderForm)">Reset</button>
-      <button class="btn btn-custom right" type="submit" [disabled]="!orderForm.valid">Submit</button>
+      <div class="form-group">
+        <button class="btn btn-success float-right ml-2" type="submit" [disabled]="!orderForm.valid">Submit</button>
+        <button class="btn btn-danger float-right" type="button" (click)="resetForm(orderForm)">Reset</button>
+      </div>
     </form>
   </div>
 </div>
