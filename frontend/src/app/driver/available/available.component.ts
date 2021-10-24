@@ -42,7 +42,7 @@ export class AvailableComponent implements OnInit {
   refreshDriverList() {
     this.driverService.getDriverList().subscribe((res:any) => {
       console.log(res)
-      this.driverService.drivers = res.rows as Driver[];
+      this.driverService.drivers = res.body as Driver[];
 
     });
   }

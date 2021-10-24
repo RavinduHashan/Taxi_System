@@ -10,6 +10,6 @@ router.get("/dashboard", authorization, Admins.dashboard);
 router.get("/get", Admins.getAdmins);
 router.put("/update/:id", Admins.updateAdmins);
 router.delete("/delete/:id", Admins.deleteAdmins);
-router.get("/getOneUser/:id", Admins.getOneAdmin);
+router.get("/:id", Admins.getOneAdmin);
 
 module.exports = router;

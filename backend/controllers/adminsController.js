@@ -22,11 +22,10 @@ const registerAdmins = async (req, res) => {
       bcryptPassword,
     ]);
 
-    const token = jwtGenerator(newAdmin.rows[0].id);
-    res.json({ token });
+    const token = jwtGenerator(newAdmin.rows.length && newAdmin.rows[0].id);
+    res.status(200).send({ done: true, token: token });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -51,10 +50,9 @@ const loginAdmins = async (req, res) => {
     }
 
     const token = jwtGenerator(admin.rows[0].id);
-    res.json({ token });
+    res.status(200).send({ done: true, token: token });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -63,8 +61,7 @@ const verify = (req, res) => {
   try {
     res.json(true);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -75,8 +72,7 @@ const dashboard = async (req, res) => {
     const admin = await pool.query(query, [req.admin]);
     res.json(admin.rows[0]);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json("Server Error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -87,22 +83,22 @@ const createAdmins = async (req, res) => {
     const array = [fullName, email, phoneNumber, city, admin_password];
     const query = `INSERT INTO admins(fullName, email, phoneNumber, city, admin_password) VALUES ($1,$2,$3,$4,$5)`;
     const result = await pool.query(query, array);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
-};
+}
 
 //Read admins
 const getAdmins = async (req, res) => {
   try {
     const query = `SELECT * FROM admins`;
     const result = await pool.query(query);
-    console.log(result);
-    res.json(result);
+    const data = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -112,10 +108,10 @@ const getOneAdmin = async (req, res) => {
     const { id } = req.params;
     const query = `SELECT * FROM admins WHERE id = $1`;
     const result = await pool.query(query, [id]);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -134,10 +130,10 @@ const updateAdmins = async (req, res) => {
       bcryptPassword,
       req.params.id,
     ]);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -146,10 +142,10 @@ const deleteAdmins = async (req, res) => {
   try {
     const query = `DELETE FROM admins WHERE id = $1 RETURNING *`;
     const result = await pool.query(query, [req.params.id]);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 

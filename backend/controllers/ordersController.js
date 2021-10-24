@@ -22,9 +22,10 @@ const createOrders = async (req, res) => {
       customer_id,
       driver_id,
     ]);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -35,10 +36,10 @@ const getOrders = async (req, res) => {
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  from orders ORDER BY created DESC;`;
     const result = await pool.query(query);
-    console.log(result);
-    res.json(result);
+    const data = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -69,47 +70,61 @@ const updateOrders = async (req, res) => {
       req.body.driver_id,
       req.params.id,
     ]);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
-};
+}
 
 //Delete orders(Admin)
 const deleteOrders = async (req, res) => {
   try {
     const query = `DELETE FROM orders WHERE id = $1 RETURNING *`;
     const result = await pool.query(query, [req.params.id]);
-    console.log(result);
-    res.json(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//Update availability of a driver(Admin)
-const updateAvailableState = async (req, res) => {
-  try {
-    const query = `UPDATE drivers SET available = $1 WHERE id = $2 RETURNING *`;
-    const result = await pool.query(query, [req.body.available, req.params.id]);
-    res.json(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//Read available drivers(Admin)
-const seeAvailableDrivers = async (req, res) => {
-  try {
-    const query = `SELECT * FROM drivers WHERE available = true`;
-    const result = await pool.query(query);
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
+
+//Driver make available
+const insertTrue = async (req, res) => {
+  try {
+    const query = `UPDATE drivers SET available = true WHERE id = $1 RETURNING *`;
+    const result = await pool.query(query, [req.params.id]);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrong!" });
+  }
+};
+
+//Driver make unavailable
+const insertFalse = async (req, res) => {
+  try {
+    const query = `UPDATE drivers SET available = false WHERE id = $1 RETURNING *`;
+    const result = await pool.query(query, [req.params.id]);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrong!" });
+  }
+}
+
+
+//Read available drivers(Admin)
+const getAvailableDrivers = async (req, res) => {
+  try {
+    const query = `select * from drivers where available = true ;`;
+    const result = await pool.query(query);
+    const data = result.rows;
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrong!" });
+  }
+}
 
 //Read pending orders(Admin)
 const viewPendingOrders = async (req, res) => {
@@ -118,7 +133,7 @@ const viewPendingOrders = async (req, res) => {
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  FROM orders WHERE response LIKE ''`;
     const result = await pool.query(query);
-    const [data] = result.rows
+    const data = result.rows
     res.status(200).send({ done: true, body: data});
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
@@ -132,7 +147,7 @@ const viewConfirmOrders = async (req, res) => {
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  FROM orders WHERE response LIKE 'Confirm' `;
     const result = await pool.query(query);
-    const [data] = result.rows;
+    const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
@@ -146,7 +161,7 @@ const viewCompleteOrders = async (req, res) => {
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  FROM orders WHERE response LIKE 'Complete'`;
     const result = await pool.query(query);
-    const [data] = result.rows;
+    const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
@@ -160,9 +175,8 @@ const viewRejectOrders = async (req, res) => {
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  FROM orders WHERE response LIKE 'Reject' `;
     const result = await pool.query(query);
-    res.json(result)
-    // const [data] = result.rows;
-    // res.status(200).send({ done: true, body: data });
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
     res.json(err)
@@ -175,42 +189,10 @@ const viewOrdersByResponse = async (req, res) => {
                              (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                               FROM orders WHERE response = $1`;
     const result = await pool.query(query, [req.params.value]);
-    res.json(result);
+    const data = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
-  }
-};
-
-//Driver response the order
-const updateDriverResponse = async (req, res) => {
-  try {
-    const query = `UPDATE orders SET response = $1 WHERE id = $2 RETURNING *`;
-    const result = await pool.query(query, [req.body.response, req.params.id]);
-    res.json(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//Driver make available
-const insertTrue = async (req, res) => {
-  try {
-    const query = `UPDATE drivers SET available = true WHERE id = $1 RETURNING *`;
-    const result = await pool.query(query, [req.params.id]);
-    res.json(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//Driver make unavailable
-const insertFalse = async (req, res) => {
-  try {
-    const query = `UPDATE drivers SET available = false WHERE id = $1 RETURNING *`;
-    const result = await pool.query(query, [req.params.id]);
-    res.json(result);
-  } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -218,9 +200,10 @@ const insertConfirm = async (req, res) => {
   try {
     const query = `UPDATE orders SET response = 'Confirm' WHERE id = $1 RETURNING *`;
     const result = await pool.query(query, [req.params.id]);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -228,9 +211,10 @@ const insertReject = async (req, res) => {
   try {
     const query = `UPDATE orders SET response = 'Reject' WHERE id = $1 RETURNING *`;
     const result = await pool.query(query, [req.params.id]);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -238,13 +222,15 @@ const insertComplete = async (req, res) => {
   try {
     const query = `UPDATE orders SET response = 'Complete' WHERE id = $1 RETURNING *`;
     const result = await pool.query(query, [req.params.id]);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
+
 //****************************************************************************************************
-// //Customer
+//Customer
 
 //Create trips(Customer)
 const customerCreateOrders = async (req, res) => {
@@ -268,9 +254,10 @@ const customerCreateOrders = async (req, res) => {
       id,
       driver_id,
     ]);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -278,32 +265,30 @@ const customerCreateOrders = async (req, res) => {
 const customerGetOrders = async (req, res) => {
   try {
     const { id } = req.params;
-    const query = `SELECT * FROM orders WHERE id = $1`;
+    const query = `SELECT * FROM orders WHERE customer_id = $1`;
     const result = await pool.query(query, [id]);
-    res.json(result);
+    const data = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
 //Update trips(Customer)
 const customerUpdateOrders = async (req, res) => {
   try {
-    const query = `UPDATE orders SET pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, customer_id = $6, driver_id = $7 WHERE id = $8 RETURNING *`;
+    const query = `UPDATE orders SET pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4 WHERE id = $5 RETURNING *`;
     const result = await pool.query(query, [
       req.body.pick_location,
       req.body.drop_location,
       req.body.pick_time,
       req.body.drop_time,
-      req.body.response,
-      req.body.c_id,
-      req.body.d_id,
       req.params.id,
     ]);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -313,55 +298,29 @@ const customerDeleteOrders = async (req, res) => {
     const query = `DELETE FROM orders WHERE id = $1 RETURNING *`;
     const result = await pool.query(query, [req.params.id]);
     console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
-// const driverSeeOrders =  async (req, res) => {
-//     try{
-//         const {id} = req.params
-//         const result = await pool.query("select * from orders where id = 1$",[id])
-//         res.json(result)
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
 
-// const driverResponseOrder = async (req, res) => {
-//     try{
-//         const {response, order_id} = req.body
-//         const result = await pool.query("update orders set  response = $1 where order_id = $2 returning *" [response, order_id])
-//         res.json(result)
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
+//****************************************************************************************************
+//Driver
 
-// const userSeeOrders =  async (req, res) => {
-//     try{
-//         const {user_id} = req.body
-//         const result = await pool.query("select * from orders u_id = $1", [user_id])
-//         res.json(result)
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
+const driverGetOrders = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const query = `SELECT * FROM orders WHERE driver_id = $1`;
+    const result = await pool.query(query, [id]);
+    const data = result.rows;
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+  }
+};
 
-// const deleteOrders = async (req, res) => {
-//     try{
-//         const result = await pool.query("delete from users where user_id = $1 returning *", [req.params.user_id])
-//         console.log(result)
-//         res.json(result)
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
 
 module.exports = {
   createOrders,
@@ -369,13 +328,12 @@ module.exports = {
   getOneOrder,
   updateOrders,
   deleteOrders,
-  updateAvailableState,
-  seeAvailableDrivers,
+  getAvailableDrivers,
   viewPendingOrders,
   viewConfirmOrders,
   viewCompleteOrders,
   viewRejectOrders,
-  updateDriverResponse,
+  viewOrdersByResponse,
   insertTrue,
   insertFalse,
   insertConfirm,
@@ -385,5 +343,5 @@ module.exports = {
   customerGetOrders,
   customerUpdateOrders,
   customerDeleteOrders,
-  viewOrdersByResponse,
+  driverGetOrders  
 };

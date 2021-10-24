@@ -23,8 +23,8 @@
           <input class="form-control" type="text" name="password" #name="ngModel" [(ngModel)]="profileService.selectedProfile.password" placeholder="">
         </div>
       <div class="form-group">
-        <button class="btn btn-custom right" type="button" (click)="resetForm(profileForm)">Reset</button>
-        <button class="btn btn-custom right" type="submit" [disabled]="!profileForm.valid">Submit</button>
+        <button class="btn btn-danger float-right ml-2" type="button"  (click)="resetForm(profileForm)">Reset</button>
+        <button class="btn btn-success float-right " type="submit" [disabled]="!profileForm.valid">Submit</button>
       </div>
   </form>
 </div>

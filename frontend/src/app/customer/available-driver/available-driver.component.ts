@@ -37,7 +37,7 @@ export class AvailableDriverComponent implements OnInit {
   }
 
   refreshAvailableDriverList() {
-    this.driverService.seeAvailableDriverList().subscribe((res:any) => {
+    this.driverService.getAvailableDriverList().subscribe((res:any) => {
       console.log(res)
       this.driverService.drivers = res.body as Driver[];
 

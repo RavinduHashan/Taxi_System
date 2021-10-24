@@ -35,8 +35,8 @@ export class DriverService {
     return this.http.delete(environment.apiBaseUrlDriver+'/delete'+ `/${id}`);
   }
 
-  seeAvailableDriverList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/seeAvailableDrivers');
+  getAvailableDriverList() {
+    return this.http.get(environment.apiBaseUrlOrder+'/getAvailableDrivers');
   }
 
   updateAvailableStateList(dri: Driver) {

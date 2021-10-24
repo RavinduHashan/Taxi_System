@@ -1,7 +1,6 @@
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../jwtGenerator/driversJwtGenerator");
-const { query } = require("express");
 
 //Driver registration
 const registerDrivers = async (req, res) => {
@@ -34,11 +33,10 @@ const registerDrivers = async (req, res) => {
     ]);
     //res.json(newUser.rows[0])
 
-    const token = jwtGenerator(newDriver.rows[0].id);
-    res.json({ token });
+    const token = jwtGenerator(newDriver.rows.length &&newDriver.rows[0].id);
+    res.status(200).send({ done: true, token: token });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -63,20 +61,18 @@ const loginDrivers = async (req, res) => {
     }
 
     const token = jwtGenerator(driver.rows[0].id);
-    res.json({ token });
+    res.status(200).send({ done: true, token: token });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
-};
+}
 
 //Vefify drivers login or not
 const verify = (req, res) => {
   try {
     res.json(true);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -87,8 +83,7 @@ const dashboard = async (req, res) => {
     const driver = await pool.query(query, [req.driver]);
     res.json(driver.rows[0]);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json("Server Error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -120,7 +115,8 @@ const getDrivers = async (req, res) => {
   try {
     const query = `SELECT * FROM drivers`;
     const result = await pool.query(query);
-    res.status(200).send({ done: true, body:result.rows });
+    const data = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
@@ -156,10 +152,10 @@ const updateDrivers = async (req, res) => {
       bcryptPassword,
       req.params.id,
     ]);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -168,12 +164,13 @@ const deleteDrivers = async (req, res) => {
   try {
     const query = `DELETE FROM drivers WHERE id = $1 RETURNING *`;
     const result = await pool.query(query, [req.params.id]);
-    console.log(result);
-    res.json(result);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
+
 
 module.exports = {
   registerDrivers,

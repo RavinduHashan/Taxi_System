@@ -21,14 +21,12 @@ const registerCustomers = async (req, res) => {
       city,
       bcryptPassword,
     ]);
-    //res.json(newUser.rows[0])
 
     const token = jwtGenerator(
       newCustomer.rows.length && newCustomer.rows[0].id
     );
-    res.json({ token });
+    res.status(200).send({ done: true, token: token });
   } catch (err) {
-    console.log(err);
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -48,16 +46,13 @@ const loginCustomers = async (req, res) => {
       password,
       customer.rows[0].customer_password
     );
-    //console.log(validPassword)
-
     if (!validPassword) {
       return res.status(401).json("Password or Email is incorrect");
     }
 
     const token = jwtGenerator(customer.rows[0].id);
-    res.json({ token });
+    res.status(200).send({ done: true, token: token });
   } catch (err) {
-    console.error(err.message);
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -67,8 +62,7 @@ const verify = (req, res) => {
   try {
     res.json(true);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -79,8 +73,7 @@ const dashboard = async (req, res) => {
     const customer = await pool.query(query, [req.customer]);
     res.json(customer.rows[0]);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json("Server Error");
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
@@ -98,7 +91,6 @@ const createCustomers = async (req, res) => {
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -111,7 +103,6 @@ const getCustomers = async (req, res) => {
     const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -125,7 +116,6 @@ const getOneCustomer = async (req, res) => {
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -149,7 +139,6 @@ const updateCustomers = async (req, res) => {
     console.log(data);
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -162,7 +151,6 @@ const deleteCustomers = async (req, res) => {
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    console.log(err);
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };

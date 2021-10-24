@@ -59,7 +59,7 @@ export class TripOrderComponent implements OnInit {
   refreshOrderList() {
     this.orderService.getOrderList().subscribe((res:any) => {
       console.log(res)
-      this.orderService.orders = res.rows as Order[];
+      this.orderService.orders = res.body as Order[];
 
     });
   }
@@ -89,7 +89,7 @@ export class TripOrderComponent implements OnInit {
   refreshPendingOrderList() {
     this.orderService.getPendingOrderList().subscribe((res:any) => {
       console.log(res)
-      this.orderService.orders = res.rows as Order[];
+      this.orderService.orders = res.body as Order[];
 
     });
   }
@@ -103,7 +103,7 @@ export class TripOrderComponent implements OnInit {
   refreshConfirmOrderList() {
     this.orderService.getConfirmOrderList().subscribe((res:any) => {
       console.log(res)
-      this.orderService.orders = res.rows as Order[];
+      this.orderService.orders = res.body as Order[];
 
     });
   }
@@ -116,7 +116,7 @@ export class TripOrderComponent implements OnInit {
   refreshCompleteOrderList() {
     this.orderService.getCompleteOrderList().subscribe((res:any) => {
       console.log(res)
-      this.orderService.orders = res.rows as Order[];
+      this.orderService.orders = res.body as Order[];
 
     });
   }
@@ -130,7 +130,7 @@ export class TripOrderComponent implements OnInit {
   refreshRejectOrderList() {
     this.orderService.getRejectOrderList().subscribe((res:any) => {
       console.log(res)
-      this.orderService.orders = res.rows as Order[];
+      this.orderService.orders = res.body as Order[];
 
     });
   }

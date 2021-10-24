@@ -39,12 +39,10 @@ export class NewComponent implements OnInit {
     }
   }
 
-
-
   refreshOrderList() {
     this.orderService.getOrderList().subscribe((res: any) => {
       console.log(res)
-      this.orderService.orders = res.rows as Order[];
+      this.orderService.orders = res.body as Order[];
 
     });
   }
@@ -120,18 +118,6 @@ export class NewComponent implements OnInit {
     });
   }
 
-  Response1(value: any) {
-    this.orderService.getOrderByResponse(value)
-
-  }
-
-  Response(value: any) {
-    this.orderService.getOrderByResponse(value).subscribe((res: any) => {
-      console.log(res)
-      this.orderService.orders = res.body as Order[];
-    })
-
-  }
 }
 
 

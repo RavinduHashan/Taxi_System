@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
   refreshProfileList() {
     this.profileService.getProfileList().subscribe((res:any) => {
       console.log(res)
-      this.profileService.profiles = res.rows as Profile[];
+      this.profileService.profiles = res.body as Profile[];
 
     });
   }
