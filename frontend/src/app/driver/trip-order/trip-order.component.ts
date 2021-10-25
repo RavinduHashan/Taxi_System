@@ -131,6 +131,7 @@ export class TripOrderComponent implements OnInit {
     this.orderService.getRejectOrderList().subscribe((res:any) => {
       console.log(res)
       this.orderService.orders = res.body as Order[];
+      
 
     });
   }

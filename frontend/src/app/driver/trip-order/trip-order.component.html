@@ -22,15 +22,19 @@
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ord.response}}
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item"  style="color: rgb(1, 103, 134); cursor: pointer" (click)="confirm(ord)" >Confirm</a>
-            <a class="dropdown-item"  style="color: rgb(87, 19, 19); cursor: pointer" (click)="reject(ord)">Reject</a>
-            <a class="dropdown-item" style="color: rgb(24, 85, 32); cursor: pointer" (click)="complete(ord)">Complete</a>
+          <div class="dropdown-menu "  aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item btn"  style="color: rgb(1, 103, 134); cursor: pointer" (click)="confirm(ord)" >Confirm</a>
+            <a class="dropdown-item btn"  style="color: rgb(87, 19, 19); cursor: pointer" (click)="reject(ord)">Reject</a>
+            <a class="dropdown-item btn" style="color: rgb(24, 85, 32); cursor: pointer" (click)="complete(ord)">Complete</a>
           </div>
         </div>
       </td>
       <td>{{ord.customer_name}}</td>
       <td>{{ord.driver_name}}</td>
     </tr>
+
+
 </table>
 </div>
+
+
