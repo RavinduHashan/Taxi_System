@@ -1,6 +1,5 @@
-<div class="container">
-
-  <table class="table table-striped">
+<div class="Padding">
+  <table class="table  table-striped table-bordered">
     <thead>
       <tr>
         <th>Full Name</th>
@@ -9,25 +8,25 @@
         <th>City</th>
         <th>Vehicle Type</th>
         <th>Vehicle Number</th>
-        <th></th>
       </tr>
     </thead>
-    <tr *ngFor="let dri of driverService.drivers">
-      <td>{{dri.full_name}}</td>
-      <td>{{dri.email}}</td>
-      <td>{{dri.phone_number}}</td>
-      <td>{{dri.city}}</td>
-      <td>{{dri.vehicle_type}}</td>
-      <td>{{dri.vehicle_number}}</td>
-      <td >
+    <tbody>
+      <tr *ngFor="let dri of driverService.drivers">
+        <td>{{dri.full_name}}</td>
+        <td>{{dri.email}}</td>
+        <td>{{dri.phone_number}}</td>
+        <td>{{dri.city}}</td>
+        <td>{{dri.vehicle_type}}</td>
+        <td>{{dri.vehicle_number}}</td>
+        <td>
           <a class="action-btn" routerLink="/edit-driver-profile/{{dri.id}}" (click)="onEdit(dri)">
-            <i class="material-icons">edit</i>
+            <i class="material-icons Edit">edit</i>
           </a>
-          <a  class="action-btn" (click)="onDelete(dri.id)">
-            <i class="material-icons">delete</i>
+          <a class="action-btn" (click)="onDelete(dri.id)">
+            <i class="material-icons Delete">delete</i>
           </a>
-      </td>
-    </tr>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
-

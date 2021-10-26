@@ -1,5 +1,5 @@
-<div class="container">
-  <table class="table table-striped">
+<div class="Padding">
+  <table class="table  table-striped table-bordered">
       <thead>
         <tr>
           <th>Full Name</th>
@@ -9,6 +9,7 @@
           <th></th>
         </tr>
       </thead>
+      <tbody>
       <tr *ngFor="let pro of profileService.profiles">
         <td>{{pro.full_name}}</td>
         <td>{{pro.email}}</td>
@@ -16,12 +17,13 @@
         <td>{{pro.city}}</td>
         <td>
             <a class="action-btn" routerLink="/edit-admin-profile/{{pro.id}}" (click)="onEdit(pro)">
-              <i class="material-icons">edit</i>
+              <i class="material-icons Edit">edit</i>
             </a>
             <a class="action-btn" (click)="onDelete(pro.id)">
-              <i class="material-icons">delete</i>
+              <i class="material-icons Delete">delete</i>
             </a>
         </td>
       </tr>
+    </tbody>
   </table>
 </div>
