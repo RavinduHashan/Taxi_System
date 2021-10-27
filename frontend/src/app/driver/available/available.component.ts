@@ -41,7 +41,6 @@ export class AvailableComponent implements OnInit {
 
   refreshDriverList() {
     this.driverService.getDriverList().subscribe((res:any) => {
-      console.log(res)
       this.driverService.drivers = res.body as Driver[];
 
     });
@@ -49,15 +48,13 @@ export class AvailableComponent implements OnInit {
   available(dri: Driver) {
     if(dri.available)
         this.driverService.insertFalse(dri).subscribe((res:any) => {
-        this.refreshDriverList();
+        // this.refreshDriverList();
         this.resetForm();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
       });
     else{
         this.driverService.insertTrue(dri).subscribe((res:any) => {
-        this.refreshDriverList();
+        // this.refreshDriverList();
         this.resetForm();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
       })
     }
 

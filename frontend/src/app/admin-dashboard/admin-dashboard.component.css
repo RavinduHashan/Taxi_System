@@ -1,0 +1,17 @@
+/* .C:focus{
+  color: rgb(89, 159, 240)!important;
+} */
+.C:focus-within{
+  color: rgb(89, 159, 240)!important;
+}
+.C{
+  color: rgb(86, 87, 88)!important;
+  font-weight: 600;
+}
+
+.Nav-bar {
+  -webkit-box-shadow: 0 0px 0px -6px black;
+	   -moz-box-shadow: 0 0px 0px -6px black;
+	        box-shadow: 0 2px 6px -6px black;
+  background-color: white !important;
+}

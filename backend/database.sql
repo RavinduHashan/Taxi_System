@@ -42,7 +42,7 @@ create table orders(
     created timestamp with time zone NOT NULL DEFAULT now()
 );
 
-ALTER TABLE public.orders ADD COLUMN created timestamp with time zone NOT NULL DEFAULT now();
+ALTER TABLE public.drivers ADD COLUMN created timestamp with time zone NOT NULL DEFAULT now();
 
 -- PSQL Command ****************************************************************************
 

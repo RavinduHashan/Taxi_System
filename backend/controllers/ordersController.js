@@ -175,7 +175,7 @@ const viewRejectOrders = async (req, res) => {
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  FROM orders WHERE response LIKE 'Reject' `;
     const result = await pool.query(query);
-    const [data] = result.rows;
+    const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong ravindu!" });

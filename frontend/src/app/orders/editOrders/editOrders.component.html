@@ -1,5 +1,5 @@
-<div class="Padding">
-  <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
+<div  class="Padding Width justify-content-center align-items-center container">
+  <form  #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
     <input type="hidden" name="id" #id="ngModel" [(ngModel)]="orderService.selectedOrder.id">
     <div class="form-group">
       <label>Pick Location :</label>
