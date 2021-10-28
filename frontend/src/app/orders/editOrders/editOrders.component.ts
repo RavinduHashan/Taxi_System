@@ -16,7 +16,6 @@ declare var M: any;
 })
 export class EditOrdersComponent implements OnInit {
   id:any;
-
   constructor(
     private activatedRoute: ActivatedRoute,
     public orderService: OrderService,
@@ -31,10 +30,8 @@ export class EditOrdersComponent implements OnInit {
     this.refreshOrderList();
   }
   getOrderData() {
-    console.log(this.id);
     this.orderService.getOrderById(this.id).subscribe((res: any) => {
       this.orderService.selectedOrder = res.body;
-      console.log(res);
     })
   }
 

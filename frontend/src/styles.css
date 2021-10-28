@@ -191,3 +191,19 @@ form div.input-field input{
   width:30%
 }
 
+
+.Input{
+  border-left-color:rgb(77, 117, 224);
+  border-left-width:5px;
+  background-color:rgb(234, 241, 240);
+  font-family: 'Ubuntu', sans-serif !important;
+  font-weight:600; color: rgb(87, 87, 88);
+  font-size: 15px;
+}
+.Label
+{
+  font-family: 'Ubuntu', sans-serif !important;
+  font-weight:600; color: rgb(154, 154, 173);
+  font-size: 15px;
+}
+

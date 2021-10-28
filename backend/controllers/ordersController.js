@@ -32,7 +32,7 @@ const createOrders = async (req, res) => {
 //Read orders(Admin)
 const getOrders = async (req, res) => {
   try {
-    const query = `select *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+    const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
                                  (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                                  from orders ORDER BY created DESC;`;
     const result = await pool.query(query);

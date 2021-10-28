@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+// import { Observable } from 'rxjs/Observable';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/toPromise';
 
 import { Order } from './order.model';
 import { environment }  from '../../environments/environment';
@@ -12,8 +12,8 @@ export class OrderService {
   selectedOrder: Order;
   orders: Order[] = [];
 
-  constructor(private http: HttpClient) { }
 
+  constructor(private http: HttpClient) { }
 
   postOrder(ord:Order) {
     return this.http.post(environment.apiBaseUrlOrder+'/createOrders', ord);

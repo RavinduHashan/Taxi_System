@@ -10,17 +10,12 @@
         <button class="btn btn-sm btn-outline-success ml-2 " (click)="Confirm(orderForm)">Confirm</button>
         <button class="btn btn-sm btn-outline-info ml-2 " (click)="Complete(orderForm)">Complete</button>
         <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Reject(orderForm)">Reject</button>
-        <!-- <button class="btn btn-sm btn-outline-secondary ml-2"  (click)="refreshOrderList()" >New</button>
-        <button class="btn btn-sm btn-outline-secondary ml-2" [value]="Pending" (click)="Response(value)" >Pending</button>
-        <button class="btn btn-sm btn-outline-secondary ml-2"  [value]="Confirm" (click)="Response(value)" >Confirm</button>
-        <button class="btn btn-sm btn-outline-secondary ml-2" [value]="Confirm" (click)="Response(value)">Complete</button>
-        <button class="btn btn-sm btn-outline-secondary ml-2" [value]="Confirm" (click)="Response(value)">Reject</button> -->
       </div>
     </form>
   </nav>
 </div>
 <div class="Padding">
-  <table class="table  table-striped table-bordered ">
+  <table class="table  table-striped table-bordered  table-sm">
     <thead>
       <tr>
         <th>Pick Location</th>
@@ -34,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ord of orderService.orders">
+      <tr *ngFor="let ord of orderService.orders | slice: (page-1) * pageSize : page * pageSize">
         <td>{{ord.pick_location}}</td>
         <td>{{ord.drop_location}}</td>
         <td>{{ord.pick_time}}</td>
@@ -52,6 +47,12 @@
         </td>
       </tr>
     </tbody>
-
   </table>
+  <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="orderService.orders.length">
+  <ng-template style="color: rgb(194, 205, 206);" ngbPaginationPrevious>Previous</ng-template>
+  <ng-template style="color: rgb(194, 205, 206);" ngbPaginationNext>Next</ng-template>
+  </ngb-pagination>
 </div>

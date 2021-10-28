@@ -2,28 +2,28 @@
   <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
     <input type="hidden" name="id" #id="ngModel" [(ngModel)]="selectedProfile.id">
     <div class="form-group">
-      <label>Full Name :</label>
-      <input class="form-control" type="text" name="full_name" #name="ngModel" [(ngModel)]="selectedProfile.full_name"
+      <label class="Label">Full Name :</label>
+      <input class="form-control Input" type="text" name="full_name" #name="ngModel" [(ngModel)]="selectedProfile.full_name"
         placeholder="" required>
     </div>
     <div class="form-group">
-      <label>email :</label>
-      <input class="form-control" type="text" name="email" #name="ngModel" [(ngModel)]="selectedProfile.email"
+      <label class="Label">email :</label>
+      <input class="form-control Input" type="text" name="email" #name="ngModel" [(ngModel)]="selectedProfile.email"
         placeholder="">
     </div>
     <div class="form-group">
-      <label>Phone Number :</label>
-      <input class="form-control" type="text" name="phone_number" #name="ngModel"
+      <label class="Label">Phone Number :</label>
+      <input class="form-control Input" type="text" name="phone_number" #name="ngModel"
         [(ngModel)]="selectedProfile.phone_number" placeholder="">
     </div>
     <div class="form-group">
-      <label>City :</label>
-      <input class="form-control" type="text" name="city" #name="ngModel" [(ngModel)]="selectedProfile.city"
+      <label class="Label">City :</label>
+      <input class="form-control Input" type="text" name="city" #name="ngModel" [(ngModel)]="selectedProfile.city"
         placeholder="">
     </div>
     <div class="form-group">
-      <label>Password :</label>
-      <input class="form-control" type="text" name="password" #name="ngModel" [(ngModel)]="selectedProfile.password"
+      <label class="Label">Password :</label>
+      <input class="form-control Input" type="text" name="password" #name="ngModel" [(ngModel)]="selectedProfile.password"
         placeholder="">
     </div>
     <div class="form-group">

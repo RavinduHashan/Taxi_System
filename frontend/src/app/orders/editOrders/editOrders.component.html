@@ -1,39 +1,39 @@
 <div  class="Padding Width justify-content-center align-items-center container">
   <form  #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="orderService.selectedOrder.id">
+    <input  type="hidden" name="id" #id="ngModel" [(ngModel)]="orderService.selectedOrder.id">
     <div class="form-group">
-      <label>Pick Location :</label>
-      <input class="form-control" type="text" name="pick_location" #name="ngModel"
+    <label  class="Label">Pick Location :</label>
+      <input  class="form-control Input" type="text" name="pick_location" #name="ngModel"
         [(ngModel)]="orderService.selectedOrder.pick_location" placeholder="">
     </div>
     <div class="form-group">
-      <label>Drop Location :</label>
-      <input class="form-control" type="text" name="drop_location" #name="ngModel"
+      <label class="Label">Drop Location :</label>
+      <input class="form-control Input" type="text" name="drop_location" #name="ngModel"
         [(ngModel)]="orderService.selectedOrder.drop_location" placeholder="">
     </div>
     <div class="form-group">
-      <label>Pick Time :</label>
-      <input class="form-control" type="text" name="pick_time" #name="ngModel"
+      <label class="Label">Pick Time :</label>
+      <input class="form-control Input" type="text" name="pick_time" #name="ngModel"
         [(ngModel)]="orderService.selectedOrder.pick_time" placeholder="">
     </div>
     <div class="form-group">
-      <label>Drop Time :</label>
-      <input class="form-control" type="text" name="drop_time" #name="ngModel"
+      <label class="Label">Drop Time :</label>
+      <input class="form-control Input" type="text" name="drop_time" #name="ngModel"
         [(ngModel)]="orderService.selectedOrder.drop_time" placeholder="">
     </div>
     <div class="form-group">
-      <label>Response :</label>
-      <input class="form-control" type="text" name="response" #name="ngModel"
+      <label class="Label">Response :</label>
+      <input class="form-control Input" type="text" name="response" #name="ngModel"
         [(ngModel)]="orderService.selectedOrder.response" placeholder="">
     </div>
     <div class="form-group">
-      <label>Customer ID :</label>
-      <input class="form-control" type="text" name="customer_id" #name="ngModel"
+      <label class="Label">Customer ID :</label>
+      <input class="form-control Input" type="text" name="customer_id" #name="ngModel"
         [(ngModel)]="orderService.selectedOrder.customer_id" placeholder="">
     </div>
     <div class="form-group">
-      <label>Driver ID :</label>
-      <input class="form-control" type="text" name="driver_id" #name="ngModel"
+      <label class="Label">Driver ID :</label>
+      <input class="form-control Input" type="text" name="driver_id" #name="ngModel"
         [(ngModel)]="orderService.selectedOrder.driver_id" placeholder="">
     </div>
     <div class="form-group">

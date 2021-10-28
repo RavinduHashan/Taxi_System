@@ -14,7 +14,9 @@ declare var M: any;
 })
 export class NewComponent implements OnInit {
 
-  value = ""
+  value = "";
+  public page = 1;
+  public pageSize = 10;
   constructor(public orderService: OrderService) { }
 
   ngOnInit(): void {
