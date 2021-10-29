@@ -29,8 +29,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ord of orderService.orders | slice: (page-1) * pageSize : page * pageSize">
-        <td>{{ord.pick_location}}</td>
+      <tr class = "Row" *ngFor="let ord of orderService.orders | slice: (page-1) * pageSize : page * pageSize">
+        <td >{{ord.pick_location}}</td>
         <td>{{ord.drop_location}}</td>
         <td>{{ord.pick_time}}</td>
         <td>{{ord.drop_time}}</td>

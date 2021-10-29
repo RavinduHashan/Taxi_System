@@ -81,6 +81,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HttpClientModule,
     NgbModule,
     FontAwesomeModule,
+    ReactiveFormsModule
 
   ],
   providers: [{
