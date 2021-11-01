@@ -15,8 +15,8 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  postOrder(ord:Order) {
-    return this.http.post(environment.apiBaseUrlOrder+'/createOrders', ord);
+  postOrder(order:Order) {
+    return this.http.post(environment.apiBaseUrlOrder+'/createOrders', order);
   }
 
   getOrderList() {
@@ -46,33 +46,31 @@ export class OrderService {
   }
 
 
-
-
   getOrderByResponse(value:any) {
     return this.http.get(environment.apiBaseUrlOrder+'/viewOrdersByResponse'+ `/${value}`);
   }
 
-  putOrder(ord: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/updateOrders'+ `/${ord.id}`, ord);
+  putOrder(order: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/updateOrders'+ `/${order.id}`, order);
   }
 
   deleteOrder(id: string) {
     return this.http.delete(environment.apiBaseUrlOrder+'/deleteOrders'+ `/${id}`);
   }
 
-  updateResponseList(ord: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/updateDriverResponse'+ `/${ord.id}`, ord);
+  updateResponseList(order: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/updateDriverResponse'+ `/${order.id}`, order);
   }
 
-  insertConfirm(ord: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertConfirm'+ `/${ord.id}`, ord);
+  insertConfirm(order: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertConfirm'+ `/${order.id}`, order);
   }
 
-  insertReject(ord: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertReject'+ `/${ord.id}`, ord);
+  insertReject(order: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertReject'+ `/${order.id}`, order);
   }
 
-  insertComplete(ord: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertComplete'+ `/${ord.id}`, ord);
+  insertComplete(order: Order) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertComplete'+ `/${order.id}`, order);
   }
 }

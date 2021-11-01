@@ -13,6 +13,7 @@ router.post("/createOrders", Orders.createOrders);
 router.get("/getOrders", Orders.getOrders);
 router.put("/updateOrders/:id", Orders.updateOrders);
 router.delete("/deleteOrders/:id", Orders.deleteOrders);
+router.get("/searchOrders/:pick_location/:drop_location/:pick_time/:drop_time/:response", Orders.searchOrders)
 
 
 //Customer

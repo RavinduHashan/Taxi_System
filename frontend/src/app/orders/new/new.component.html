@@ -2,7 +2,7 @@
   <nav class="navbar navbar-light bg-light" style="background-color: white !important;">
     <form class="container-fluid" #orderForm="ngForm">
       <div>
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        <input class="form-control" type="text" [(ngModel)]="searchValue" placeholder="Search" aria-label="Search">
       </div>
       <div class="justify-content-start">
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()">All</button>
@@ -29,19 +29,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr class = "Row" *ngFor="let ord of orderService.orders | slice: (page-1) * pageSize : page * pageSize">
-        <td >{{ord.pick_location}}</td>
-        <td>{{ord.drop_location}}</td>
-        <td>{{ord.pick_time}}</td>
-        <td>{{ord.drop_time}}</td>
-        <td>{{ord.response}}</td>
-        <td>{{ord.customer_name}}</td>
-        <td>{{ord.driver_name}}</td>
+      <tr class = "Row" *ngFor="let order of Orders | slice: (page-1) * pageSize : page * pageSize | searchfilter:searchValue">
+        <td>{{order.pick_location}}</td>
+        <td>{{order.drop_location}}</td>
+        <td>{{order.pick_time}}</td>
+        <td>{{order.drop_time}}</td>
+        <td>{{order.response}}</td>
+        <td>{{order.customer_name}}</td>
+        <td>{{order.driver_name}}</td>
         <td>
-          <a class="action-btn" routerLink="/edit-order/{{ord.id}}" (click)="onEdit(ord)">
+          <a class="action-btn" routerLink="/edit-order/{{order.id}}" (click)="onEdit(order)">
             <i class="material-icons Edit">edit</i>
           </a>
-          <a class="action-btn" (click)="onDelete(ord.id,orderForm)">
+          <a class="action-btn" (click)="onDelete(order.id,orderForm)">
             <i class="material-icons Delete">delete</i>
           </a>
         </td>
@@ -51,7 +51,7 @@
   <ngb-pagination
   [(page)]="page"
   [pageSize]="pageSize"
-  [collectionSize]="orderService.orders.length">
+  [collectionSize]="Orders.length">
   <ng-template style="color: rgb(194, 205, 206);" ngbPaginationPrevious>Previous</ng-template>
   <ng-template style="color: rgb(194, 205, 206);" ngbPaginationNext>Next</ng-template>
   </ngb-pagination>

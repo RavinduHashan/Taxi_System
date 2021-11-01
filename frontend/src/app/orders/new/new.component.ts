@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+
 import { Order } from '../../shared/order.model';
 import { OrderService } from '../../shared/order.service';
 
@@ -17,6 +18,10 @@ export class NewComponent implements OnInit {
   value = "";
   public page = 1;
   public pageSize = 10;
+
+  Orders: Order[];
+  searchValue: string
+
   constructor(public orderService: OrderService) { }
 
   ngOnInit(): void {
@@ -43,15 +48,14 @@ export class NewComponent implements OnInit {
 
   refreshOrderList() {
     this.orderService.getOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.orderService.orders = res.body as Order[];
+      this.Orders = res.body as Order[];
 
     });
   }
 
 
-  onEdit(ord: Order) {
-    this.orderService.selectedOrder = ord;
+  onEdit(order: Order) {
+    this.orderService.selectedOrder = order;
   }
 
   onDelete(id: string, form: NgForm) {
@@ -74,7 +78,7 @@ export class NewComponent implements OnInit {
   refreshPendingOrderList() {
     this.orderService.getPendingOrderList().subscribe((res: any) => {
       console.log(res)
-      this.orderService.orders = res.body as Order[];
+      this.Orders = res.body as Order[];
 
     });
   }
@@ -88,7 +92,7 @@ export class NewComponent implements OnInit {
   refreshConfirmOrderList() {
     this.orderService.getConfirmOrderList().subscribe((res: any) => {
       console.log(res)
-      this.orderService.orders = res.body as Order[];
+      this.Orders = res.body as Order[];
 
     });
   }
@@ -101,7 +105,7 @@ export class NewComponent implements OnInit {
   refreshCompleteOrderList() {
     this.orderService.getCompleteOrderList().subscribe((res: any) => {
       console.log(res)
-      this.orderService.orders = res.body as Order[];
+      this.Orders = res.body as Order[];
 
     });
   }
@@ -114,7 +118,7 @@ export class NewComponent implements OnInit {
   refreshRejectOrderList() {
     this.orderService.getRejectOrderList().subscribe((res: any) => {
       console.log(res)
-      this.orderService.orders = res.body as Order[];
+      this.Orders = res.body as Order[];
 
     });
   }
