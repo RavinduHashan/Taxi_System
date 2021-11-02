@@ -9,7 +9,7 @@ const registerAdmins = async (req, res) => {
     const query1 = `SELECT * FROM admins WHERE email = $1`;
     const admin = await pool.query(query1, [email]);
     if (admin.rows.length > 0) {
-      return res.status(401).json("Admin already exist!");
+      return res.status(200).json({done:true, message:"Admin already exist!"});
     }
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
@@ -37,7 +37,7 @@ const loginAdmins = async (req, res) => {
     const admin = await pool.query(query, [email]);
 
     if (admin.rows.length === 0) {
-      return res.status(401).json("Password or Email is incorrect");
+      return res.status(401).json({done: false,  message:"Password or Email is incorrect"});
     }
 
     const validPassword = await bcrypt.compare(
@@ -46,7 +46,7 @@ const loginAdmins = async (req, res) => {
     );
 
     if (!validPassword) {
-      return res.status(401).json("Password or Email is incorrect");
+      return res.status(401).json({done: false, message:"Password is incorrect"});
     }
 
     const token = jwtGenerator(admin.rows[0].id);

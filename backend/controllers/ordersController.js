@@ -233,22 +233,18 @@ const insertComplete = async (req, res) => {
 //Search orders(Admin)
 const searchOrders = async (req, res) => {
   try {
-    const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                             (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
-                              FROM orders WHERE pick_location = $1 OR drop_location = $2 OR pick_time = $3 OR drop_time = $4 OR response = $5 `;
-    const result = await pool.query(query, [[
-      req.params.pick_location,
-      req.params.drop_location,
-      req.params.pick_time,
-      req.params.drop_time,
-      req.params.response,
-    ]]);
-    const data = result.rows;
-    res.status(200).send({ done: true, body: data });
+    // const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+    //                              (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+    //                              from orders ORDER BY created DESC;`;
+    // const result = await pool.query(query);
+    // const data = result.rows;
+    const { name } =req.query
+    res.status(200).send(req.query);
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
+
 //****************************************************************************************************
 //Customer
 
@@ -364,5 +360,6 @@ module.exports = {
   customerUpdateOrders,
   customerDeleteOrders,
   driverGetOrders ,
-  searchOrders 
+  searchOrders
+   
 };

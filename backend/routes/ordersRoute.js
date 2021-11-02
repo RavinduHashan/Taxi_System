@@ -2,7 +2,6 @@ const router = require("express").Router();
 const Orders = require("../controllers/ordersController");
 
 //Admin
-
 router.get("/viewPendingOrders", Orders.viewPendingOrders);
 router.get("/viewConfirmOrders", Orders.viewConfirmOrders);
 router.get("/viewCompleteOrders", Orders.viewCompleteOrders);
@@ -13,7 +12,7 @@ router.post("/createOrders", Orders.createOrders);
 router.get("/getOrders", Orders.getOrders);
 router.put("/updateOrders/:id", Orders.updateOrders);
 router.delete("/deleteOrders/:id", Orders.deleteOrders);
-router.get("/searchOrders/:pick_location/:drop_location/:pick_time/:drop_time/:response", Orders.searchOrders)
+router.get("/searchOrders", Orders.searchOrders);
 
 
 //Customer
@@ -21,6 +20,7 @@ router.post("/customerCreateOrders/:customer_id", Orders.customerCreateOrders);
 router.get("/customerGetOrders/:id", Orders.customerGetOrders);
 router.put("/customerUpdateOrders/:id", Orders.customerUpdateOrders);
 router.delete("/customerDeleteOrders/:id", Orders.customerDeleteOrders);
+
 
 //Driver
 router.get("/driverGetOrders/:id", Orders.driverGetOrders);
