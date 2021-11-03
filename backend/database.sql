@@ -42,7 +42,11 @@ create table orders(
     created timestamp with time zone NOT NULL DEFAULT now()
 );
 
-ALTER TABLE public.drivers ADD COLUMN created timestamp with time zone NOT NULL DEFAULT now();
+ALTER TABLE public.orders ADD COLUMN created timestamp with time zone NOT NULL DEFAULT now();
+
+ALTER TABLE orders ALTER COLUMN response TYPE varchar(255) SET DEFAULT "Pending";
+
+UPDATE orders SET response = DEFAULT WHERE response = 'Pending';
 
 -- PSQL Command ****************************************************************************
 

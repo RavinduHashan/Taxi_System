@@ -2,14 +2,15 @@
   <nav class="navbar navbar-light bg-light" style="background-color: white !important;">
     <form class="container-fluid" #orderForm="ngForm">
       <div>
-        <input class="form-control" type="text" [(ngModel)]="searchValue" placeholder="Search" aria-label="Search">
+        <input [(ngModel)]="name" name="name" class="form-control" type="text" placeholder="Search" aria-label="Search">
+        <p>{{name}}</p>
       </div>
       <div class="justify-content-start">
         <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()">All</button>
-        <button class="btn btn-sm btn-outline-warning ml-2 " (click)="Pending(orderForm)">Pending</button>
-        <button class="btn btn-sm btn-outline-success ml-2 " (click)="Confirm(orderForm)">Confirm</button>
-        <button class="btn btn-sm btn-outline-info ml-2 " (click)="Complete(orderForm)">Complete</button>
-        <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Reject(orderForm)">Reject</button>
+        <button class="btn btn-sm btn-outline-warning ml-2 " (click)="Response('Pending')">Pending</button>
+        <button class="btn btn-sm btn-outline-success ml-2 " (click)="Response('Confirm')">Confirm</button>
+        <button class="btn btn-sm btn-outline-info ml-2 " (click)="Response('Complete')">Complete</button>
+        <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Response('Reject')">Reject</button>
       </div>
     </form>
   </nav>
@@ -29,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class = "Row" *ngFor="let order of Orders | slice: (page-1) * pageSize : page * pageSize | searchfilter:searchValue">
+      <tr class = "Row" *ngFor="let order of Orders | slice: (page-1) * pageSize : page * pageSize ">
         <td>{{order.pick_location}}</td>
         <td>{{order.drop_location}}</td>
         <td>{{order.pick_time}}</td>

@@ -15,7 +15,8 @@ declare var M: any;
 })
 export class NewComponent implements OnInit {
 
-  value = "";
+
+  public name = '';
   public page = 1;
   public pageSize = 10;
 
@@ -47,12 +48,16 @@ export class NewComponent implements OnInit {
   }
 
   refreshOrderList() {
-    this.orderService.getOrderList().subscribe((res: any) => {
+    this.orderService.searchOrderList(this.name).subscribe((res: any) => {
       this.Orders = res.body as Order[];
-
     });
   }
 
+  Response(response: any) {
+    this.orderService.getOrderByResponse(response).subscribe((res: any) => {
+      this.Orders = res.body as Order[];
+    });
+  }
 
   onEdit(order: Order) {
     this.orderService.selectedOrder = order;

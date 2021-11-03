@@ -39,7 +39,7 @@ import { EditCustomerProfileComponent } from './customer/edit-customer-profile/e
 import { EditDriverProfileComponent } from './driver/edit-driver-profile/edit-driver-profile.component';
 import { EditAdminProfileComponent } from './edit-admin-profile/edit-admin-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SearchfilterPipe } from './searchfilter.pipe';
+
 
 
 
@@ -67,8 +67,7 @@ import { SearchfilterPipe } from './searchfilter.pipe';
     EditOrdersComponent,
     EditCustomerProfileComponent,
     EditDriverProfileComponent,
-    EditAdminProfileComponent,
-    SearchfilterPipe
+    EditAdminProfileComponent
 
   ],
 

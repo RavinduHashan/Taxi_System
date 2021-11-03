@@ -188,7 +188,7 @@ const viewOrdersByResponse = async (req, res) => {
     const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
                              (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
                               FROM orders WHERE response = $1 `;
-    const result = await pool.query(query, [req.params.value]);
+    const result = await pool.query(query, [req.params.response]);
     const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
@@ -233,13 +233,11 @@ const insertComplete = async (req, res) => {
 //Search orders(Admin)
 const searchOrders = async (req, res) => {
   try {
-    // const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-    //                              (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
-    //                              from orders ORDER BY created DESC;`;
-    // const result = await pool.query(query);
-    // const data = result.rows;
     const { name } =req.query
-    res.status(200).send(req.query);
+    const result = await pool.query(`SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+                                                (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name   
+                                                From orders WHERE pick_location || drop_location || pick_time || ' ' ILIKE $1 ORDER BY created DESC;`, [`%${name}%`]);
+    res.status(200).send({ done: true, body:result.rows });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }

@@ -23,6 +23,10 @@ export class OrderService {
     return this.http.get(environment.apiBaseUrlOrder+'/getOrders');
   }
 
+  searchOrderList(name:any) {
+    return this.http.get(environment.apiBaseUrlOrder+`/searchOrders/?name=${name}`);
+  }
+
   getOrderById(id:any) {
     return this.http.get(`${environment.apiBaseUrlOrder}/${id}`);
   }
@@ -46,8 +50,8 @@ export class OrderService {
   }
 
 
-  getOrderByResponse(value:any) {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewOrdersByResponse'+ `/${value}`);
+  getOrderByResponse(response:any) {
+    return this.http.get(environment.apiBaseUrlOrder+'/viewOrdersByResponse'+ `/${response}`);
   }
 
   putOrder(order: Order) {
