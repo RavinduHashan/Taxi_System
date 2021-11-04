@@ -83,18 +83,4 @@ export class EditDriverProfileComponent implements OnInit {
     });
   }
 
-  onEdit(dri: Driver) {
-    this.driverService.selectedDriver = dri;
-  }
-
-  onDelete(id: string, form: NgForm) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-      this.driverService.deleteDriver(id).subscribe((res:any) => {
-        this.refreshDriverList();
-        this.resetForm(form);
-        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-      });
-    }
-  }
-
 }

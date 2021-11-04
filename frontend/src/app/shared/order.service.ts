@@ -31,25 +31,7 @@ export class OrderService {
     return this.http.get(`${environment.apiBaseUrlOrder}/${id}`);
   }
 
-
   //*******************************
-  getPendingOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewPendingOrders');
-  }
-
-  getConfirmOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewConfirmOrders');
-  }
-
-  getCompleteOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewCompleteOrders');
-  }
-
-  getRejectOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewRejectOrders');
-  }
-
-
   getOrderByResponse(response:any) {
     return this.http.get(environment.apiBaseUrlOrder+'/viewOrdersByResponse'+ `/${response}`);
   }
@@ -61,20 +43,7 @@ export class OrderService {
   deleteOrder(id: string) {
     return this.http.delete(environment.apiBaseUrlOrder+'/deleteOrders'+ `/${id}`);
   }
-
-  updateResponseList(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/updateDriverResponse'+ `/${order.id}`, order);
-  }
-
-  insertConfirm(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertConfirm'+ `/${order.id}`, order);
-  }
-
-  insertReject(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertReject'+ `/${order.id}`, order);
-  }
-
-  insertComplete(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertComplete'+ `/${order.id}`, order);
+  insertResponse(ord: Order, response: any) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertResponse'+ `/${ord.id}/${response}`, ord);
   }
 }

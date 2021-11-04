@@ -72,63 +72,6 @@ export class NewComponent implements OnInit {
       });
     }
   }
-
-  //******************************************
-
-  Pending(form: NgForm) {
-    this.resetForm(form);
-    this.refreshPendingOrderList()
-  }
-
-  refreshPendingOrderList() {
-    this.orderService.getPendingOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
-    });
-  }
-
-
-  Confirm(form: NgForm) {
-    this.resetForm(form);
-    this.refreshConfirmOrderList()
-  }
-
-  refreshConfirmOrderList() {
-    this.orderService.getConfirmOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
-    });
-  }
-
-  Complete(form: NgForm) {
-    this.resetForm(form);
-    this.refreshCompleteOrderList()
-  }
-
-  refreshCompleteOrderList() {
-    this.orderService.getCompleteOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
-    });
-  }
-
-  Reject(form: NgForm) {
-    this.resetForm(form);
-    this.refreshRejectOrderList()
-  }
-
-  refreshRejectOrderList() {
-    this.orderService.getRejectOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
-    });
-  }
-
-
 }
 
 

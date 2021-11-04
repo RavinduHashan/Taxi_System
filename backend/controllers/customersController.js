@@ -42,7 +42,6 @@ const loginCustomers = async (req, res) => {
     if (customer.rows.length === 0) {
       return res.status(401).json({done:true, message:"Password or Email is incorrect"});
     }
-
     const validPassword = await bcrypt.compare(
       password,
       customer.rows[0].customer_password
@@ -50,7 +49,6 @@ const loginCustomers = async (req, res) => {
     if (!validPassword) {
       return res.status(401).json({done: true, message:"Password or Email is incorrect"});
     }
-
     const token = jwtGenerator(customer.rows[0].id);
     res.status(200).send({ done: true, token: token });
   } catch (err) {

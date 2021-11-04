@@ -75,7 +75,7 @@ const updateOrders = async (req, res) => {
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
-}
+};
 
 //Delete orders(Admin)
 const deleteOrders = async (req, res) => {
@@ -89,30 +89,19 @@ const deleteOrders = async (req, res) => {
   }
 };
 
-//Driver make available
-const insertTrue = async (req, res) => {
+const insertAvailability = async (req, res) => {
   try {
-    const query = `UPDATE drivers SET available = true WHERE id = $1 RETURNING *`;
-    const result = await pool.query(query, [req.params.id]);
+    const query = `UPDATE drivers SET available = $1 WHERE id = $2 RETURNING *`;
+    const result = await pool.query(query, [
+      req.params.available,
+      req.params.id,
+    ]);
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
-
-//Driver make unavailable
-const insertFalse = async (req, res) => {
-  try {
-    const query = `UPDATE drivers SET available = false WHERE id = $1 RETURNING *`;
-    const result = await pool.query(query, [req.params.id]);
-    const [data] = result.rows;
-    res.status(200).send({ done: true, body: data });
-  } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong!" });
-  }
-}
-
 
 //Read available drivers(Admin)
 const getAvailableDrivers = async (req, res) => {
@@ -124,65 +113,9 @@ const getAvailableDrivers = async (req, res) => {
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
-}
-
-//Read pending orders(Admin)
-const viewPendingOrders = async (req, res) => {
-  try {
-    const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
-                                 FROM orders WHERE response LIKE ''`;
-    const result = await pool.query(query);
-    const data = result.rows
-    res.status(200).send({ done: true, body: data});
-  } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
-  }
 };
 
-//Read confirm orders(Admin)
-const viewConfirmOrders = async (req, res) => {
-  try {
-    const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
-                                 FROM orders WHERE response LIKE 'Confirm' `;
-    const result = await pool.query(query);
-    const data = result.rows;
-    res.status(200).send({ done: true, body: data });
-  } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
-  }
-};
-
-//Read complete orders(Admin)
-const viewCompleteOrders = async (req, res) => {
-  try {
-    const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
-                                 FROM orders WHERE response LIKE 'Complete'`;
-    const result = await pool.query(query);
-    const data = result.rows;
-    res.status(200).send({ done: true, body: data });
-  } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
-  }
-}
-
-//Read reject orders(Admin)
-const viewRejectOrders = async (req, res) => {
-  try {
-    const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
-                                 FROM orders WHERE response LIKE 'Reject' `;
-    const result = await pool.query(query);
-    const data = result.rows;
-    res.status(200).send({ done: true, body: data });
-  } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
-    res.json(err)
-  }
-};
-
+//Read orders by response
 const viewOrdersByResponse = async (req, res) => {
   try {
     const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
@@ -192,52 +125,37 @@ const viewOrdersByResponse = async (req, res) => {
     const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
 
-const insertConfirm = async (req, res) => {
+//Driver update response by order id
+const insertResponse = async (req, res) => {
   try {
-    const query = `UPDATE orders SET response = 'Confirm' WHERE id = $1 RETURNING *`;
-    const result = await pool.query(query, [req.params.id]);
+    const query = `UPDATE orders SET response = $1 WHERE id = $2 RETURNING *`;
+    const result = await pool.query(query, [
+      req.params.response,
+      req.params.id,
+    ]);
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
-
-const insertReject = async (req, res) => {
-  try {
-    const query = `UPDATE orders SET response = 'Reject' WHERE id = $1 RETURNING *`;
-    const result = await pool.query(query, [req.params.id]);
-    const [data] = result.rows;
-    res.status(200).send({ done: true, body: data });
-  } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
-  }
-};
-
-const insertComplete = async (req, res) => {
-  try {
-    const query = `UPDATE orders SET response = 'Complete' WHERE id = $1 RETURNING *`;
-    const result = await pool.query(query, [req.params.id]);
-    const [data] = result.rows;
-    res.status(200).send({ done: true, body: data });
-  } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
-  }
-};
-
 
 //Search orders(Admin)
 const searchOrders = async (req, res) => {
   try {
-    const { name } =req.query
-    const result = await pool.query(`SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+    const { name } = req.query;
+    const result = await pool.query(
+      `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
                                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name   
-                                                From orders WHERE pick_location || drop_location || pick_time || ' ' ILIKE $1 ORDER BY created DESC;`, [`%${name}%`]);
-    res.status(200).send({ done: true, body:result.rows });
+                                                From orders WHERE pick_location || drop_location || pick_time || ' ' ILIKE $1 ORDER BY created DESC;`,
+      [`%${name}%`]
+    );
+    res.status(200).send({ done: true, body: result.rows });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
@@ -271,7 +189,9 @@ const customerCreateOrders = async (req, res) => {
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res
+      .status(500)
+      .send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -284,7 +204,9 @@ const customerGetOrders = async (req, res) => {
     const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res
+      .status(500)
+      .send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -302,7 +224,9 @@ const customerUpdateOrders = async (req, res) => {
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res
+      .status(500)
+      .send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
 
@@ -315,10 +239,11 @@ const customerDeleteOrders = async (req, res) => {
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res
+      .status(500)
+      .send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
-
 
 //****************************************************************************************************
 //Driver
@@ -331,10 +256,11 @@ const driverGetOrders = async (req, res) => {
     const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong ravindu!" });
+    res
+      .status(500)
+      .send({ done: false, message: "Something went wrong ravindu!" });
   }
 };
-
 
 module.exports = {
   createOrders,
@@ -343,21 +269,13 @@ module.exports = {
   updateOrders,
   deleteOrders,
   getAvailableDrivers,
-  viewPendingOrders,
-  viewConfirmOrders,
-  viewCompleteOrders,
-  viewRejectOrders,
   viewOrdersByResponse,
-  insertTrue,
-  insertFalse,
-  insertConfirm,
-  insertReject,
-  insertComplete,
+  insertAvailability,
+  insertResponse,
   customerCreateOrders,
   customerGetOrders,
   customerUpdateOrders,
   customerDeleteOrders,
-  driverGetOrders ,
-  searchOrders
-   
+  driverGetOrders,
+  searchOrders,
 };
