@@ -1,16 +1,16 @@
 <div class="Padding">
   <table class="table  table-striped table-bordered table-sm">
       <thead>
-        <tr>
+        <tr style="text-align: center;">
           <th>Full Name</th>
           <th>Email</th>
           <th>Phone Number</th>
           <th>City</th>
-          <th></th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let pro of profileService.profiles">
+      <tr class="Row" *ngFor="let pro of profileService.profiles">
         <td>{{pro.full_name}}</td>
         <td>{{pro.email}}</td>
         <td>{{pro.phone_number}}</td>

@@ -5,12 +5,11 @@ const jwtGenerator = require("../jwtGenerator/customersJwtGenerator");
 //Customer registration
 const registerCustomers = async (req, res) => {
   const { full_name, email, phone_number, city, password } = req.body;
-  console.log('req.body : ',req.body);
   try {
     const query1 = `SELECT * FROM customers WHERE email = $1`;
     const customer = await pool.query(query1, [email]);
     if (customer.rows.length > 0) {
-      return res.status(500).json({done:false , message:"Customer already exist!"});
+      return res.status(200).json({done:false , message:"Customer already exist!"});
     }
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
@@ -40,14 +39,14 @@ const loginCustomers = async (req, res) => {
     const customer = await pool.query(query, [email]);
 
     if (customer.rows.length === 0) {
-      return res.status(401).json({done:true, message:"Password or Email is incorrect"});
+      return res.status(200).json({done:false, message:"Password or Email is incorrect"});
     }
     const validPassword = await bcrypt.compare(
       password,
       customer.rows[0].customer_password
     );
     if (!validPassword) {
-      return res.status(401).json({done: true, message:"Password or Email is incorrect"});
+      return res.status(200).json({done:false, message:"Password or Email is incorrect"});
     }
     const token = jwtGenerator(customer.rows[0].id);
     res.status(200).send({ done: true, token: token });

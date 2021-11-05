@@ -6,13 +6,13 @@ module.exports = async (req, res, next) => {
     const jwtToken = req.header("token");
 
     if (!jwtToken) {
-      return res.status(403).json("Not Authorization");
+      return res.status(200).json({done: false, message:"Not Authorization"});
     }
     const payload = jwt.verify(jwtToken, process.env.jwtSecret);
     req.customer = payload.customer;
   } catch (err) {
     console.error(err.message);
-    return res.status(403).json("Not Authorize");
+    return res.status(200).json({done: false, message:"Not Authorize"});
   }
   next();
 };
