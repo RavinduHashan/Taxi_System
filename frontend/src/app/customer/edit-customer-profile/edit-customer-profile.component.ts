@@ -78,18 +78,4 @@ export class EditCustomerProfileComponent implements OnInit {
     });
   }
 
-  onEdit(cus: Customer) {
-    this.customerService.selectedCustomer = cus;
-  }
-
-  onDelete(id: string, form: NgForm) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-      this.customerService.deleteCustomer(id).subscribe((res: any) => {
-        this.refreshCustomerList();
-        this.resetForm(form);
-        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-      });
-    }
-  }
-
 }

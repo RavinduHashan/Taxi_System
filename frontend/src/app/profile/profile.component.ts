@@ -34,23 +34,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.value.id == "") {
-      this.profileService.postProfile(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshProfileList();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
-      });
-    }
-    else {
-      this.profileService.putProfile(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshProfileList();
-        M.toast({ html: 'Updated successfully', classes: 'rounded' });
-      });
-    }
-  }
-
   refreshProfileList() {
     this.profileService.getProfileList().subscribe((res:any) => {
       console.log(res)

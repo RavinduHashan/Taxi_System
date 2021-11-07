@@ -47,13 +47,11 @@ export class AvailableComponent implements OnInit {
   }
   available(dri: Driver) {
     if(dri.available)
-        this.driverService.insertFalse(dri).subscribe((res:any) => {
-        // this.refreshDriverList();
+        this.driverService.insertAvailability(dri, false).subscribe((res:any) => {
         this.resetForm();
       });
     else{
-        this.driverService.insertTrue(dri).subscribe((res:any) => {
-        // this.refreshDriverList();
+        this.driverService.insertAvailability(dri, true).subscribe((res:any) => {
         this.resetForm();
       })
     }

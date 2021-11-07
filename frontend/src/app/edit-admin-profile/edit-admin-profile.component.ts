@@ -77,19 +77,4 @@ export class EditAdminProfileComponent implements OnInit {
 
     });
   }
-
-  onEdit(pro: Profile) {
-    this.profileService.selectedProfile = pro;
-  }
-
-  onDelete(id: string, form: NgForm) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-      this.profileService.deleteProfile(id).subscribe((res:any) => {
-        this.refreshProfileList();
-        this.resetForm(form);
-        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-      });
-    }
-  }
-
 }

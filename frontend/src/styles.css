@@ -207,3 +207,6 @@ form div.input-field input{
   font-size: 15px;
 }
 
+.Row:hover{
+  background-color: rgb(177, 221, 194);
+}

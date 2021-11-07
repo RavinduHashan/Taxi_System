@@ -20,6 +20,12 @@ export class NewComponent implements OnInit {
   public page = 1;
   public pageSize = 10;
 
+  public all:string;
+  public complete:string;
+  public confirm:string;
+  public pending:string;
+  public reject:string;
+
   Orders: Order[];
   searchValue: string
 
@@ -28,6 +34,12 @@ export class NewComponent implements OnInit {
   ngOnInit(): void {
     this.resetForm();
     this.refreshOrderList();
+
+    this.refreshAllList()
+    this.refreshCompleteList();
+    this.refreshConfirmList();
+    this.refreshRejectList();
+    this.refreshPendingList();
   }
 
   resetForm(form?: NgForm) {
@@ -49,9 +61,11 @@ export class NewComponent implements OnInit {
 
   refreshOrderList() {
     this.orderService.searchOrderList(this.name).subscribe((res: any) => {
-      this.Orders = res.body as Order[];
+      this.Orders = res.body;
     });
   }
+
+
 
   Response(response: any) {
     this.orderService.getOrderByResponse(response).subscribe((res: any) => {
@@ -69,65 +83,40 @@ export class NewComponent implements OnInit {
         this.refreshOrderList();
         this.resetForm(form);
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-      });
+      })
     }
   }
+//******************************************************** */
 
-  //******************************************
-
-  Pending(form: NgForm) {
-    this.resetForm(form);
-    this.refreshPendingOrderList()
-  }
-
-  refreshPendingOrderList() {
-    this.orderService.getPendingOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
+  refreshAllList() {
+    this.orderService.allCount().subscribe((res: any) => {
+      this.all = res.body as string;
     });
   }
 
-
-  Confirm(form: NgForm) {
-    this.resetForm(form);
-    this.refreshConfirmOrderList()
-  }
-
-  refreshConfirmOrderList() {
-    this.orderService.getConfirmOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
+  refreshCompleteList() {
+    this.orderService.completeCount().subscribe((res: any) => {
+      this.complete = res.body as string;
     });
   }
 
-  Complete(form: NgForm) {
-    this.resetForm(form);
-    this.refreshCompleteOrderList()
-  }
-
-  refreshCompleteOrderList() {
-    this.orderService.getCompleteOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
+  refreshConfirmList() {
+    this.orderService.confirmCount().subscribe((res: any) => {
+      this.confirm = res.body as string;
     });
   }
 
-  Reject(form: NgForm) {
-    this.resetForm(form);
-    this.refreshRejectOrderList()
-  }
-
-  refreshRejectOrderList() {
-    this.orderService.getRejectOrderList().subscribe((res: any) => {
-      console.log(res)
-      this.Orders = res.body as Order[];
-
+  refreshPendingList() {
+    this.orderService.pendingCount().subscribe((res: any) => {
+      this.pending = res.body as string;
     });
   }
 
+  refreshRejectList() {
+    this.orderService.rejectCount().subscribe((res: any) => {
+      this.reject = res.body as string;
+    });
+  }
 
 }
 

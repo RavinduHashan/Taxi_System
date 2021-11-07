@@ -137,7 +137,7 @@ const updateAdmins = async (req, res) => {
   }
 };
 
-//Delete admin
+//Delete admin...
 const deleteAdmins = async (req, res) => {
   try {
     const query = `DELETE FROM admins WHERE id = $1 RETURNING *`;

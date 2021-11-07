@@ -113,7 +113,7 @@ const createDrivers = async (req, res) => {
 //Read drivers
 const getDrivers = async (req, res) => {
   try {
-    const query = `SELECT * FROM drivers ORDER BY created`;
+    const query = `SELECT * FROM drivers`;
     const result = await pool.query(query);
     const data = result.rows;
     res.status(200).send({ done: true, body: data });

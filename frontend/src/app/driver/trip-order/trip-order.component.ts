@@ -39,22 +39,13 @@ export class TripOrderComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.value.id == "") {
-      this.orderService.updateResponseList(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshOrderList();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
-      });
-    }
-    else {
-      this.orderService.updateResponseList(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshOrderList();
-        M.toast({ html: 'Updated successfully', classes: 'rounded' });
-      });
-    }
+  insertResponse(ord: Order, response: any) {
+    this.orderService.insertResponse(ord, response).subscribe((res: any) => {
+      this.orderService.orders = res.body as Order[];
+      this.refreshOrderList();
+    });
   }
+
 
   refreshOrderList() {
     this.orderService.getOrderList().subscribe((res:any) => {
@@ -63,101 +54,6 @@ export class TripOrderComponent implements OnInit {
 
     });
   }
-
-
-  onEdit(ord: Order) {
-    this.orderService.selectedOrder = ord;
-  }
-
-  onDelete(id: string, form: NgForm) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-      this.orderService.deleteOrder(id).subscribe((res:any) => {
-        this.refreshOrderList();
-        this.resetForm(form);
-        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-      });
-    }
-  }
-
- //******************************************
-
-  Pending(form: NgForm){
-    this.resetForm(form);
-    this.refreshPendingOrderList()
-  }
-
-  refreshPendingOrderList() {
-    this.orderService.getPendingOrderList().subscribe((res:any) => {
-      console.log(res)
-      this.orderService.orders = res.body as Order[];
-
-    });
-  }
-
-
-  Confirm(form: NgForm){
-    this.resetForm(form);
-    this.refreshConfirmOrderList()
-  }
-
-  refreshConfirmOrderList() {
-    this.orderService.getConfirmOrderList().subscribe((res:any) => {
-      console.log(res)
-      this.orderService.orders = res.body as Order[];
-
-    });
-  }
-
-  Complete(form: NgForm){
-    this.resetForm(form);
-    this.refreshCompleteOrderList()
-  }
-
-  refreshCompleteOrderList() {
-    this.orderService.getCompleteOrderList().subscribe((res:any) => {
-      console.log(res)
-      this.orderService.orders = res.body as Order[];
-
-    });
-  }
-
-
-  Reject(form: NgForm){
-    this.resetForm(form);
-    this.refreshRejectOrderList()
-  }
-
-  refreshRejectOrderList() {
-    this.orderService.getRejectOrderList().subscribe((res:any) => {
-      console.log(res)
-      this.orderService.orders = res.body as Order[];
-      
-
-    });
-  }
-
-  confirm(ord: Order) {
-      this.orderService.insertConfirm(ord).subscribe((res:any) => {
-        this.resetForm();
-        this.refreshOrderList();
-        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-      });
-  }
-  reject(ord: Order) {
-    this.orderService.insertReject(ord).subscribe((res:any) => {
-      this.resetForm();
-      this.refreshOrderList();
-      M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-    });
-  }
-  complete(ord: Order) {
-    this.orderService.insertComplete(ord).subscribe((res:any) => {
-      this.resetForm();
-      this.refreshOrderList();
-      M.toast({ html: 'Deleted successfully', classes: 'rounded' });
-    });
-  }
-
 }
 
 

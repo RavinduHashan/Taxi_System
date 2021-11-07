@@ -40,23 +40,6 @@ export class DriverProfileComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.value.id == "") {
-      this.driverService.postDriver(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshDriverList();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
-      });
-    }
-    else {
-      this.driverService.putDriver(form.value).subscribe((res:any) => {
-        this.resetForm(form);
-        this.refreshDriverList();
-        M.toast({ html: 'Updated successfully', classes: 'rounded' });
-      });
-    }
-  }
-
   refreshDriverList() {
     this.driverService.getDriverList().subscribe((res:any) => {
       console.log(res)
@@ -73,7 +56,6 @@ export class DriverProfileComponent implements OnInit {
     if (confirm('Are you sure to delete this record ?') == true) {
       this.driverService.deleteDriver(id).subscribe((res:any) => {
         this.refreshDriverList();
-        // this.resetForm();
         M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });
     }

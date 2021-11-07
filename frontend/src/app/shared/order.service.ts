@@ -9,9 +9,9 @@ import { environment }  from '../../environments/environment';
 
 @Injectable()
 export class OrderService {
+
   selectedOrder: Order;
   orders: Order[] = [];
-
 
   constructor(private http: HttpClient) { }
 
@@ -31,25 +31,7 @@ export class OrderService {
     return this.http.get(`${environment.apiBaseUrlOrder}/${id}`);
   }
 
-
   //*******************************
-  getPendingOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewPendingOrders');
-  }
-
-  getConfirmOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewConfirmOrders');
-  }
-
-  getCompleteOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewCompleteOrders');
-  }
-
-  getRejectOrderList() {
-    return this.http.get(environment.apiBaseUrlOrder+'/viewRejectOrders');
-  }
-
-
   getOrderByResponse(response:any) {
     return this.http.get(environment.apiBaseUrlOrder+'/viewOrdersByResponse'+ `/${response}`);
   }
@@ -62,19 +44,32 @@ export class OrderService {
     return this.http.delete(environment.apiBaseUrlOrder+'/deleteOrders'+ `/${id}`);
   }
 
-  updateResponseList(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/updateDriverResponse'+ `/${order.id}`, order);
+  insertResponse(ord: Order, response: any) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertResponse'+ `/${ord.id}/${response}`, ord);
   }
 
-  insertConfirm(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertConfirm'+ `/${order.id}`, order);
+
+
+
+  allCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/allCount');
   }
 
-  insertReject(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertReject'+ `/${order.id}`, order);
+  completeCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/completeCount');
   }
 
-  insertComplete(order: Order) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertComplete'+ `/${order.id}`, order);
+  confirmCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/confirmCount');
   }
+
+  pendingCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/pendingCount');
+  }
+
+  rejectCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/rejectCount');
+  }
+
+
 }
