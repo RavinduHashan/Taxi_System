@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 
+
 import { Order } from '../../shared/order.model';
 import { OrderService } from '../../shared/order.service';
 
@@ -20,11 +21,12 @@ export class NewComponent implements OnInit {
   public page = 1;
   public pageSize = 10;
 
-  public all:string;
-  public complete:string;
-  public confirm:string;
-  public pending:string;
-  public reject:string;
+  public all: any;
+  public allCount:number;
+  public completeCount: string;
+  public confirmCount: string;
+  public pendingCount: string;
+  public rejectCount: string;
 
   Orders: Order[];
   searchValue: string
@@ -36,10 +38,7 @@ export class NewComponent implements OnInit {
     this.refreshOrderList();
 
     this.refreshAllList()
-    this.refreshCompleteList();
-    this.refreshConfirmList();
-    this.refreshRejectList();
-    this.refreshPendingList();
+
   }
 
   resetForm(form?: NgForm) {
@@ -86,35 +85,30 @@ export class NewComponent implements OnInit {
       })
     }
   }
-//******************************************************** */
+  //******************************************************** */
 
   refreshAllList() {
     this.orderService.allCount().subscribe((res: any) => {
-      this.all = res.body as string;
-    });
-  }
+      this.all = res.body as object[];
 
-  refreshCompleteList() {
-    this.orderService.completeCount().subscribe((res: any) => {
-      this.complete = res.body as string;
-    });
-  }
+      this.all.forEach((item: { response: string; count: string; }) => {
+        if (item.response == "Complete") {
+          this.completeCount = item.count
+        }
+        if (item.response == "Confirm") {
+          this.confirmCount = item.count
+        }
+        if (item.response == "Pending") {
+          this.pendingCount = item.count
+        }
+        if (item.response == "Reject") {
+          this.rejectCount = item.count
+        }
+        if(true){
+          this.allCount = parseInt(this.completeCount) +parseInt(this.confirmCount) +parseInt(this.pendingCount) +parseInt(this.rejectCount)
+        }
+      });
 
-  refreshConfirmList() {
-    this.orderService.confirmCount().subscribe((res: any) => {
-      this.confirm = res.body as string;
-    });
-  }
-
-  refreshPendingList() {
-    this.orderService.pendingCount().subscribe((res: any) => {
-      this.pending = res.body as string;
-    });
-  }
-
-  refreshRejectList() {
-    this.orderService.rejectCount().subscribe((res: any) => {
-      this.reject = res.body as string;
     });
   }
 
