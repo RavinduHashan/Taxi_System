@@ -3,14 +3,13 @@
     <form class="container-fluid" #orderForm="ngForm">
       <div>
         <input [(ngModel)]="name" name="name" class="form-control" type="text" placeholder="Search" aria-label="Search">
-        <p>{{name}}</p>
       </div>
-      <div class="justify-content-start">
-        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()">All({{all}})</button>
-        <button class="btn btn-sm btn-outline-warning ml-2 " (click)="Response('Pending')">Pending({{pending}})</button>
-        <button class="btn btn-sm btn-outline-success ml-2 " (click)="Response('Confirm')">Confirm({{confirm}})</button>
-        <button class="btn btn-sm btn-outline-info ml-2 " (click)="Response('Complete')">Complete({{complete}})</button>
-        <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Response('Reject')">Reject({{reject}})</button>
+      <div class="justify-content-end">
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()">All({{allCount}})</button>
+        <button class="btn btn-sm btn-outline-warning ml-2 " (click)="Response('Pending')">Pending({{pendingCount}})</button>
+        <button class="btn btn-sm btn-outline-success ml-2 " (click)="Response('Confirm')">Confirm({{confirmCount}})</button>
+        <button class="btn btn-sm btn-outline-info ml-2 " (click)="Response('Complete')">Complete({{completeCount}})</button>
+        <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Response('Reject')">Reject({{rejectCount}})</button>
       </div>
     </form>
   </nav>

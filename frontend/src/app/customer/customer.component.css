@@ -1,11 +1,20 @@
 .Nav-bar {
   -webkit-box-shadow: 0 0px 0px -6px black;
 	-moz-box-shadow: 0 0px 0px -6px black;
-	box-shadow: 0 2px 6px -6px black;
+	box-shadow: 0 2px 5px -5px black;
   background-color: white !important;
+
 }
 
 .Padding{
   padding-left: 33px !important;
   padding-right: 33px !important;
+}
+
+.justify-content-end {
+  justify-content: flex-start;
+}
+
+.Row:hover{
+  background-color: rgb(177, 221, 194);
 }
