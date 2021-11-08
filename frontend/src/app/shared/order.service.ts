@@ -47,5 +47,29 @@ export class OrderService {
   insertResponse(ord: Order, response: any) {
     return this.http.put(environment.apiBaseUrlOrder+'/insertResponse'+ `/${ord.id}/${response}`, ord);
   }
-  
+
+
+
+
+  allCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/allCount');
+  }
+
+  completeCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/completeCount');
+  }
+
+  confirmCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/confirmCount');
+  }
+
+  pendingCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/pendingCount');
+  }
+
+  rejectCount() {
+    return this.http.get(environment.apiBaseUrlOrder+'/rejectCount');
+  }
+
+
 }

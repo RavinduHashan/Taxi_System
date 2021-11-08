@@ -12,6 +12,13 @@ router.put("/updateOrders/:id", Orders.updateOrders);
 router.delete("/deleteOrders/:id", Orders.deleteOrders);
 router.get("/searchOrders", Orders.searchOrders);
 
+router.get("/allCount", Orders.allCount);
+router.get("/completeCount", Orders.completeCount);
+router.get("/confirmCount", Orders.confirmCount);
+router.get("/rejectCount", Orders.rejectCount);
+router.get("/pendingCount", Orders.pendingCount);
+
+
 
 //Customer
 router.post("/customerCreateOrders/:customer_id", Orders.customerCreateOrders);

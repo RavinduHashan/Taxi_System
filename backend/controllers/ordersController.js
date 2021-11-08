@@ -161,6 +161,60 @@ const searchOrders = async (req, res) => {
   }
 };
 
+//Count
+
+const allCount = async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT COUNT(*) FROM orders`);
+    const data = result.rows[0].count
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrongdsdqw!" });
+  }
+};
+
+const completeCount = async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT COUNT(*) FROM orders WHERE response LIKE 'Complete'  `);
+    const data = result.rows[0].count
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrongdsdqw!" });
+  }
+};
+
+const pendingCount = async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT COUNT(*) FROM orders WHERE response LIKE 'Pending'`);
+    const data = result.rows[0].count
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrong!" });
+  }
+};
+
+const confirmCount = async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT COUNT(*) FROM orders WHERE response LIKE 'Confirm'`);
+    const data = result.rows[0].count
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrong!" });
+  }
+};
+
+const rejectCount = async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT COUNT(*) FROM orders WHERE response LIKE 'Reject'`);
+    const data = result.rows[0].count
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    res.status(500).send({ done: false, message: "Something went wrong!" });
+  }
+};
+
+
+
 //****************************************************************************************************
 //Customer
 
@@ -278,4 +332,9 @@ module.exports = {
   customerDeleteOrders,
   driverGetOrders,
   searchOrders,
+  completeCount,
+  confirmCount,
+  pendingCount,
+  rejectCount,
+  allCount
 };

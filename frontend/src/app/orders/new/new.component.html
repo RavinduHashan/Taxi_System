@@ -6,11 +6,11 @@
         <p>{{name}}</p>
       </div>
       <div class="justify-content-start">
-        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()">All</button>
-        <button class="btn btn-sm btn-outline-warning ml-2 " (click)="Response('Pending')">Pending</button>
-        <button class="btn btn-sm btn-outline-success ml-2 " (click)="Response('Confirm')">Confirm</button>
-        <button class="btn btn-sm btn-outline-info ml-2 " (click)="Response('Complete')">Complete</button>
-        <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Response('Reject')">Reject</button>
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()">All({{all}})</button>
+        <button class="btn btn-sm btn-outline-warning ml-2 " (click)="Response('Pending')">Pending({{pending}})</button>
+        <button class="btn btn-sm btn-outline-success ml-2 " (click)="Response('Confirm')">Confirm({{confirm}})</button>
+        <button class="btn btn-sm btn-outline-info ml-2 " (click)="Response('Complete')">Complete({{complete}})</button>
+        <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Response('Reject')">Reject({{reject}})</button>
       </div>
     </form>
   </nav>
