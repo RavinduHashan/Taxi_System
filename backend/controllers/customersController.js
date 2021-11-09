@@ -1,6 +1,8 @@
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../jwtGenerator/customersJwtGenerator");
+re
+
 
 //Customer registration
 const registerCustomers = async (req, res) => {
@@ -78,20 +80,47 @@ const dashboard = async (req, res) => {
 //Create Customer without athetication and hash password
 const createCustomers = async (req, res) => {
   try {
-    const query = `INSERT INTO users(fullName, email, phoneNumber, city, usersPassword) values ($1,$2,$3,$4,$5)`;
-    const result = await pool.query(query, [
-      req.body.fullName,
-      req.body.email,
-      req.body.phoneNumber,
-      req.body.city,
-      req.body.usersPassword,
-    ]);
-    const [data] = result.rows;
+    const {phone_number} = req.body;
+    const query1 = `SELECT * FROM customers WHERE phone_number = $1`;
+    const result1 = await pool.query(query1, [phone_number]);
+    if (result1.rows.length > 0) {
+      return res.status(200).json({done:false , message:"Customer already exist!"});
+    }
+    const query2 = `INSERT INTO customers(phone_number) values ($1) RETURNING *`;
+    const result2 = await pool.query(query2, [phone_number]);
+    const data = result2.rows;
+
+    const accountSid = 'ACbfe9569750df80b53c9f5e5e0955d637'; 
+    const authToken = '663c5288f1b5cc0e104e3d8e361db61f'; 
+    var client = new twilio(accountSid, authToken); 
+
+    client.messages 
+      .create({ 
+        // body: `Your OTP code: ${data}`,
+        // messagingServiceSid: 'MG9ea87602b028cde4e762301a70b7839a',
+        to: "+94768613325",
+        from: "+17163404354",
+        body: "Ravindu"
+       }) 
+
     res.status(200).send({ done: true, body: data });
   } catch (err) {
-    res.status(500).send({ done: false, message: "Something went wrong!" });
+    res.status(500).send({ done: false, message: "Something went wrong !" });
   }
 };
+
+// const accountSid = 'ACbfe9569750df80b53c9f5e5e0955d637'; 
+// const authToken = '[AuthToken]'; 
+// const client = require('twilio')(accountSid, authToken); 
+ 
+// client.messages 
+//       .create({ 
+//          body: 'Confrim your registration',  
+//          messagingServiceSid: 'MG78215b65ce38bceded475df750487048',      
+//          to: '+94701685864' 
+//        }) 
+//       .then(message => console.log(message.sid)) 
+//       .done();
 
 //Read customers
 const getCustomers = async (req, res) => {

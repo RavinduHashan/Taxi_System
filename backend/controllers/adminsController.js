@@ -2,6 +2,7 @@ const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../jwtGenerator/adminsJwtGenerator");
 
+
 //Admin registration
 const registerAdmins = async (req, res) => {
   const { full_name, email, phone_number, city, password } = req.body;

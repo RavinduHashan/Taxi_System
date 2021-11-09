@@ -22,11 +22,11 @@ export class NewComponent implements OnInit {
   public pageSize = 10;
 
   public all: any;
-  public allCount:number;
-  public completeCount: string;
-  public confirmCount: string;
-  public pendingCount: string;
-  public rejectCount: string;
+  public allCount:number = 0;
+  public completeCount: string = "0";
+  public confirmCount: string = "0";
+  public pendingCount: string = "0";
+  public rejectCount: string = "0";
 
   Orders: Order[];
   searchValue: string
@@ -107,15 +107,12 @@ export class NewComponent implements OnInit {
           this.rejectCount = item.count
         }
         if(true){
-          this.allCount = parseInt(this.completeCount) +parseInt(this.confirmCount) +parseInt(this.pendingCount) +parseInt(this.rejectCount)
+          this.allCount = parseInt(this.completeCount) +parseInt(this.confirmCount) +
+          parseInt(this.pendingCount) +parseInt(this.rejectCount)
         }
       });
-
     });
-
-
   }
-
 }
 
 
