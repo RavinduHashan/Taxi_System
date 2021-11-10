@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
+    "postman-request": "^2.88.1-postman.30",
     "twilio": "^3.71.1"
   }
 }

@@ -15,7 +15,7 @@ create table customers(
     email varchar(255),
     phone_number varchar(255),
     city varchar(255),
-    otp integer not null default random()*(9999-1000)+1000
+    otp integer
     
 );
 
@@ -51,6 +51,7 @@ ALTER TABLE orders ALTER COLUMN response TYPE varchar(255) not null;
 
 ALTER TABLE public.customers ADD COLUMN otp default SELECT random_between(1,100);
 
+otp integer not null default random()*(9999-1000)+1000
 -- add a colunm
 ALTER TABLE customers ADD COLUMN otp serial;
 
