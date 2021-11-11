@@ -49,9 +49,9 @@ const loginAdmins = async (req, res) => {
     if (!validPassword) {
       return res.status(401).json({done: false, message:"Password is incorrect"});
     }
-
+  
     const token = jwtGenerator(admin.rows[0].id);
-    res.status(200).send({ done: true, token: token });
+    res.status(200).send({ done: true, token: token});
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
