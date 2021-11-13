@@ -1,0 +1,55 @@
+<div>
+  <nav class="navbar navbar-light bg-light" style="background-color: white !important;">
+    <form class="container-fluid" #orderForm="ngForm">
+      <div class="justify-content-start">
+        <button class="btn btn-sm btn-outline-secondary ml-2" (click)="refreshOrderList()">All({{allCount}})</button>
+        <button class="btn btn-sm btn-outline-warning ml-2 " (click)="Response('Pending')">Pending({{pendingCount}})</button>
+        <button class="btn btn-sm btn-outline-success ml-2 " (click)="Response('Confirm')">Confirm({{confirmCount}})</button>
+        <button class="btn btn-sm btn-outline-info ml-2 " (click)="Response('Complete')">Complete({{completeCount}})</button>
+        <button class="btn btn-sm btn-outline-danger ml-2 " (click)="Response('Reject')">Reject({{rejectCount}})</button>
+      </div>
+    </form>
+  </nav>
+</div>
+<div class="Padding">
+  <table class="table  table-striped table-bordered  table-sm">
+    <thead>
+      <tr style="text-align: center;">
+        <th>Pick Location</th>
+        <th>Drop Location</th>
+        <th>Pick Time</th>
+        <th>Drop Time</th>
+        <th>Response</th>
+        <th>Customer Name</th>
+        <th>Driver Name</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class = "Row" *ngFor="let order of Orders | slice: (page-1) * pageSize : page * pageSize ">
+        <td>{{order.pick_location}}</td>
+        <td>{{order.drop_location}}</td>
+        <td>{{order.pick_time}}</td>
+        <td>{{order.drop_time}}</td>
+        <td>{{order.response}}</td>
+        <td>{{order.customer_name}}</td>
+        <td>{{order.driver_name}}</td>
+        <td>
+          <a class="action-btn" routerLink="/edit-order/{{order.id}}" (click)="onEdit(order)">
+            <i class="material-icons Edit">edit</i>
+          </a>
+          <a class="action-btn" (click)="onDelete(order.id,orderForm)">
+            <i class="material-icons Delete">delete</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="Orders.length">
+  <ng-template style="color: rgb(194, 205, 206);" ngbPaginationPrevious>Previous</ng-template>
+  <ng-template style="color: rgb(194, 205, 206);" ngbPaginationNext>Next</ng-template>
+  </ngb-pagination>
+</div>

@@ -16,16 +16,16 @@ export class AdminDashboardComponent implements OnInit {
       (res:any) => {
         //this.userDetails = res['user'];
       },
-      err => { 
+      err => {
         console.log(err);
-        
+
       }
     );
   }
 
   onLogout(){
     this.adminService.deleteToken();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/admin-login']);
   }
 
 }

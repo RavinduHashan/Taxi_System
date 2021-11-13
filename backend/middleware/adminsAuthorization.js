@@ -8,6 +8,7 @@ module.exports = async (req, res, next) => {
     if (!jwtToken) {
       return res.status(403).json("Not Authorization");
     }
+    //Decode the token
     const payload = jwt.verify(jwtToken, process.env.jwtSecret);
     req.admin = payload.admin;
   } catch (err) {

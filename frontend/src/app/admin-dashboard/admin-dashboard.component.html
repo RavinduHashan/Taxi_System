@@ -12,19 +12,19 @@
     <div class="collapse navbar-collapse justify-content-start" id="navbarTogglerDemo03">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link C" routerLink="/home">Home </a>
+          <a class="nav-link C" routerLink="dashboard/home">Home </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="/new">Orders</a>
+          <a class="nav-link C" routerLink="dashboard/orders">Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="/create-order">Customer Management</a>
+          <a class="nav-link C" routerLink="dashboard/customer">Customer Management</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="/trip-order">Driver Management</a>
+          <a class="nav-link C" routerLink="dashboard/driver">Driver Management</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="/profile">Setting</a>
+          <a class="nav-link C" routerLink="dashboard/profile">Setting</a>
         </li>
         <li class="nav-item">
           <a class="nav-link  C" (click)="onLogout()" value="Logout" style="cursor: pointer">Logout</a>
@@ -35,5 +35,6 @@
   <br><br><br><br>
   <hr style="width: 100%;" >
 </div>
+<router-outlet></router-outlet>
 
 

@@ -11,11 +11,12 @@ create table admins(
 
 create table customers(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
-    full_name varchar(255) not null,
-    email varchar(255) not null,
-    phone_number varchar(255) not null,
-    city varchar(255) not null,
-    customer_password varchar(255) not null
+    full_name varchar(255),
+    email varchar(255),
+    phone_number varchar(255),
+    city varchar(255),
+    otp integer
+    
 );
 
 create table drivers(
@@ -36,7 +37,7 @@ create table orders(
     drop_location varchar(255) not null,
     pick_time varchar(255) not null,
     drop_time varchar(255) not null,
-    response varchar(255),
+    response varchar(255) not null DEFAULT 'Pending',
     customer_id uuid DEFAULT uuid_generate_v4() references customers(id),
     driver_id uuid DEFAULT uuid_generate_v4() references drivers(id),
     created timestamp with time zone NOT NULL DEFAULT now()
@@ -44,9 +45,26 @@ create table orders(
 
 ALTER TABLE public.orders ADD COLUMN created timestamp with time zone NOT NULL DEFAULT now();
 
-ALTER TABLE orders ALTER COLUMN response TYPE varchar(255) SET DEFAULT "Pending";
+ALTER TABLE orders ALTER COLUMN response SET DEFAULT 'Pending';
 
-UPDATE orders SET response = DEFAULT WHERE response = 'Pending';
+ALTER TABLE orders ALTER COLUMN response TYPE varchar(255) not null;
+
+ALTER TABLE public.customers ADD COLUMN otp default SELECT random_between(1,100);
+
+otp integer not null default random()*(9999-1000)+1000
+-- add a colunm
+ALTER TABLE customers ADD COLUMN otp serial;
+
+-- change type of a colunm
+ALTER TABLE customers ALTER COLUMN otp TYPE integer;
+
+-- cmd command for find the data type of a table
+\d+ customers;
+
+-- chnage default value in a colunm
+ALTER TABLE customers ALTER COLUMN otp SET DEFAULT 5;
+
+
 
 -- PSQL Command ****************************************************************************
 

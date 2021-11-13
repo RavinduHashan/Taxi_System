@@ -3,13 +3,12 @@ const pool = require("../db");
 //Create orders(Admin)
 const createOrders = async (req, res) => {
   try {
-    const query = `INSERT INTO orders(pick_location, drop_location, pick_time, drop_time, response, customer_id, driver_id) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`;
+    const query = `INSERT INTO orders(pick_location, drop_location, pick_time, drop_time, customer_id, driver_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`;
     const {
       pick_location,
       drop_location,
       pick_time,
       drop_time,
-      response,
       customer_id,
       driver_id,
     } = req.body;
@@ -18,7 +17,6 @@ const createOrders = async (req, res) => {
       drop_location,
       pick_time,
       drop_time,
-      response,
       customer_id,
       driver_id,
     ]);

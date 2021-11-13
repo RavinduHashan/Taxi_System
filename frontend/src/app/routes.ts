@@ -1,50 +1,80 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './admin-login/auth/auth.guard';
 
-import { AdminComponent } from './admin/admin.component';
-import { SignUpComponent } from './admin/sign-up/sign-up.component';
-import { SignInComponent } from './admin/sign-in/sign-in.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { LoginComponent } from './admin-login/login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { HomeComponent } from './home/home.component';
-import { OrdersComponent } from './orders/orders.component';
-import { DriverComponent } from './driver/driver.component';
-import { CustomerComponent } from './customer/customer.component';
-import { ProfileComponent } from './profile/profile.component';
-import { EditAdminProfileComponent } from './edit-admin-profile/edit-admin-profile.component';
+import { HomeComponent } from './admin-dashboard/home/home.component';
+import { ProfileComponent } from './admin-dashboard/profile/profile.component';
+
+import { CustomerComponent } from './admin-dashboard/customer/customer.component';
+
+import { CreateOrderComponent } from './admin-dashboard/customer/create-order/create-order.component';
+import { AvailableDriverComponent } from './admin-dashboard/customer/available-driver/available-driver.component';
+import { ResponseComponent } from './admin-dashboard/customer/response/response.component';
+import { CustomerProfileComponent } from './admin-dashboard/customer/customer-profile/customer-profile.component';
+import { EditCustomerProfileComponent } from './admin-dashboard/customer/edit-customer-profile/edit-customer-profile.component';
+
+import { DriverComponent } from './admin-dashboard/driver/driver.component';
+
+import { DriverProfileComponent } from './admin-dashboard/driver/driver-profile/driver-profile.component';
+import { AvailableComponent } from './admin-dashboard/driver/available/available.component';
+import { TripOrderComponent } from './admin-dashboard/driver/trip-order/trip-order.component';
+import { HistoryComponent } from './admin-dashboard/driver/history/history.component';
+import { EditDriverProfileComponent } from './admin-dashboard/driver/edit-driver-profile/edit-driver-profile.component';
+
+import { OrdersComponent } from './admin-dashboard/orders/orders.component';
+
+import { NewComponent } from './admin-dashboard/orders/new/new.component';
+
 
 export const appRoutes: Routes = [
     {
-        path: 'signup', component: AdminComponent,
-        children: [{ path: '', component: SignUpComponent }]
+        path: 'admin-login', component: AdminLoginComponent,
+        children: [{ path: '', component: LoginComponent }]
     },
     {
-        path: 'login', component: AdminComponent,
-        children: [{ path: '', component: SignInComponent }]
-    },
-    {
-        path: 'dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]
-    },
-    {
-        path: 'home', component: HomeComponent, canActivate: [AuthGuard]
-    },
-    {
-        path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]
-    },
+        path: 'dashboard', component: AdminDashboardComponent,
+        children: [
+                  {path: 'dashboard/home', component: HomeComponent, canActivate: [AuthGuard]},
 
-    {
-        path: 'driver', component: DriverComponent, canActivate: [AuthGuard]
-    },
+                  {
+                    path: 'dashboard/orders', component: OrdersComponent,
+                    children:
+                            [
+                              { path: 'dashboard/orders/orders', component: NewComponent, canActivate: [AuthGuard] },
+                            ],
+                    canActivate: [AuthGuard]},
 
-    {
-        path: 'customer', component: CustomerComponent, canActivate: [AuthGuard]
+                  {
+                    path: 'dashboard/customer', component: CustomerComponent,
+                    children:[
+                             { path: 'dashboard/customer/create-order', component: CreateOrderComponent, canActivate: [AuthGuard] },
+                             { path: 'dashboard/customer/available-driver', component: AvailableDriverComponent, canActivate: [AuthGuard] },
+                             { path: 'dashboard/customer/response', component: ResponseComponent, canActivate: [AuthGuard]},
+                             { path: 'dashboard/customer/profile', component: CustomerProfileComponent, canActivate: [AuthGuard] },
+                             { path: 'dashboard/customer/profile/:id', component: EditCustomerProfileComponent, canActivate: [AuthGuard] }
+                             ],
+                    canActivate: [AuthGuard]
+                  },
+
+                  {
+                    path: 'dashboard/driver', component: DriverComponent,
+                    children:
+                            [
+                              { path: 'dashboard/driver/profile', component: DriverProfileComponent, canActivate: [AuthGuard] },
+                              { path: 'dashboard/driver/available', component: AvailableComponent, canActivate: [AuthGuard] },
+                              { path: 'dashboard/driver/trip-order', component: TripOrderComponent, canActivate: [AuthGuard] },
+                              { path: 'dashboard/driver/history', component: HistoryComponent, canActivate: [AuthGuard] },
+                              { path: 'dashboard/driver/edit/:id', component: EditDriverProfileComponent, canActivate: [AuthGuard]  }
+                            ],
+                    canActivate: [AuthGuard]
+                  },
+
+                  {path: 'dashboard/profile', component: ProfileComponent, canActivate: [AuthGuard]},
+                  ], canActivate: [AuthGuard]
     },
     {
-        path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
-    },
-    {
-      path: 'edit-admin-profile/:id', component: EditAdminProfileComponent, canActivate: [AuthGuard]
-    },
-    {
-        path: '', redirectTo: '/login', pathMatch: 'full'
+      path: '', redirectTo: '/admin-login', pathMatch: 'full'
     }
 ];

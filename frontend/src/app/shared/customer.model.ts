@@ -4,5 +4,5 @@ export class Customer {
     email: string;
     phone_number: string;
     city: string;
-    password: string;
+    otp: string;
 }
