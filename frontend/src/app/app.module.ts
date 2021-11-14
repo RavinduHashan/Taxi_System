@@ -37,7 +37,7 @@ import { TripOrderComponent } from './admin-dashboard/driver-management/trip-ord
 import { HistoryComponent } from './admin-dashboard/driver-management/history/history.component';
 import { EditOrdersComponent } from './admin-dashboard/order-management/editOrders/editOrders.component';
 import { EditDriverProfileComponent } from './admin-dashboard/driver-management/edit-driver-profile/edit-driver-profile.component';
-import { EditAdminProfileComponent } from './admin-dashboard/user-management/edit-profile/edit-profile.component';
+import { EditProfileComponent } from './admin-dashboard/user-management/edit-profile/edit-profile.component';
 import { VehicleComponent } from './admin-dashboard/vehicle-management/vehicle/vehicle.component';
 import { SahasaComponent } from './admin-dashboard/setting/sahasa/sahasa.component';
 
@@ -59,7 +59,7 @@ import { SahasaComponent } from './admin-dashboard/setting/sahasa/sahasa.compone
     HistoryComponent,
     EditOrdersComponent,
     EditDriverProfileComponent,
-    EditAdminProfileComponent,
+    EditProfileComponent,
     UsersComponent,
     AddComponent,
     VehicleManagementComponent,

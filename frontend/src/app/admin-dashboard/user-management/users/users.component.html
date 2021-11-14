@@ -11,7 +11,7 @@
         <td>{{pro.username}}</td>
 
         <td>
-            <a class="action-btn" routerLink="/edit-admin-profile/{{pro.id}}" (click)="onEdit(pro)">
+            <a class="action-btn" routerLink="edit/{{pro.id}}" (click)="onEdit(pro)">
               <i class="material-icons Edit">edit</i>
             </a>
             <a class="action-btn" (click)="onDelete(pro.id)">

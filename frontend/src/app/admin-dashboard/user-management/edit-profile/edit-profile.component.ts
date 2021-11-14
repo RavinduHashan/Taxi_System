@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Admin } from '../../../interface/admin.model';
 import { AdminService } from '../../../service/admin.service';
-import { UserManagementComponent } from '../user-management.component';
+import { UsersComponent } from '../users/users.component';
 
 declare var M: any;
 
@@ -12,16 +12,16 @@ declare var M: any;
   selector: 'app-edit-admin-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css'],
-  providers: [AdminService, UserManagementComponent]
+  providers: [AdminService, UsersComponent]
 })
-export class EditAdminProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
   id: string = '';
   selectedProfile: Admin;
 
   constructor(
     public adminService:AdminService,
     private activatedRoute: ActivatedRoute,
-    public UserManagementComponent: UserManagementComponent) { }
+    public UsersComponent: UsersComponent) { }
 
     ngOnInit(): void {
       this.activatedRoute.paramMap.subscribe((params: any) => {

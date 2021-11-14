@@ -39,7 +39,7 @@
         <td>{{order.customer_name}}</td>
         <td>{{order.driver_name}}</td>
         <td>
-          <a class="action-btn" routerLink="/edit-order/{{order.id}}" (click)="onEdit(order)">
+          <a class="action-btn" routerLink="edit/{{order.id}}" (click)="onEdit(order)">
             <i class="material-icons Edit">edit</i>
           </a>
           <a class="action-btn" (click)="onDelete(order.id,orderForm)">

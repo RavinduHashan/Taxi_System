@@ -14,6 +14,7 @@ import { HomeComponent } from './admin-dashboard/home/home.component';
 //Order Management
 import { OrderManagementComponent } from './admin-dashboard/order-management/order-management.component';
 import { NewComponent } from './admin-dashboard/order-management/new/new.component';
+import { EditOrdersComponent } from './admin-dashboard/order-management/editOrders/editOrders.component';
 
 //Vehicle Management
 import { VehicleManagementComponent } from './admin-dashboard/vehicle-management/vehicle-management.component';
@@ -31,6 +32,7 @@ import { EditDriverProfileComponent } from './admin-dashboard/driver-management/
 import { UserManagementComponent } from './admin-dashboard/user-management/user-management.component';
 import { UsersComponent } from './admin-dashboard/user-management/users/users.component';
 import { AddComponent } from './admin-dashboard/user-management/add/add.component';
+import { EditProfileComponent } from './admin-dashboard/user-management/edit-profile/edit-profile.component';
 
 //Setting
 import { SettingComponent } from './admin-dashboard/setting/setting.component';
@@ -57,6 +59,7 @@ export const appRoutes: Routes = [
                     children:
                             [
                               { path: '', component: NewComponent, canActivate: [AuthGuard] },
+                              { path: 'edit/:id', component: EditOrdersComponent, canActivate: [AuthGuard]  }
                             ],
                     canActivate: [AuthGuard]
                   },
@@ -89,6 +92,7 @@ export const appRoutes: Routes = [
                             [
                               { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
                               { path: 'add', component: AddComponent, canActivate: [AuthGuard] },
+                              { path: 'edit/:id', component: EditProfileComponent, canActivate: [AuthGuard]}
                             ],
                      canActivate: [AuthGuard]
                   },
