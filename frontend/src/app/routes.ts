@@ -12,8 +12,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { HomeComponent } from './admin-dashboard/home/home.component';
 
 //Order Management
-import { OrdersComponent } from './admin-dashboard/orders/orders.component';
-import { NewComponent } from './admin-dashboard/orders/new/new.component';
+import { OrderManagementComponent } from './admin-dashboard/order-management/order-management.component';
+import { NewComponent } from './admin-dashboard/order-management/new/new.component';
 
 //Vehicle Management
 import { VehicleManagementComponent } from './admin-dashboard/vehicle-management/vehicle-management.component';
@@ -53,7 +53,7 @@ export const appRoutes: Routes = [
                   },
                   //Order Management
                   {
-                    path: 'order-management', component: OrdersComponent,
+                    path: 'order-management', component: OrderManagementComponent,
                     children:
                             [
                               { path: '', component: NewComponent, canActivate: [AuthGuard] },

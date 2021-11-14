@@ -19,7 +19,7 @@ import { appRoutes } from './routes';
 
 //Dachboard
 import { HomeComponent } from './admin-dashboard/home/home.component';
-import { OrdersComponent } from './admin-dashboard/orders/orders.component';
+import { OrderManagementComponent } from './admin-dashboard/order-management/order-management.component';
 import { DriverManagementComponent } from './admin-dashboard/driver-management/driver-management.component';
 import { UserManagementComponent } from './admin-dashboard/user-management/user-management.component';
 import { VehicleManagementComponent } from './admin-dashboard/vehicle-management/vehicle-management.component';
@@ -29,13 +29,13 @@ import { SettingComponent } from './admin-dashboard/setting/setting.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UsersComponent } from './admin-dashboard/user-management/users/users.component';
 import { AddComponent } from './admin-dashboard/user-management/add/add.component';
-import { NewComponent } from './admin-dashboard/orders/new/new.component';
+import { NewComponent } from './admin-dashboard/order-management/new/new.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { DriverProfileComponent } from './admin-dashboard/driver-management/driver-profile/driver-profile.component';
 import { AvailableComponent } from './admin-dashboard/driver-management/available/available.component';
 import { TripOrderComponent } from './admin-dashboard/driver-management/trip-order/trip-order.component';
 import { HistoryComponent } from './admin-dashboard/driver-management/history/history.component';
-import { EditOrdersComponent } from './admin-dashboard/orders/editOrders/editOrders.component';
+import { EditOrdersComponent } from './admin-dashboard/order-management/editOrders/editOrders.component';
 import { EditDriverProfileComponent } from './admin-dashboard/driver-management/edit-driver-profile/edit-driver-profile.component';
 import { EditAdminProfileComponent } from './admin-dashboard/user-management/edit-profile/edit-profile.component';
 import { VehicleComponent } from './admin-dashboard/vehicle-management/vehicle/vehicle.component';
@@ -48,7 +48,7 @@ import { SahasaComponent } from './admin-dashboard/setting/sahasa/sahasa.compone
     AdminLoginComponent,
     LoginComponent,
     HomeComponent,
-    OrdersComponent,
+    OrderManagementComponent,
     DriverManagementComponent,
     UserManagementComponent,
     NewComponent,
