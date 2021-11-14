@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 
 
 
-import { Order } from '../../../shared/order.model';
-import { OrderService } from '../../../shared/order.service';
+import { Order } from '../../../interface/order.model';
+import { OrderService } from '../../../service/order.service';
 
 declare var M: any;
 

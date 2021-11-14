@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 
 
-import { AdminService} from '../../shared/admin.service';
+import { AdminService} from '../../service/admin.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private adminService: AdminService,private router : Router) { }
 
   model ={
-    email :'',
+    username :'',
     password:''
   };
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

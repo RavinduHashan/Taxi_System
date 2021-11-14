@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { Order } from '../../../shared/order.model';
-import { OrderService } from '../../../shared/order.service';
+import { Order } from '../../../interface/order.model';
+import { OrderService } from '../../../service/order.service';
 import { NewComponent} from '../new/new.component'
 
 declare var M: any;

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Router } from "@angular/router";
 
-import { AdminService } from "../../shared/admin.service";
+import { AdminService } from "../../service/admin.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
