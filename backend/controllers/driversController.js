@@ -87,28 +87,6 @@ const dashboard = async (req, res) => {
   }
 };
 
-//Create drivers without authentication and hash password
-const createDrivers = async (req, res) => {
-  try {
-    const query = `INSERT INTO drivers(fullName, email, phoneNumber,vehicle_type, vehicle_number, city, driver_Password) VALUES ($1,$2,$3,$4,$5,$6,$7)`;
-    const result = await pool.query(query, [
-      req.body.fullName,
-      req.body.email,
-      req.body.phoneNumber,
-      req.body.vehicle_type,
-      req.body.vehicle_number,
-      req.body.city,
-      req.body.driver_Password,
-    ]);
-    console.log(result);
-    res.status(201).json({
-      status: "Success",
-      date: { drivers: "Ravindu" },
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 //Read drivers
 const getDrivers = async (req, res) => {
@@ -141,7 +119,9 @@ const updateDrivers = async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
-    const query = `UPDATE drivers SET full_name = $1, email = $2, phone_number = $3, vehicle_type = $4, vehicle_number = $5, city = $6, driver_password = $7 where id = $8 RETURNING *`;
+    const query = `UPDATE drivers SET full_name = $1, email = $2, phone_number = $3, vehicle_type = $4, 
+                   vehicle_number = $5, city = $6, driver_password = $7, available = $8, verification = $9, 
+                   updated = now() where id = $10 RETURNING *`;
     const result = await pool.query(query, [
       req.body.full_name,
       req.body.email,
@@ -150,7 +130,9 @@ const updateDrivers = async (req, res) => {
       req.body.vehicle_number,
       req.body.city,
       bcryptPassword,
-      req.params.id,
+      req.body.available,
+      req.body.verification,
+      req.params.id
     ]);
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
@@ -177,7 +159,6 @@ module.exports = {
   loginDrivers,
   verify,
   dashboard,
-  createDrivers,
   getDrivers,
   getOneDriver,
   updateDrivers,

@@ -4,70 +4,68 @@ import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-// components
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+//component
 import { AppComponent } from './app.component';
-import { AdminComponent } from './admin/admin.component';
-import { SignUpComponent } from './admin/sign-up/sign-up.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { LoginComponent } from './admin-login/login/login.component';
+import { AuthGuard } from './admin-login/auth/auth.guard';
+import { AuthInterceptor } from './admin-login/auth/auth.interceptor';
+import { AdminService } from './service/admin.service';
+
 //routes
 import { appRoutes } from './routes';
-import { driverRoutes } from './driver/driverRoutes';
-import { customerRoutes } from './customer/customerRoutes';
-import { ordersRoutes } from './orders/ordersRoutes';
-import { SignInComponent } from './admin/sign-in/sign-in.component';
-import { AdminService } from './shared/admin.service';
+
+//Dachboard
+import { HomeComponent } from './admin-dashboard/home/home.component';
+import { OrderManagementComponent } from './admin-dashboard/order-management/order-management.component';
+import { DriverManagementComponent } from './admin-dashboard/driver-management/driver-management.component';
+import { UserManagementComponent } from './admin-dashboard/user-management/user-management.component';
+import { VehicleManagementComponent } from './admin-dashboard/vehicle-management/vehicle-management.component';
+import { SettingComponent } from './admin-dashboard/setting/setting.component';
+
 //other
-import { AuthGuard } from './auth/auth.guard';
-import { AuthInterceptor } from './auth/auth.interceptor';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './home/home.component';
-import { OrdersComponent } from './orders/orders.component';
-import { DriverComponent } from './driver/driver.component';
-import { ProfileComponent } from './profile/profile.component';
-import { NewComponent } from './orders/new/new.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { CustomerComponent } from './customer/customer.component';
-import { CustomerProfileComponent } from './customer/customer-profile/customer-profile.component';
-import { DriverProfileComponent } from './driver/driver-profile/driver-profile.component';
-import { AvailableDriverComponent } from './customer/available-driver/available-driver.component';
-import { AvailableComponent } from './driver/available/available.component';
-import { ResponseComponent } from './customer/response/response.component';
-import { TripOrderComponent } from './driver/trip-order/trip-order.component';
-import { HistoryComponent } from './driver/history/history.component';
-import { CreateOrderComponent } from './customer/create-order/create-order.component';
-import { EditOrdersComponent } from './orders/editOrders/editOrders.component';
-import { EditCustomerProfileComponent } from './customer/edit-customer-profile/edit-customer-profile.component';
-import { EditDriverProfileComponent } from './driver/edit-driver-profile/edit-driver-profile.component';
-import { EditAdminProfileComponent } from './edit-admin-profile/edit-admin-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-
+import { UsersComponent } from './admin-dashboard/user-management/users/users.component';
+import { AddComponent } from './admin-dashboard/user-management/add/add.component';
+import { NewComponent } from './admin-dashboard/order-management/new/new.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { DriverProfileComponent } from './admin-dashboard/driver-management/driver-profile/driver-profile.component';
+import { AvailableComponent } from './admin-dashboard/driver-management/available/available.component';
+import { TripOrderComponent } from './admin-dashboard/driver-management/trip-order/trip-order.component';
+import { HistoryComponent } from './admin-dashboard/driver-management/history/history.component';
+import { EditOrdersComponent } from './admin-dashboard/order-management/editOrders/editOrders.component';
+import { EditDriverProfileComponent } from './admin-dashboard/driver-management/edit-driver-profile/edit-driver-profile.component';
+import { EditProfileComponent } from './admin-dashboard/user-management/edit-profile/edit-profile.component';
+import { VehicleComponent } from './admin-dashboard/vehicle-management/vehicle/vehicle.component';
+import { SahasaComponent } from './admin-dashboard/setting/sahasa/sahasa.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent,
-    SignUpComponent,
-    SignInComponent,
+    AdminLoginComponent,
+    LoginComponent,
     HomeComponent,
-    OrdersComponent,
-    DriverComponent,
-    ProfileComponent,
+    OrderManagementComponent,
+    DriverManagementComponent,
+    UserManagementComponent,
     NewComponent,
     AdminDashboardComponent,
-    CustomerComponent,
-    CustomerProfileComponent,
     DriverProfileComponent,
-    AvailableDriverComponent,
     AvailableComponent,
-    ResponseComponent,
     TripOrderComponent,
     HistoryComponent,
-    CreateOrderComponent,
     EditOrdersComponent,
-    EditCustomerProfileComponent,
     EditDriverProfileComponent,
-    EditAdminProfileComponent
+    EditProfileComponent,
+    UsersComponent,
+    AddComponent,
+    VehicleManagementComponent,
+    SettingComponent,
+    VehicleComponent,
+    SahasaComponent
 
   ],
 
@@ -76,9 +74,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    RouterModule.forRoot(driverRoutes),
-    RouterModule.forRoot(customerRoutes),
-    RouterModule.forRoot(ordersRoutes),
     HttpClientModule,
     NgbModule,
     FontAwesomeModule,

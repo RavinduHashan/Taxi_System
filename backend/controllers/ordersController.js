@@ -149,9 +149,9 @@ const searchOrders = async (req, res) => {
     const { name } = req.query;
     const result = await pool.query(
       `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                                                (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name   
-                                                From orders WHERE pick_location || drop_location || pick_time || ' ' ILIKE $1 ORDER BY created DESC;`,
-      [`%${name}%`]
+                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name   
+                 From orders WHERE pick_location || drop_location || pick_time || response || ' ' ILIKE $1 ORDER BY created DESC;`,
+                 [`%${name}%`]
     );
     res.status(200).send({ done: true, body: result.rows });
   } catch (err) {

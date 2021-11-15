@@ -2,21 +2,21 @@ create database sahasa_taxi;
 
 create table admins(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
-    full_name varchar(255) not null,
-    email varchar(255) not null,
-    phone_number varchar(255) not null,
-    city varchar(255) not null,
-    admin_password varchar(255) not null
+    username varchar(255) not null,
+    admin_password varchar(255) not null,
+    created timestamp with time zone NOT NULL DEFAULT now(),
+    updated timestamp with time zone
 );
 
 create table customers(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
     full_name varchar(255),
     email varchar(255),
-    phone_number varchar(255),
+    phone_number varchar(255) not null,
     city varchar(255),
-    otp integer
-    
+    otp integer,
+    created timestamp with time zone NOT NULL DEFAULT now(),
+    updated timestamp with time zone    
 );
 
 create table drivers(
@@ -24,23 +24,38 @@ create table drivers(
     full_name varchar(255) not null,
     email varchar(255) not null,
     phone_number varchar(255) not null,
-    vehicle_type varchar(255) not null,
+    vehicle_type varchar(255) not null references vehicles(vehicle_type),
     vehicle_number varchar(255) not null,
     city varchar(255) not null,
     driver_password varchar(255) not null,
-    available boolean DEFAULT false
+    available boolean DEFAULT false,
+    verification varchar(255) not null DEFAULT 'Unverified',
+    created timestamp with time zone NOT NULL DEFAULT now(),
+    updated timestamp with time zone
 );
 
 create table orders(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
     pick_location varchar(255) not null,
     drop_location varchar(255) not null,
-    pick_time varchar(255) not null,
-    drop_time varchar(255) not null,
+    distance varchar(255) ,
+    pick_time varchar(255) ,
+    drop_time varchar(255) ,
     response varchar(255) not null DEFAULT 'Pending',
     customer_id uuid DEFAULT uuid_generate_v4() references customers(id),
     driver_id uuid DEFAULT uuid_generate_v4() references drivers(id),
-    created timestamp with time zone NOT NULL DEFAULT now()
+    created timestamp with time zone NOT NULL DEFAULT now(),
+    updated timestamp with time zone 
+);
+
+create table vehicles(
+    id uuid DEFAULT uuid_generate_v4() not null primary key,
+    vehicle_type varchar(255) not null UNIQUE,
+    base_distance varchar(255) not null,
+    base_rate varchar(255) not null,
+    rate_per_KM varchar(255) not null,
+    created timestamp with time zone NOT NULL DEFAULT now(),
+    updated timestamp with time zone 
 );
 
 ALTER TABLE public.orders ADD COLUMN created timestamp with time zone NOT NULL DEFAULT now();
@@ -63,8 +78,6 @@ ALTER TABLE customers ALTER COLUMN otp TYPE integer;
 
 -- chnage default value in a colunm
 ALTER TABLE customers ALTER COLUMN otp SET DEFAULT 5;
-
-
 
 -- PSQL Command ****************************************************************************
 
