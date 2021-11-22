@@ -40,6 +40,7 @@ import { EditDriverProfileComponent } from './admin-dashboard/driver-management/
 import { EditProfileComponent } from './admin-dashboard/user-management/edit-profile/edit-profile.component';
 import { VehicleComponent } from './admin-dashboard/vehicle-management/vehicle/vehicle.component';
 import { SahasaComponent } from './admin-dashboard/setting/sahasa/sahasa.component';
+import { ViewComponent } from './admin-dashboard/order-management/view/view.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { SahasaComponent } from './admin-dashboard/setting/sahasa/sahasa.compone
     VehicleManagementComponent,
     SettingComponent,
     VehicleComponent,
-    SahasaComponent
+    SahasaComponent,
+    ViewComponent
 
   ],
 

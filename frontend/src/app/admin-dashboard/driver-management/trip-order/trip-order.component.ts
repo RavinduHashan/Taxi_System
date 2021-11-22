@@ -17,43 +17,48 @@ export class TripOrderComponent implements OnInit {
   constructor(public orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.resetForm();
-    this.refreshOrderList();
+    // this.resetForm();
+    // this.refreshOrderList();
   }
 
 
-  resetForm(form?: NgForm) {
-    if (form)
-      form.reset();
-    this.orderService.selectedOrder = {
-      id: "",
-      pick_location: "",
-      drop_location: "",
-      pick_time: "",
-      drop_time: "",
-      response: "",
-      customer_id: "",
-      driver_id:"",
-      customer_name:"",
-      driver_name: ""
-    }
-  }
+  // resetForm(form?: NgForm) {
+  //   if (form)
+  //     form.reset();
+  //     this.orderService.selectedOrder = {
+  //       id: "",
+  //       serial_number: "",
+  //       pick_location: "",
+  //       drop_location: "",
+  //       distance: "",
+  //       pick_time: "",
+  //       drop_time: "",
+  //       response: "",
+  //       customer_id: "",
+  //       driver_id: "",
+  //       customer_name: "",
+  //       customer_number: "",
+  //       driver_name: "",
+  //       created: "",
+  //       updated: ""
+  //     }
+  // }
 
-  insertResponse(ord: Order, response: any) {
-    this.orderService.insertResponse(ord, response).subscribe((res: any) => {
-      this.orderService.orders = res.body as Order[];
-      this.refreshOrderList();
-    });
-  }
+  // insertResponse(ord: Order, response: any) {
+  //   this.orderService.insertResponse(ord, response).subscribe((res: any) => {
+  //     this.orderService.orders = res.body as Order[];
+  //     this.refreshOrderList();
+  //   });
+  // }
 
 
-  refreshOrderList() {
-    this.orderService.getOrderList().subscribe((res:any) => {
-      console.log(res)
-      this.orderService.orders = res.body as Order[];
+  // refreshOrderList() {
+  //   this.orderService.getOrderList().subscribe((res:any) => {
+  //     console.log(res)
+  //     this.orderService.orders = res.body as Order[];
 
-    });
-  }
+  //   });
+  // }
 }
 
 

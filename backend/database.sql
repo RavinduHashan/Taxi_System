@@ -2,6 +2,7 @@ create database sahasa_taxi;
 
 create table admins(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
+    serial_number bigserial,
     username varchar(255) not null,
     admin_password varchar(255) not null,
     created timestamp with time zone NOT NULL DEFAULT now(),
@@ -10,6 +11,7 @@ create table admins(
 
 create table customers(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
+    serial_number bigserial,
     full_name varchar(255),
     email varchar(255),
     phone_number varchar(255) not null,
@@ -21,6 +23,7 @@ create table customers(
 
 create table drivers(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
+    serial_number bigserial,
     full_name varchar(255) not null,
     email varchar(255) not null,
     phone_number varchar(255) not null,
@@ -36,20 +39,22 @@ create table drivers(
 
 create table orders(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
+    serial_number bigserial,
     pick_location varchar(255) not null,
     drop_location varchar(255) not null,
     distance varchar(255) ,
     pick_time varchar(255) ,
     drop_time varchar(255) ,
-    response varchar(255) not null DEFAULT 'Pending',
+    response varchar(255) DEFAULT 'Pending',
     customer_id uuid DEFAULT uuid_generate_v4() references customers(id),
     driver_id uuid DEFAULT uuid_generate_v4() references drivers(id),
     created timestamp with time zone NOT NULL DEFAULT now(),
-    updated timestamp with time zone 
+    updated timestamp with time zone NOT NULL DEFAULT now()
 );
 
 create table vehicles(
     id uuid DEFAULT uuid_generate_v4() not null primary key,
+    serial_number bigserial,
     vehicle_type varchar(255) not null UNIQUE,
     base_distance varchar(255) not null,
     base_rate varchar(255) not null,

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-
-
 import { Order } from '../../../interface/order.model';
 import { OrderService } from '../../../service/order.service';
 
@@ -46,15 +44,21 @@ export class NewComponent implements OnInit {
       form.reset();
     this.orderService.selectedOrder = {
       id: "",
+      serial_number: "",
       pick_location: "",
       drop_location: "",
+      distance: "",
       pick_time: "",
       drop_time: "",
       response: "",
       customer_id: "",
       driver_id: "",
       customer_name: "",
-      driver_name: ""
+      customer_number: "",
+      driver_name: "",
+      driver_number: "",
+      created: "",
+      updated: ""
     }
   }
 
