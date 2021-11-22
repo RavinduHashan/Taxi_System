@@ -7,7 +7,8 @@ export const environment = {
   apiBaseUrlAdmin: 'http://localhost:5000/admins',
   apiBaseUrlDriver:'http://localhost:5000/drivers',
   apiBaseUrlCustomer:'http://localhost:5000/customers',
-  apiBaseUrlOrder:'http://localhost:5000/orders'
+  apiBaseUrlOrder:'http://localhost:5000/orders',
+  apiBaseUrlVehicle:'http://localhost:5000/vehicles'
 };
 
 /*

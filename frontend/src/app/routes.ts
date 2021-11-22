@@ -15,10 +15,14 @@ import { HomeComponent } from './admin-dashboard/home/home.component';
 import { OrderManagementComponent } from './admin-dashboard/order-management/order-management.component';
 import { NewComponent } from './admin-dashboard/order-management/new/new.component';
 import { EditOrdersComponent } from './admin-dashboard/order-management/editOrders/editOrders.component';
+import { ViewComponent } from './admin-dashboard/order-management/view/view.component';
 
 //Vehicle Management
 import { VehicleManagementComponent } from './admin-dashboard/vehicle-management/vehicle-management.component';
 import { VehicleComponent } from './admin-dashboard/vehicle-management/vehicle/vehicle.component';
+import { EditVehiclesComponent } from './admin-dashboard/vehicle-management/edit-vehicles/edit-vehicles.component';
+import { AddVehicleComponent } from './admin-dashboard/vehicle-management/add-vehicle/add-vehicle.component';
+
 
 //Driver Management
 import { DriverManagementComponent } from './admin-dashboard/driver-management/driver-management.component';
@@ -59,7 +63,8 @@ export const appRoutes: Routes = [
                     children:
                             [
                               { path: '', component: NewComponent, canActivate: [AuthGuard] },
-                              { path: 'edit/:id', component: EditOrdersComponent, canActivate: [AuthGuard]  }
+                              { path: 'edit/:id', component: EditOrdersComponent, canActivate: [AuthGuard]  },
+                              { path: 'view/:id', component: ViewComponent, canActivate: [AuthGuard]  }
                             ],
                     canActivate: [AuthGuard]
                   },
@@ -69,6 +74,8 @@ export const appRoutes: Routes = [
                     children:
                             [
                               { path: 'vehicle', component: VehicleComponent, canActivate: [AuthGuard] },
+                              { path: 'edit/:id', component: EditVehiclesComponent, canActivate: [AuthGuard] },
+                              { path: 'add', component: AddVehicleComponent, canActivate: [AuthGuard] }
                             ],
                     canActivate: [AuthGuard]
                   },

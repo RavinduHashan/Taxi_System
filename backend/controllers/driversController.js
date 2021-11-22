@@ -32,10 +32,10 @@ const registerDrivers = async (req, res) => {
       bcryptPassword,
     ]);
     //res.json(newUser.rows[0])
-
     const token = jwtGenerator(newDriver.rows.length &&newDriver.rows[0].id);
     res.status(200).send({ done: true, token: token });
   } catch (err) {
+    console.log(err)
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };

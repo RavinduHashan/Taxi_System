@@ -3,12 +3,14 @@ const pool = require("../db");
 //Create orders(Admin)
 const createOrders = async (req, res) => {
   try {
-    const query = `INSERT INTO orders(pick_location, drop_location, pick_time, drop_time, customer_id, driver_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`;
+    const query = `INSERT INTO orders(pick_location, drop_location, pick_time, drop_time, distance, response, customer_id, driver_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`;
     const {
       pick_location,
       drop_location,
       pick_time,
       drop_time,
+      distance,
+      response,
       customer_id,
       driver_id,
     } = req.body;
@@ -17,12 +19,15 @@ const createOrders = async (req, res) => {
       drop_location,
       pick_time,
       drop_time,
+      distance,
+      response,
       customer_id,
       driver_id,
     ]);
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
+    console.log(err)
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -31,12 +36,15 @@ const createOrders = async (req, res) => {
 const getOrders = async (req, res) => {
   try {
     const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                             (SELECT phone_number FROM customers WHERE id = customer_id) AS customer_number,
+                             (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name,
+                             (SELECT phone_number FROM drivers WHERE id = driver_id) AS driver_number
                                  from orders ORDER BY created DESC;`;
     const result = await pool.query(query);
     const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
+    console.log(err)
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -45,11 +53,16 @@ const getOrders = async (req, res) => {
 const getOneOrder = async (req, res) => {
   try {
     const { id } = req.params;
-    const query = `SELECT * FROM orders WHERE id = $1`;
+    const query = `SELECT *,(SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
+                            (SELECT phone_number FROM customers WHERE id = customer_id) AS customer_number, 
+                            (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name,
+                            (SELECT phone_number FROM drivers WHERE id = driver_id) AS driver_number
+                            FROM orders WHERE id = $1`;
     const result = await pool.query(query, [id]);
-    const [data] = result.rows;
+    const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
+    console.log(err)
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -117,7 +130,7 @@ const getAvailableDrivers = async (req, res) => {
 const viewOrdersByResponse = async (req, res) => {
   try {
     const query = `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                             (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
+                             (SELECT phone_number FROM customers WHERE id = customer_id) AS customer_number 
                               FROM orders WHERE response = $1 `;
     const result = await pool.query(query, [req.params.response]);
     const data = result.rows;
@@ -149,7 +162,7 @@ const searchOrders = async (req, res) => {
     const { name } = req.query;
     const result = await pool.query(
       `SELECT *, (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name,
-                 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name   
+                 (SELECT phone_number FROM customers WHERE id = customer_id) AS customer_number   
                  From orders WHERE pick_location || drop_location || pick_time || response || ' ' ILIKE $1 ORDER BY created DESC;`,
                  [`%${name}%`]
     );
