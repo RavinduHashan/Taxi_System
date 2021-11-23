@@ -6,10 +6,7 @@ import { environment }  from '../../environments/environment';
 
 @Injectable()
 export class OrderService {
-
-  selectedOrder: Order;
-  orders: Order[] = [];
-
+  selectedOrder: Order
   constructor(private http: HttpClient) { }
 
   postOrder(order:Order) {
@@ -41,8 +38,8 @@ export class OrderService {
     return this.http.delete(environment.apiBaseUrlOrder+'/deleteOrders'+ `/${id}`);
   }
 
-  insertResponse(ord: Order, response: any) {
-    return this.http.put(environment.apiBaseUrlOrder+'/insertResponse'+ `/${ord.id}/${response}`, ord);
+  insertResponse(order: Order, response: any) {
+    return this.http.put(environment.apiBaseUrlOrder+'/insertResponse'+ `/${order.id}/${response}`, order);
   }
 
 

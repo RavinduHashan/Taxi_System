@@ -8,11 +8,11 @@ declare var M: any;
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.css'],
+  templateUrl: './order.component.html',
+  styleUrls: ['./order.component.css'],
   providers: [OrderService]
 })
-export class NewComponent implements OnInit {
+export class OrderComponent implements OnInit {
   public name = '';
   public page = 1;
   public pageSize = 10;
@@ -24,22 +24,22 @@ export class NewComponent implements OnInit {
   public pendingCount: string = "0";
   public rejectCount: string = "0";
 
-  Orders: Order[];
+  orders: Order[];
+  order:Order;
   searchValue: string
 
   constructor(public orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.resetForm();
     this.refreshOrderList();
-    this.refreshAllList()
+    this.refreshAllList();
+    this.resetForm();
 
   }
-
   resetForm(form?: NgForm) {
     if (form)
       form.reset();
-    this.orderService.selectedOrder = {
+    this.order = {
       id: "",
       serial_number: "",
       pick_location: "",
@@ -61,20 +61,14 @@ export class NewComponent implements OnInit {
 
   refreshOrderList() {
     this.orderService.searchOrderList(this.name).subscribe((res: any) => {
-      this.Orders = res.body;
+      this.orders = res.body;
     });
   }
-
-
 
   Response(response: any) {
     this.orderService.getOrderByResponse(response).subscribe((res: any) => {
-      this.Orders = res.body as Order[];
+      this.orders = res.body as Order[];
     });
-  }
-
-  onEdit(order: Order) {
-    this.orderService.selectedOrder = order;
   }
 
   onDelete(id: string, form: NgForm) {
@@ -88,7 +82,6 @@ export class NewComponent implements OnInit {
     }
 
   }
-  //******************************************************** */
 
   refreshAllList() {
     this.orderService.allCount().subscribe((res: any) => {

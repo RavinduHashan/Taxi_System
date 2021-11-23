@@ -45,11 +45,18 @@ export class VehicleComponent implements OnInit {
     this.vehicleService.selectedVehicle = vehicle;
   }
 
-  onDelete(id: any) {
-    if (confirm('Are you sure to delete this record ?') == true) {
-      // this.vehicleService.deleteVehicle(id).subscribe((res:any) => {
-      //   this.refreshVehicleList();
-      // });
+  onSubmit(form: NgForm) {
+    if (form.value.id == "") {
+      this.vehicleService.createVehicleList(form.value).subscribe((res:any) => {
+        this.resetForm(form);
+        this.refreshVehicleList();
+      });
+    }
+    else {
+      this.vehicleService.updateVehicleList(form.value).subscribe((res:any) => {
+        this.resetForm(form);
+        this.refreshVehicleList();
+      });
     }
   }
 

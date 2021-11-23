@@ -4,43 +4,50 @@ import { NgForm } from '@angular/forms';
 import { Order } from '../../../interface/order.model';
 import { OrderService } from '../../../service/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { NewComponent} from '../new/new.component'
+import { OrderComponent} from '../order/order.component'
 
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css'],
-  providers: [OrderService , NewComponent]
+  providers: [OrderService , OrderComponent]
 })
 export class ViewComponent implements OnInit {
-  Orders: Order[];
+  orders: Order[];
+  order: Order
   id:any;
   constructor(
     private activatedRoute: ActivatedRoute,
     public orderService: OrderService,
-    public newComponent: NewComponent) { }
+    public orderComponent: OrderComponent) { }
 
   ngOnInit(): void {
     this.resetForm();
-    this.refreshOrderList();
+    this.refreshOrder()
     this.activatedRoute.paramMap.subscribe((params: any) => {
       this.id = params.get('id')
     });
-    if (this.id) { this.getOrderData() };
-    this.resetForm();
-    this.refreshOrderList();
+    if (this.id) { this.getOrderById() };
   }
-  getOrderData() {
+
+  getOrderById() {
     this.orderService.getOrderById(this.id).subscribe((res: any) => {
-      this.Orders = res.body;
-      console.log('selected Order', this.orderService.selectedOrder);
+      this.orders = res.body;
+      this.refreshOrder()
     })
+  }
+
+  refreshOrder() {
+    this.orderService.getOrderById(this.id).subscribe((res:any) => {
+      console.log(res)
+      this.orders = res.body;
+    });
   }
 
   resetForm(form?: NgForm) {
     if (form)
       form.reset();
-    this.orderService.selectedOrder = {
+    this.order = {
       id: "",
       serial_number: "",
       pick_location: "",
@@ -60,32 +67,37 @@ export class ViewComponent implements OnInit {
     }
   }
 
-  refreshOrderList() {
-    this.orderService.getOrderList().subscribe((res:any) => {
-      console.log(res)
-      this.orderService.orders = res.rows as Order[];
-
-    });
-  }
-
-  Response(response: any) {
-    this.orderService.getOrderByResponse(response).subscribe((res: any) => {
-      this.Orders = res.body as Order[];
-    });
+  onSubmit(form: NgForm) {
+    if (form.value.id == "") {
+      this.orderService.postOrder(form.value).subscribe((res:any) => {
+        this.resetForm(form);
+        this.refreshOrder();
+      });
+    }
+    else {
+      this.orderService.putOrder(form.value).subscribe((res:any) => {
+        this.resetForm(form);
+        this.refreshOrder();
+      });
+    }
   }
 
   onEdit(order: Order) {
-    this.orderService.selectedOrder = order;
+    this.order = order;
   }
 
   onDelete(id:any) {
     if (confirm('Are you sure to delete this record ?') == true) {
       this.orderService.deleteOrder(id).subscribe((res: any) => {
-        this.refreshOrderList();
-        // this.resetForm(form);
+        this.refreshOrder();
       })
     }
-
   }
 
+  insertResponse(order: Order, response: any) {
+    this.orderService.insertResponse(order, response).subscribe((res: any) => {
+      this.orders = res.body as Order[];
+      this.refreshOrder();
+    });
+  }
 }

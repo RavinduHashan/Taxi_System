@@ -3,14 +3,13 @@ const pool = require("../db");
 //Create orders(Admin)
 const createOrders = async (req, res) => {
   try {
-    const query = `INSERT INTO orders(pick_location, drop_location, pick_time, drop_time, distance, response, customer_id, driver_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`;
+    const query = `INSERT INTO orders(pick_location, drop_location, pick_time, drop_time, distance, customer_id, driver_id) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`;
     const {
       pick_location,
       drop_location,
       pick_time,
       drop_time,
       distance,
-      response,
       customer_id,
       driver_id,
     } = req.body;
@@ -20,7 +19,6 @@ const createOrders = async (req, res) => {
       pick_time,
       drop_time,
       distance,
-      response,
       customer_id,
       driver_id,
     ]);
@@ -70,20 +68,18 @@ const getOneOrder = async (req, res) => {
 //Update orders(Admin)
 const updateOrders = async (req, res) => {
   try {
-    const query = `UPDATE orders SET pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4, response = $5, customer_id = $6, driver_id = $7 WHERE id = $8 RETURNING *`;
+    const query = `UPDATE orders SET pick_location = $1, drop_location = $2, pick_time = $3, drop_time = $4 WHERE id = $5 RETURNING *`;
     const result = await pool.query(query, [
       req.body.pick_location,
       req.body.drop_location,
       req.body.pick_time,
       req.body.drop_time,
-      req.body.response,
-      req.body.customer_id,
-      req.body.driver_id,
       req.params.id,
     ]);
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
+    console.log(err)
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };

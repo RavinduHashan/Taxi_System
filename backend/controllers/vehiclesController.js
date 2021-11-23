@@ -2,7 +2,8 @@ const pool = require("../db");
 
 const createVehicle = async (req, res) => {
     try {
-      const query = `INSERT INTO vehicles(vehicle_type, base_distance, base_rate, rate_per_KM) VALUES ($1,$2,$3,$4) RETURNING *`;
+      const query = `INSERT INTO vehicles(vehicle_type, base_distance, base_rate, 
+        rate_per_KM) VALUES ($1,$2,$3,$4) RETURNING *`;
       const result = await pool.query(query, [
         req.body.vehicle_type,
         req.body.base_distance,

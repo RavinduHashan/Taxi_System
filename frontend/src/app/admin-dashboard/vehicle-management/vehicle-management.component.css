@@ -9,3 +9,11 @@
   padding-left: 33px !important;
   padding-right: 33px !important;
 }
+
+.justify-content-end {
+  justify-content: flex-start;
+}
+
+.Row:hover{
+  background-color: rgb(177, 221, 194);
+}

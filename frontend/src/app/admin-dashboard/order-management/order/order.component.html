@@ -24,12 +24,12 @@
         <th>Customer Number</th>
         <th>Placed Date</th>
         <th>Order Updated</th>
-        <th>Response</th>
+        <th>Status</th>
         <th>View</th>
       </tr>
     </thead>
     <tbody>
-      <tr style="text-align: center;" class = "Row" *ngFor="let order of Orders | slice: (page-1) * pageSize : page * pageSize ">
+      <tr style="text-align: center;" class = "Row" *ngFor="let order of orders | slice: (page-1) * pageSize : page * pageSize ">
         <td>{{order.serial_number}}</td>
         <td>{{order.customer_name}}</td>
         <td>{{order.customer_number}}</td>
@@ -37,7 +37,7 @@
         <td>{{order.updated}}</td>
         <td>{{order.response}}</td>
         <td>
-          <a class="action-btn" routerLink="view/{{order.id}}" (click)="onEdit(order)">
+          <a class="action-btn" routerLink="view/{{order.id}}">
             <i style="color: rgb(64, 105, 150);">view</i>
           </a>
         </td>
@@ -47,7 +47,7 @@
   <ngb-pagination
   [(page)]="page"
   [pageSize]="pageSize"
-  [collectionSize]="Orders.length">
+  [collectionSize]="orders.length">
   <ng-template style="color: rgb(194, 205, 206);" ngbPaginationPrevious>Previous</ng-template>
   <ng-template style="color: rgb(194, 205, 206);" ngbPaginationNext>Next</ng-template>
   </ngb-pagination>
