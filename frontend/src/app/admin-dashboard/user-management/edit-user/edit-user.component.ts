@@ -6,17 +6,16 @@ import { Admin } from '../../../interface/admin.model';
 import { AdminService } from '../../../service/admin.service';
 import { UsersComponent } from '../users/users.component';
 
-declare var M: any;
-
 @Component({
-  selector: 'app-edit-admin-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css'],
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css'],
   providers: [AdminService, UsersComponent]
 })
 export class EditProfileComponent implements OnInit {
   id: string = '';
-  selectedProfile: Admin;
+  admin: Admin;
+  admins:Admin[];
 
   constructor(
     public adminService:AdminService,
@@ -35,7 +34,7 @@ export class EditProfileComponent implements OnInit {
     getProfileData() {
       console.log(this.id);
       this.adminService.getProfileById(this.id).subscribe((res: any) => {
-        this.selectedProfile = res.body;
+        this.admin = res.body;
         console.log(res);
       })
     }
@@ -43,9 +42,11 @@ export class EditProfileComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form)
       form.reset();
-    this.adminService.selectedProfile = {
+    this.admin = {
       id: "",
       username: "",
+      created:"",
+      updated:"",
       password:""
     }
   }
@@ -55,14 +56,12 @@ export class EditProfileComponent implements OnInit {
       this.adminService.postProfile(form.value).subscribe((res:any) => {
         this.resetForm(form);
         this.refreshProfileList();
-        M.toast({ html: 'Saved successfully', classes: 'rounded' });
       });
     }
     else {
       this.adminService.putProfile(form.value).subscribe((res:any) => {
         this.resetForm(form);
         this.refreshProfileList();
-        M.toast({ html: 'Updated successfully', classes: 'rounded' });
       });
     }
   }
@@ -70,8 +69,7 @@ export class EditProfileComponent implements OnInit {
   refreshProfileList() {
     this.adminService.getProfileList().subscribe((res:any) => {
       console.log(res)
-      this.adminService.profiles = res.body as Admin[];
-
+      this.admins = res.body as Admin[];
     });
   }
 }

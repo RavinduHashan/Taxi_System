@@ -4,8 +4,6 @@ import { NgForm } from '@angular/forms';
 import { Admin } from '../../../interface/admin.model';
 import { AdminService } from '../../../service/admin.service';
 
-declare var M: any;
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -14,6 +12,8 @@ declare var M: any;
 })
 export class UsersComponent implements OnInit {
 
+  admin:Admin;
+  admins:Admin[]
   constructor(public adminSevice: AdminService) { }
 
   ngOnInit(): void {
@@ -24,9 +24,11 @@ export class UsersComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form)
       form.reset();
-    this.adminSevice.selectedProfile = {
+    this.admin = {
       id: "",
       username: "",
+      created:"",
+      updated:"",
       password:""
     }
   }
@@ -34,13 +36,12 @@ export class UsersComponent implements OnInit {
   refreshProfileList() {
     this.adminSevice.getProfileList().subscribe((res:any) => {
       console.log(res)
-      this.adminSevice.profiles = res.body as Admin[];
-
+      this.admins = res.body as Admin[];
     });
   }
 
   onEdit(pro: Admin) {
-    this.adminSevice.selectedProfile = pro;
+    this.admin = pro;
   }
 
   onDelete(id: string) {
@@ -48,7 +49,6 @@ export class UsersComponent implements OnInit {
       this.adminSevice.deleteProfile(id).subscribe((res:any) => {
         this.refreshProfileList();
         this.resetForm();
-        M.toast({ html: 'Deleted successfully', classes: 'rounded' });
       });
     }
   }

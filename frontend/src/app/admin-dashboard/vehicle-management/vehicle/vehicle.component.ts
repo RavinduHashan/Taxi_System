@@ -13,7 +13,8 @@ import { VehicleService } from '../../../service/vehicle.service';
 })
 export class VehicleComponent implements OnInit {
 
-  Vehicles: Vehicle[];
+  vehicle: Vehicle;
+  vehicles: Vehicle[];
 
  constructor(public vehicleService: VehicleService) { }
 
@@ -25,7 +26,7 @@ export class VehicleComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form)
       form.reset();
-    this.vehicleService.selectedVehicle = {
+    this.vehicle = {
       id: "",
       serial_number: "",
       vehicle_type: "",
@@ -37,12 +38,12 @@ export class VehicleComponent implements OnInit {
 
   refreshVehicleList() {
     this.vehicleService.getVehicleList().subscribe((res: any) => {
-      this.Vehicles = res.body;
+      this.vehicles = res.body;
     });
   }
 
   onEdit(vehicle: Vehicle) {
-    this.vehicleService.selectedVehicle = vehicle;
+    this.vehicle = vehicle;
   }
 
   onSubmit(form: NgForm) {
@@ -57,6 +58,14 @@ export class VehicleComponent implements OnInit {
         this.resetForm(form);
         this.refreshVehicleList();
       });
+    }
+  }
+
+  onDelete(id:any) {
+    if (confirm('Are you sure to delete this record ?') == true) {
+      this.vehicleService.deleteVehicleList(id).subscribe((res: any) => {
+        this.refreshVehicleList();
+      })
     }
   }
 

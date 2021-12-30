@@ -6,7 +6,7 @@ create table admins(
     username varchar(255) not null,
     admin_password varchar(255) not null,
     created timestamp with time zone NOT NULL DEFAULT now(),
-    updated timestamp with time zone
+    updated timestamp with time zone NOT NULL DEFAULT now()
 );
 
 create table customers(
@@ -58,7 +58,7 @@ create table vehicles(
     vehicle_type varchar(255) not null UNIQUE,
     base_distance varchar(255) not null,
     base_rate varchar(255) not null,
-    rate_per_KM varchar(255) not null,
+    rate_per_km varchar(255) not null,
     created timestamp with time zone NOT NULL DEFAULT now(),
     updated timestamp with time zone 
 );
@@ -107,4 +107,7 @@ driver_id,
 (SELECT full_name FROM customers WHERE id = customer_id) AS customer_name, 
 (SELECT full_name FROM drivers WHERE id = driver_id) AS driver_name 
 from orders ;
+
+-- Delete table data
+TRUNCATE customers;
 

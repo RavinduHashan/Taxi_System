@@ -6,6 +6,7 @@ export class Driver {
     city: string;
     vehicle_type: string;
     vehicle_number: string;
-    password: string;
+    password: any;
     available: any;
+    verification: any;
 }

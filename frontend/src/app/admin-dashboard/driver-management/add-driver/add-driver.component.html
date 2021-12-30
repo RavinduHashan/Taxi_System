@@ -1,0 +1,44 @@
+<div class="Padding Width justify-content-center align-items-center container">
+  <form #driverForm="ngForm" (ngSubmit)="onSubmit(driverForm)">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="driver.id">
+    <div class="form-group">
+      <label class="Label">Full Name :</label>
+      <input class="form-control Input" type="text" name="full_name" #name="ngModel"
+        [(ngModel)]="driver.full_name" placeholder="" required>
+    </div>
+    <div class="form-group">
+      <label class="Label">email :</label>
+      <input class="form-control Input" type="text" name="email" #name="ngModel" [(ngModel)]="driver.email"
+        placeholder="">
+    </div>
+    <div class="form-group">
+      <label class="Label">Phone Number :</label>
+      <input class="form-control Input" type="text" name="phone_number" #name="ngModel"
+        [(ngModel)]="driver.phone_number" placeholder="">
+    </div>
+    <div class="form-group">
+      <label class="Label">City :</label>
+      <input class="form-control Input" type="text" name="city" #name="ngModel" [(ngModel)]="driver.city"
+        placeholder="">
+    </div>
+    <div class="form-group">
+      <label class="Label">vehicle Type :</label>
+      <input class="form-control Input" type="text" name="vehicle_type" #name="ngModel"
+        [(ngModel)]="driver.vehicle_type" placeholder="">
+    </div>
+    <div class="form-group">
+      <label class="Label">Vehicle Number :</label>
+      <input class="form-control Input" type="text" name="vehicle_number" #name="ngModel"
+        [(ngModel)]="driver.vehicle_number" placeholder="">
+    </div>
+    <div class="form-group">
+      <label class="Label">Password :</label>
+      <input class="form-control Input" type="text" name="password" #name="ngModel"
+        [(ngModel)]="driver.password" placeholder="">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success float-right ml-2" type="submit" [disabled]="!driverForm.valid">Submit</button>
+      <button class="btn btn-danger float-right" type="button" (click)="resetForm(driverForm)">Reset</button>
+    </div>
+  </form>
+</div>

@@ -10,25 +10,25 @@
     <div class="collapse navbar-collapse justify-content-start" id="navbarTogglerDemo03">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link C" routerLink="">Home </a>
+          <a class="nav-link C" routerLink="" routerLinkActive="active C" [routerLinkActiveOptions]="{exact:true}">Home </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="order-management">Orders</a>
+          <a class="nav-link C" routerLink="order-management" routerLinkActive="active">Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="vehicle-management">Vehicle Management</a>
+          <a class="nav-link C" routerLink="driver-management" routerLinkActive="active">Driver Management</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="driver-management">Driver Management</a>
+          <a class="nav-link C" routerLink="vehicle-management" routerLinkActive="active">Vehicle Management</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="user-management">User Management</a>
+          <a class="nav-link C" routerLink="user-management" routerLinkActive="active">User Management</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link C" routerLink="setting">Setting</a>
+          <a class="nav-link C" routerLink="setting" routerLinkActive="active">Setting</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  C" (click)="onLogout()" value="Logout" style="cursor: pointer">Logout</a>
+          <a class="nav-link C" (click)="onLogout()" value="Logout" style="cursor: pointer">Logout</a>
         </li>
       </ul>
     </div>

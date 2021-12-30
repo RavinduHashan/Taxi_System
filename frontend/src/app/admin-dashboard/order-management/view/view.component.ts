@@ -39,7 +39,6 @@ export class ViewComponent implements OnInit {
 
   refreshOrder() {
     this.orderService.getOrderById(this.id).subscribe((res:any) => {
-      console.log(res)
       this.orders = res.body;
     });
   }

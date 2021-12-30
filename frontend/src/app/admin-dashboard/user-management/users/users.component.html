@@ -1,21 +1,24 @@
-<div class="Padding">
-  <table class="table  table-striped table-bordered table-sm">
+<div class="Padding Width justify-content-center align-items-center container">
+  <table class="table  table-striped table-bordered  table-sm">
       <thead>
         <tr style="text-align: center;">
           <th>Username</th>
+          <th>Created</th>
+          <th>Updated</th>
           <th>Edit</th>
         </tr>
       </thead>
       <tbody>
-      <tr class="Row" *ngFor="let pro of adminSevice.profiles">
+      <tr class="Row" *ngFor="let pro of admins">
         <td>{{pro.username}}</td>
-
+        <td>{{pro.created | date:'medium'}}</td>
+        <td>{{pro.updated | date:'medium'}}</td>
         <td>
             <a class="action-btn" routerLink="edit/{{pro.id}}" (click)="onEdit(pro)">
-              <i class="material-icons Edit">edit</i>
+              <i style="cursor: pointer" class="material-icons Edit">edit</i>
             </a>
             <a class="action-btn" (click)="onDelete(pro.id)">
-              <i class="material-icons Delete">delete</i>
+              <i style="cursor: pointer" class="material-icons Delete">delete</i>
             </a>
         </td>
       </tr>

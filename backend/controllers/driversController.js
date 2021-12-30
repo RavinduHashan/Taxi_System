@@ -106,7 +106,7 @@ const getOneDriver = async (req, res) => {
     const { id } = req.params;
     const query = `SELECT * FROM drivers WHERE id = $1`;
     const result = await pool.query(query, [id]);
-    const [data] = result.rows;
+    const data = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
     res.status(500).send({ done: false, message: "Something went wrong!" });
@@ -115,13 +115,10 @@ const getOneDriver = async (req, res) => {
 
 //Update drivers
 const updateDrivers = async (req, res) => {
-  const { password } = req.body;
   try {
-    const salt = await bcrypt.genSalt(10);
-    const bcryptPassword = await bcrypt.hash(password, salt);
     const query = `UPDATE drivers SET full_name = $1, email = $2, phone_number = $3, vehicle_type = $4, 
-                   vehicle_number = $5, city = $6, driver_password = $7, available = $8, verification = $9, 
-                   updated = now() where id = $10 RETURNING *`;
+                   vehicle_number = $5, city = $6, available = $7, 
+                   updated = now() where id = $8 RETURNING *`;
     const result = await pool.query(query, [
       req.body.full_name,
       req.body.email,
@@ -129,14 +126,13 @@ const updateDrivers = async (req, res) => {
       req.body.vehicle_type,
       req.body.vehicle_number,
       req.body.city,
-      bcryptPassword,
       req.body.available,
-      req.body.verification,
       req.params.id
     ]);
     const [data] = result.rows;
     res.status(200).send({ done: true, body: data });
   } catch (err) {
+    console.log(err)
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
@@ -153,6 +149,22 @@ const deleteDrivers = async (req, res) => {
   }
 };
 
+//Update verification of a driver
+const insertVerification = async (req, res) => {
+  try {
+    const query = `UPDATE drivers SET verification = $1 WHERE id = $2 RETURNING *`;
+    const result = await pool.query(query, [
+      req.params.verification,
+      req.params.id,
+    ]);
+    const [data] = result.rows;
+    res.status(200).send({ done: true, body: data });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ done: false, message: "Something went wrong!" });
+  }
+};
+
 
 module.exports = {
   registerDrivers,
@@ -163,4 +175,5 @@ module.exports = {
   getOneDriver,
   updateDrivers,
   deleteDrivers,
+  insertVerification
 };

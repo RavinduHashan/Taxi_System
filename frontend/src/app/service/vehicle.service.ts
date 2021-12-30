@@ -9,8 +9,6 @@ import { environment }  from '../../environments/environment';
 })
 export class VehicleService {
 
-  selectedVehicle: Vehicle;
-  vehicles: Vehicle[] = [];
   constructor(private http: HttpClient) { }
 
   getVehicleList() {
@@ -26,6 +24,6 @@ export class VehicleService {
     return this.http.post(environment.apiBaseUrlVehicle+'/createVehicles', vehicle);
   }
   deleteVehicleList(id:any) {
-    return this.http.delete(`${environment.apiBaseUrlVehicle}/deleteVehicle/${id}`);
+    return this.http.delete(`${environment.apiBaseUrlVehicle}/deleteVehicles/${id}`);
   }
 }

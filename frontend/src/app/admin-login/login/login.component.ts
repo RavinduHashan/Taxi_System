@@ -12,7 +12,6 @@ import { AdminService} from '../../service/admin.service';
 })
 export class LoginComponent implements OnInit {
 
-
   constructor(private adminService: AdminService,private router : Router) { }
 
   model ={

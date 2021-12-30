@@ -6,7 +6,7 @@ import { environment }  from '../../environments/environment';
 
 @Injectable()
 export class OrderService {
-  selectedOrder: Order
+  
   constructor(private http: HttpClient) { }
 
   postOrder(order:Order) {

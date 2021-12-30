@@ -8,13 +8,7 @@ import { environment }  from '../../environments/environment';
   providedIn: 'root'
 })
 export class AdminService {
-  selectedAdmin: Admin = {
-    id:'',
-    username: '',
-    password: ''
-  }
-  selectedProfile: Admin;
-  profiles: Admin[] = [];
+ 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
   constructor(private http: HttpClient) { }

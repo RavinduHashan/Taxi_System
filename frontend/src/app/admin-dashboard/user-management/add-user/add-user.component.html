@@ -1,0 +1,19 @@
+<div class="Padding Width justify-content-center align-items-center container">
+  <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="admin.id">
+    <div class="form-group">
+      <label class="Label">Username :</label>
+      <input class="form-control Input" type="text" name="username" #name="ngModel" [(ngModel)]="admin.username"
+        placeholder="" required>
+    </div>
+    <div class="form-group">
+      <label class="Label">Password :</label>
+      <input class="form-control Input" type="text" name="password" #name="ngModel" [(ngModel)]="admin.password"
+        placeholder="">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success float-right ml-2" type="submit" [disabled]="!profileForm.valid">Submit</button>
+      <button class="btn btn-danger float-right" type="button" (click)="resetForm(profileForm)">Reset</button>
+    </div>
+  </form>
+</div>

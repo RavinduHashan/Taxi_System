@@ -12,4 +12,6 @@ router.put("/update/:id", Drivers.updateDrivers);
 router.delete("/delete/:id", Drivers.deleteDrivers);
 router.get("/:id", Drivers.getOneDriver);
 
+router.put("/insertVerification/:id/:verification", Drivers.insertVerification);
+
 module.exports = router;

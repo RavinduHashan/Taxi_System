@@ -41,13 +41,13 @@ const createCustomers = async (req, res) => {
 
 //OTP Login
 const otpLogin = async (req, res) => {
-  try {
+  try {cd
     const { phone_number, otp } = req.body;
     const query = `SELECT * FROM customers WHERE phone_number = $1`;
     const customer = await pool.query(query, [phone_number]);
 
     if (customer.rows.length === 0) {
-      return res.status(200).json({done:false, message:"Phone Number is incorrect"});
+      return res.status(200).json({done:true, message:"Phone Number is incorrect"});
     }
    
     if (otp == customer.rows[0].otp) {
@@ -55,7 +55,7 @@ const otpLogin = async (req, res) => {
       res.status(200).send({ done: true, token: token });
     }
     else{
-      res.status(200).send({ done: true, message: "OTP is incorrect"});
+      res.status(200).send({ done:true, message: "OTP is incorrect"});
     }
     
   } catch (err) {

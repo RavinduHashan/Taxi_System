@@ -1,0 +1,34 @@
+<div class="Padding">
+  <table class="table  table-striped table-bordered table-sm">
+    <thead>
+      <tr style="text-align: center;">
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>City</th>
+        <th>Vehicle Type</th>
+        <th>Vehicle Number</th>
+        <th>Verification</th>
+        <th>Available</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="Row" *ngFor="let driver of drivers">
+        <td>{{driver.full_name}}</td>
+        <td>{{driver.email}}</td>
+        <td>{{driver.phone_number}}</td>
+        <td>{{driver.city}}</td>
+        <td>{{driver.vehicle_type}}</td>
+        <td>{{driver.vehicle_number}}</td>
+        <td>{{driver.verification}}</td>
+        <td>{{driver.available}}</td>
+        <td>
+          <a class="action-btn" routerLink="view/{{driver.id}}">
+            <i style="cursor: pointer" style="color: rgb(64, 105, 150);">view</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
