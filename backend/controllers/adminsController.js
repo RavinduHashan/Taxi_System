@@ -23,6 +23,7 @@ const registerAdmins = async (req, res) => {
     const token = jwtGenerator(newAdmin.rows.length && newAdmin.rows[0].id);
     res.status(200).send({ done: true, token: token });
   } catch (err) {
+    print(err)
     res.status(500).send({ done: false, message: "Something went wrong!" });
   }
 };
