@@ -1,6 +1,7 @@
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../jwtGenerator/adminsJwtGenerator");
+//Ravindu
 
 
 //Admin registration
