@@ -4,7 +4,7 @@ const jwtGenerator = require("../jwtGenerator/adminsJwtGenerator");
 
 
 
-//Admin registration
+//Admin registration...
 const registerAdmins = async (req, res) => {
   const { username, password } = req.body;
   try {
